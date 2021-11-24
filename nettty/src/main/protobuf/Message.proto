@@ -1,0 +1,16 @@
+
+// 头部生命
+syntax = "proto3";
+package org.lee.im.protobuf;
+
+// java 配置定义
+option java_package = "org.lee.im.multi.protobuf";
+option java_outer_classname = "MessageProto";
+
+// 消息定义
+message MsgDemo{
+  uint32 id = 1;
+  uint64 sendTime = 2;
+  string content = 3;
+  string header = 4;
+}

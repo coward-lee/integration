@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+
+group 'org.lee.study'
+version '1.0-SNAPSHOT'
+
+repositories {
+    maven{
+        allowInsecureProtocol = true
+        url 'http://maven.aliyun.com/nexus/content/groups/public/'
+    }
+    mavenCentral()
+}
+dependencies {
+    implementation 'cglib:cglib:3.2.7'
+    implementation 'junit:junit:4.12'
+}

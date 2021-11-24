@@ -1,0 +1,16 @@
+
+// 头部生命
+syntax = "proto3";
+package org.lee.im.multi.protobuf;
+
+// java 配置定义
+option java_package = "org.lee.im.multi.protobuf";
+option java_outer_classname = "UserProto";
+
+// 消息定义
+message User{
+    uint32 id = 1;
+    string username = 2;
+    string ip = 3;
+    int32 port = 4;
+}
