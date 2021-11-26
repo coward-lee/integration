@@ -18,4 +18,5 @@ dependencies {
     implementation 'org.openjdk.jmh:jmh-generator-annprocess:1.23'
     implementation 'junit:junit:4.13'
     implementation 'org.openjdk.jol:jol-core:0.9'
+    implementation 'org.slf4j:slf4j-api:1.7.25'
 }

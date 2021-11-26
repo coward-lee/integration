@@ -1,18 +1,15 @@
 package org.lee.im.multi.im;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.ByteBufAllocator;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.MessageToMessageEncoder;
-import io.netty.handler.codec.protobuf.ProtobufDecoder;
-import io.netty.handler.codec.protobuf.ProtobufEncoder;
-import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
-import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import org.lee.im.multi.config.AddressConfig;
 import org.lee.im.multi.config.ClientAction;
+import org.lee.im.multi.im.coder.IMProtoDecoder;
+import org.lee.im.multi.im.coder.IMProtoEncoder;
 import org.lee.im.multi.im.domain.MessageProto;
 import org.lee.im.multi.im.domain.MessageProto.*;
 import org.lee.im.multi.util.MessageUtil;
@@ -53,13 +50,11 @@ public class NormalClient {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
                     // out bound
-                    ch.pipeline().addLast(new ProtobufVarint32LengthFieldPrepender());
-                    ch.pipeline().addLast(new ProtobufEncoder());
+                    ch.pipeline().addLast(new IMProtoEncoder());
                     ch.pipeline().addLast(new OutPrint());
 
                     // in bound
-                    ch.pipeline().addLast(new ProtobufVarint32FrameDecoder());
-                    ch.pipeline().addLast(new ProtobufDecoder(MessageProto.Message.getDefaultInstance()));
+                    ch.pipeline().addLast(new IMProtoDecoder());
                     ch.pipeline().addLast(new ProtobufBusinessDecoder());
                 }
             });

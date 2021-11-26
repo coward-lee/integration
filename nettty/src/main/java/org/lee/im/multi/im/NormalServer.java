@@ -1,21 +1,16 @@
 package org.lee.im.multi.im;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.buffer.ByteBufAllocator;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.MessageToMessageEncoder;
-import io.netty.handler.codec.protobuf.ProtobufDecoder;
-import io.netty.handler.codec.protobuf.ProtobufEncoder;
-import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
-import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import org.lee.im.multi.config.AddressConfig;
+import org.lee.im.multi.im.coder.IMProtoDecoder;
+import org.lee.im.multi.im.coder.IMProtoEncoder;
 import org.lee.im.multi.im.domain.MessageProto;
 import org.lee.im.multi.im.domain.MessageProto.*;
-import org.lee.im.multi.im.domain.UserProto;
-import org.lee.im.multi.im.domain.UserProto.*;
 import org.lee.im.multi.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,15 +46,12 @@ public class NormalServer {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
                     // out bound
-                    ch.pipeline().addLast(new ProtobufVarint32LengthFieldPrepender());
-                    ch.pipeline().addLast(new ProtobufEncoder());
+                    ch.pipeline().addLast(new IMProtoEncoder());
                     ch.pipeline().addLast(new ProtobufBusinessEncoder());
 
                     // in bound
-                    ch.pipeline().addLast(new ProtobufVarint32FrameDecoder());
-                    ch.pipeline().addLast(new ProtobufDecoder(Message.getDefaultInstance()));
+                    ch.pipeline().addLast(new IMProtoDecoder());
                     ch.pipeline().addLast(new ProtobufBusinessDecoder());
-
                 }
             });
             // 等待启动成功
@@ -92,7 +84,7 @@ public class NormalServer {
         protected void encode(ChannelHandlerContext ctx, Message msg, List<Object> out) throws Exception {
             Message m = msg;
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-            log.info("exchange message:{} from : {}，to : {}", m.getContent(), m.getFrom(), m.getTo());
+            System.out.println("exchange  from : "+  m.getFrom()+"，to : {}"+ m.getTo());
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             out.add(msg);
         }

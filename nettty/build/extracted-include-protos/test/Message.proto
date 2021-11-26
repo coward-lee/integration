@@ -1,0 +1,18 @@
+
+// 头部生命
+syntax = "proto3";
+package org.lee.im.multi.im.domain;
+
+// java 配置定义
+option java_package = "org.lee.im.multi.im.domain";
+option java_outer_classname = "MessageProto";
+
+// 消息定义
+message Message{
+  string id = 1;
+  uint64 sendTime = 2;
+  string content = 3;
+  string header = 4;
+  string from = 5;
+  string to = 6;
+}
