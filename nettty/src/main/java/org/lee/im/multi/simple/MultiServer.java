@@ -25,7 +25,7 @@ public class MultiServer {
         try{
             b.group(parent, work)
                     .channel(NioServerSocketChannel.class)
-                    .localAddress(AddressConfig.PORT);
+                    .localAddress(AddressConfig.SERVER_PORT);
 
             b.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
@@ -79,14 +79,6 @@ public class MultiServer {
             log.info("===================  a channel connected :【ip:{},port:{}】   =============", ch.remoteAddress().getAddress(),ch.remoteAddress().getPort());
             channels.add(ch);
             super.channelActive(ctx);
-        }
-    }
-    static class ExchangeMessage extends MessageToMessageEncoder<String>{
-        @Override
-        protected void encode(ChannelHandlerContext ctx, String msg, List<Object> out) throws Exception {
-            SocketChannel ch = (SocketChannel) ctx.channel();
-            System.out.println("服务器发送到客户端："+ch.remoteAddress().getAddress()+":"+ch.remoteAddress().getPort());
-            out.add(msg);
         }
     }
 

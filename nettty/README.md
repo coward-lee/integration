@@ -8,4 +8,5 @@
 
  
  
- 
+ ## pipeline进出站规则
+ ![netty_pipeline](./img/netty_pipeline.png) 

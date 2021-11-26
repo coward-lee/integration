@@ -28,14 +28,15 @@ dependencies {
     implementation 'com.google.protobuf:protobuf-java:3.18.1'
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
-//    compile 'ch.qos.logback:logback-classic:1.1.2'
-//    compile 'ch.qos.logback:logback-core:1.1.2'
-//    compile 'org.slf4j:slf4j-api:1.7.25'
+    implementation 'ch.qos.logback:logback-classic:1.1.2'
+    implementation 'ch.qos.logback:logback-core:1.1.2'
+    implementation 'org.slf4j:slf4j-api:1.7.25'
 
     runtimeOnly 'com.google.protobuf:protobuf-gradle-plugin:0.8.17'
 
 }
 
+logging.captureStandardError(LogLevel.INFO)
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 

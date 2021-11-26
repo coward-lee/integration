@@ -25,7 +25,7 @@ public class ProtobufServer {
             b.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
             b.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
-                protected void initChannel(SocketChannel ch) throws Exception {
+                protected void initChannel(SocketChannel ch){
                     // 添加指定的handler
                     ch.pipeline().addLast(new ProtobufVarint32FrameDecoder());
                     ch.pipeline().addLast(new ProtobufDecoder(MsgProtos.Msg.getDefaultInstance()));
@@ -45,7 +45,7 @@ public class ProtobufServer {
     }
     static class ProtobufBusinessDecoder extends ChannelInboundHandlerAdapter {
         @Override
-        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        public void channelRead(ChannelHandlerContext ctx, Object msg){
             MsgProtos.Msg m = (MsgProtos.Msg) msg;
             //
             System.out.println("收到了消息："  + m.getContent());
