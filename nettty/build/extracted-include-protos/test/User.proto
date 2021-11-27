@@ -1,0 +1,16 @@
+
+// 头部生命
+syntax = "proto3";
+package org.lee.im.multi.im.domain;
+
+// java 配置定义
+option java_package = "org.lee.im.multi.im.domain";
+option java_outer_classname = "UserProto";
+
+// 消息定义
+message User{
+    string id = 1;
+    string username = 2;
+    string ip = 3;
+    int32 port = 4;
+}
