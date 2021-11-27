@@ -151,6 +151,7 @@ public class NormalClient {
         m.setId(UUID.randomUUID().toString());
         m.setSendTime(System.currentTimeMillis());
         return m.build();
+
     }
 
 
