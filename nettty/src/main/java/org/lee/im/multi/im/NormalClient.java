@@ -12,7 +12,6 @@ import org.lee.im.multi.im.coder.IMProtoDecoder;
 import org.lee.im.multi.im.coder.IMProtoEncoder;
 import org.lee.im.multi.im.domain.MessageProto;
 import org.lee.im.multi.im.domain.MessageProto.*;
-import org.lee.im.multi.util.MessageUtil;
 import org.lee.im.util.ScannerUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,12 +25,6 @@ public class NormalClient {
     int port;
     String name;
     private final Logger log = LoggerFactory.getLogger(NormalServer.class);
-
-    public NormalClient(String ip, int port, String name) {
-        this.ip = ip;
-        this.port = port;
-        this.name = name;
-    }
 
     public NormalClient(String ip, int port) {
         this.ip = ip;
@@ -48,7 +41,7 @@ public class NormalClient {
             ;
             b.handler(new ChannelInitializer<SocketChannel>() {
                 @Override
-                protected void initChannel(SocketChannel ch) throws Exception {
+                protected void initChannel(SocketChannel ch){
                     // out bound
                     ch.pipeline().addLast(new IMProtoEncoder());
                     ch.pipeline().addLast(new OutPrint());
@@ -63,19 +56,11 @@ public class NormalClient {
             future.addListener(f ->{
                 if (f.isSuccess()){
                     log.info("连接成功");
-                    MessageUtil.startInputListening(future.channel(),NormalClient.class);
+                    startInputListening(future.channel());
                 }else{
                     log.info("连接失败");
                 }
             });
-            future.sync();
-            Channel channel =  future.channel();
-
-//            login(channel);
-
-//            test(channel);
-            startInputListening((SocketChannel) channel);
-
             ChannelFuture close = future.channel().closeFuture();
             close.sync();
             log.info("连接关闭   ==== === = = == = = = =");
@@ -84,73 +69,35 @@ public class NormalClient {
             log.error(e.getMessage(), e);
         }
     }
-    public void test(Channel channel) throws InterruptedException {
-            for (int i = 0; i < 10; i++) {
-                Thread.sleep(2000);
-                Message message = build(i);
-                log.info("发送了消息：{}", message);
-                channel.writeAndFlush(message);
-            }
-            channel.flush();
-    }
 
-    // 登录操作
-    public void login(Channel channel){
-        log.info("开始登录");
-        MessageProto.Message.Builder m = MessageProto.Message.newBuilder();
-        m.setContent("登录操作");
-        m.setFrom(this.name);
-        m.setHeader(ClientAction.LOGIN.name());
-        m.setId(UUID.randomUUID().toString());
-        m.setSendTime(System.currentTimeMillis());
-        channel.writeAndFlush(m);
-    }
-
-    // 构建测试对象
-    public Message build(int i){
-        MessageProto.Message.Builder message = MessageProto.Message.newBuilder();
-        message.setContent("一个发送的内容");
-        message.setFrom(name);
-        for (String s : names) {
-            if (!s.equalsIgnoreCase(name)){
-                message.setTo(s);
-                break;
-            }
-        }
-        message.setHeader("消息header");
-        message.setId(UUID.randomUUID().toString());
-        message.setSendTime(System.currentTimeMillis());
-        return message.build();
+    public static void printMessage(Message message){
+        System.out.println(
+                "收到了消息：header:"+message.getHeader()
+                        +",content:"+message.getContent()
+                        +",from:"+message.getFrom()
+                        +",to:"+message.getTo()
+                        +",id:"+message.getId()
+        );
     }
 
     static class ProtobufBusinessDecoder extends ChannelInboundHandlerAdapter {
-        private final Logger log = LoggerFactory.getLogger(ProtobufBusinessDecoder.class);
         @Override
-        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        public void channelRead(ChannelHandlerContext ctx, Object msg) {
             MessageProto.Message m = (MessageProto.Message) msg;
-
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-            log.info("id : {}", m.getContent());
-            log.info("sendTime : {}", m.getSendTime());
-            log.info("header : {}", m.getHeader());
-            log.info("content : {}", m.getContent());
-            log.info("from : {}", m.getFrom());
-            log.info("to : {}", m.getTo());
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+            printMessage(m);
         }
     }
-    static class OutPrint extends MessageToMessageEncoder<Message> {
-        private final Logger log = LoggerFactory.getLogger(NormalServer.ProtobufBusinessEncoder.class);
 
+    static class OutPrint extends MessageToMessageEncoder<Message> {
         @Override
-        protected void encode(ChannelHandlerContext ctx, Message msg, List<Object> out) throws Exception {
+        protected void encode(ChannelHandlerContext ctx, Message msg, List<Object> out) {
             System.out.println("客户端发送了消息：" +msg);
             out.add(msg);
         }
     }
 
 
-    public void startInputListening(SocketChannel channel){
+    public void startInputListening(Channel channel){
         new Thread(()->{
             try {
                 // 登录请求
@@ -208,7 +155,6 @@ public class NormalClient {
 
 
 
-    public static String[] names = {"name1", "name2"};
     public static void main(String[] args) {
         new NormalClient(AddressConfig.ADDRESS, AddressConfig.SERVER_PORT).runClient();
     }

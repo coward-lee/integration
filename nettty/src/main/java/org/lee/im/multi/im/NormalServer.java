@@ -44,7 +44,7 @@ public class NormalServer {
                     ;
             server.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
-                protected void initChannel(SocketChannel ch) throws Exception {
+                protected void initChannel(SocketChannel ch){
                     // out bound
                     ch.pipeline().addLast(new IMProtoEncoder());
                     ch.pipeline().addLast(new ProtobufBusinessEncoder());
@@ -78,14 +78,10 @@ public class NormalServer {
     }
 
     static class ProtobufBusinessEncoder extends MessageToMessageEncoder<MessageProto.Message> {
-        private final Logger log = LoggerFactory.getLogger(ProtobufBusinessEncoder.class);
 
         @Override
-        protected void encode(ChannelHandlerContext ctx, Message msg, List<Object> out) throws Exception {
-            Message m = msg;
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-            System.out.println("exchange  from : "+  m.getFrom()+"，to : {}"+ m.getTo());
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        protected void encode(ChannelHandlerContext ctx, Message msg, List<Object> out){
+            System.out.println("exchange  from : "+  msg.getFrom()+"，to : {}"+ msg.getTo());
             out.add(msg);
         }
     }
@@ -94,24 +90,15 @@ public class NormalServer {
         private final Logger log = LoggerFactory.getLogger(ProtobufBusinessDecoder.class);
 
         @Override
-        public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        public void channelActive(ChannelHandlerContext ctx){
             log.info("连接进来了，现在回复一个消息回去");
             ctx.channel().writeAndFlush(build());
         }
 
         @Override
-        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        public void channelRead(ChannelHandlerContext ctx, Object msg){
             Message m = (Message) msg;
-
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-//            log.info("id : {}", m.getContent());
-//            log.info("sendTime : {}", m.getSendTime());
-//            log.info("header : {}", m.getHeader());
-//            log.info("content : {}", m.getContent());
-//            log.info("from : {}", m.getFrom());
-//            log.info("to : {}", m.getTo());
-            System.out.println(m);
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+            printMessage(m);
             if (HeaderUtil.isLogin(m.getHeader())){
                 clients.put(m.getFrom(), ctx.channel());
                 return;
@@ -129,6 +116,15 @@ public class NormalServer {
 //            log.info("exchange message:{} from : {}，to : {}", m.getContent(), m.getFrom(), m.getTo());
             channel.writeAndFlush(m);
         }
+    }
+    public static void printMessage(Message message){
+        System.out.println(
+                "收到了消息：header:"+message.getHeader()
+                        +",content:"+message.getContent()
+                        +",from:"+message.getFrom()
+                        +",to:"+message.getTo()
+                        +",id:"+message.getId()
+        );
     }
 
 
