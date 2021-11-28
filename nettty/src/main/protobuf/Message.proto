@@ -4,7 +4,7 @@ syntax = "proto3";
 package org.lee.im.multi.im.domain;
 
 // java 配置定义
-option java_package = "org.lee.im.multi.im.domain";
+option java_package = "org.lee.p2p.domain";
 option java_outer_classname = "MessageProto";
 
 // 消息定义

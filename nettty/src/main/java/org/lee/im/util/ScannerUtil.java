@@ -8,7 +8,6 @@ public class ScannerUtil {
 
     public static String getLine(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("请输入：    ");
         return scanner.nextLine();
     }
     public static boolean quit(String content){
