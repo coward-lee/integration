@@ -19,8 +19,7 @@ public class InitialHandler extends ChannelInitializer<DatagramChannel>{
     protected void initChannel(DatagramChannel ch)  {
         ChannelPipeline pipeline = ch.pipeline();
         pipeline.addLast(new LoggingHandler(LogLevel.INFO));
-        pipeline.addLast(new AddPortHandler(ports));
         pipeline.addLast(new DataToObjectHandler());
-        pipeline.addLast(new MessageDecoderOfRaftHandler());
+        pipeline.addLast(new AddPortHandler(ports));
     }
 }

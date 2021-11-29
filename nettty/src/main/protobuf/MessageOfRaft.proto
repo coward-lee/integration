@@ -11,7 +11,14 @@ option java_outer_classname = "MessageProto";
 message Message{
   string id = 1;
   uint64 sendTime = 2;
-  string content = 3;
-  string header = 4;
-  string from = 5;
+  string header = 3;
+  string from = 4;
+  ElectionMessage content = 5;
+}
+
+//option java_outer_classname = "ElectionMessageProto";
+// 消息定义
+message ElectionMessage{
+  string value = 1;
+  string epoch = 2;
 }

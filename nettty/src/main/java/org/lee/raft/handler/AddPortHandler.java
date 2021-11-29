@@ -1,12 +1,13 @@
 package org.lee.raft.handler;
 
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.unix.DatagramSocketAddress;
+import io.netty.handler.codec.MessageToMessageDecoder;
+import org.lee.raft.domain.MessageProto.Message;
 
+import java.util.List;
 import java.util.Set;
 
-class  AddPortHandler extends ChannelInboundHandlerAdapter {
+class  AddPortHandler extends MessageToMessageDecoder<Message> {
     Set<Integer> ports;
 
     public AddPortHandler(Set<Integer> ports) {
@@ -14,10 +15,8 @@ class  AddPortHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        DatagramSocketAddress datagramSocketAddress = (DatagramSocketAddress) ctx.channel().remoteAddress();
-        int port = datagramSocketAddress.getPort();
-        ports.add(port);
-        super.channelRead(ctx, msg);
+    protected void decode(ChannelHandlerContext ctx, Message msg, List<Object> out) throws Exception {
+        ports.add(Integer.parseInt(msg.getFrom()));
+        System.out.println("收到了来自:"+msg.getFrom()+"，消息："+msg.getContent());
     }
 }
