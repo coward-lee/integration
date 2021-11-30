@@ -1,5 +1,10 @@
 package org.lee.raft.enums;
 
 public enum NodeAction {
-    HEART_BEAT,PROPOSE,ACCEPT,QUESTION
+    ELECTION_DONE,
+    HEART_BEAT,
+    QUESTION,
+    PROPOSE,
+    ACCEPT,
+    JOIN;
 }

@@ -3,11 +3,12 @@ package org.lee.raft.handler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
 import org.lee.raft.domain.MessageProto.Message;
+import org.lee.raft.enums.NodeAction;
 
 import java.util.List;
 import java.util.Set;
 
-class  AddPortHandler extends MessageToMessageDecoder<Message> {
+public class  AddPortHandler extends MessageToMessageDecoder<Message> {
     Set<Integer> ports;
 
     public AddPortHandler(Set<Integer> ports) {
@@ -16,7 +17,10 @@ class  AddPortHandler extends MessageToMessageDecoder<Message> {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, Message msg, List<Object> out) throws Exception {
-        ports.add(Integer.parseInt(msg.getFrom()));
-        System.out.println("收到了来自:"+msg.getFrom()+"，消息："+msg.getContent());
+        if (NodeAction.JOIN.name().equalsIgnoreCase(msg.getHeader())){
+            ports.add(Integer.parseInt(msg.getFrom()));
+            System.out.println("header加入服务，from："+msg.getFrom()+"，消息："+msg.getContent());
+        }
+        out.add(msg);
     }
 }
