@@ -12,3 +12,10 @@ Using insecure protocols with repositories, without explicit opt-in, is unsuppor
     maven{
         url 'http://maven.aliyun.com/nexus/content/groups/public/'
     }
+    
+## git rebase -i xxx
+交互式的rebase 
+pick commit1   // 时间11.11
+s commit2   // 时间11.12
+s commit3   // 时间11.13
+这里的提交全部都会汇聚到commit1里面
