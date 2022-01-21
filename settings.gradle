@@ -11,5 +11,7 @@ include 'theory'
 include 'mysql'
 include 'redis'
 include 'interview'
+include 'spring-boot'
+include 'design-pattern'
 include 'socketio'
 
