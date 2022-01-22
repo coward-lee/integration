@@ -2,9 +2,8 @@ package error;
 
 import sun.misc.Unsafe;
 
-import java.io.File;
 import java.lang.reflect.Field;
-
+@SuppressWarnings("restriction")
 public class DirectMemoryOOM {
     private static final long _1MB = 1<<20;
 

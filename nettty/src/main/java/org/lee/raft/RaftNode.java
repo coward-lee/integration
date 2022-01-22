@@ -27,15 +27,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class RaftNode {
     private final Logger log = LoggerFactory.getLogger(RaftNode.class);
     // 所以的节点端口
-    public static final Set<Integer> ports = new HashSet<>();
+    private static final Set<Integer> ports = new HashSet<>();
     // 选举轮次，逻辑时钟
-    public AtomicInteger epoch = new AtomicInteger(0);
+    private final AtomicInteger epoch = new AtomicInteger(0);
     // 是否选举结束，用于选举最后的一次 accepted  by majorities 的消息通知的置为
-    public AtomicBoolean isDOne = new AtomicBoolean(false);
+    private final AtomicBoolean isDOne = new AtomicBoolean(false);
     // node的提议
-    public String acceptPropose;
+    private String acceptPropose;
 
-    public Set<Integer> acceptors;
+    private Set<Integer> acceptors;
 
 
     String propose;
@@ -89,7 +89,7 @@ public class RaftNode {
             // 关闭连接的监听
             ChannelFuture closeFuture = future.channel().closeFuture();
             closeFuture.sync();
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             log.warn("似乎失败了");
         }finally {
             if (eventExecutors !=null){
@@ -145,37 +145,6 @@ public class RaftNode {
                 new InetSocketAddress(AddressConfig.BROADCAST_ADDRESS,targetPort)
         );
     }
-
-
-//    public DatagramPacket buildData( ){
-//        System.out.print("\n输入发送者的端口：");
-//        String line = ScannerUtil.getLine();
-//
-//        ElectionMessage content = ElectionMessage.newBuilder()
-//                .setEpoch(String.valueOf(epoch.get()))
-//                .setValue("value ___" + port)
-//                .build();
-//
-//        Message build = Message.newBuilder()
-//                .setContent(content)
-//                .setFrom(String.valueOf(port))
-//                .setHeader("header")
-//                .build();
-//
-//        return new DatagramPacket(Unpooled.copiedBuffer(build.toByteArray()),
-//                new InetSocketAddress(AddressConfig.BROADCAST_ADDRESS,Integer.parseInt(line)));
-//    }
-//
-//    public void test(Channel channel){
-//        for (int i = 0; i < 10; i++) {
-//            try {
-//                Thread.sleep(1000);
-//                channel.writeAndFlush(buildData());
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 
     public void responsePropose(Channel channel, Message message){
         ElectionMessage content = message.getContent();
