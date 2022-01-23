@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: io.spring.gradle:dependency-management-plugin:1.0.9.RELEASE">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.m2/repository/io/spring/gradle/dependency-management-plugin/1.0.9.RELEASE/dependency-management-plugin-1.0.9.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.m2/repository/io/spring/gradle/dependency-management-plugin/1.0.9.RELEASE/dependency-management-plugin-1.0.9.RELEASE-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.m2/repository/io/spring/gradle/dependency-management-plugin/1.0.9.RELEASE/dependency-management-plugin-1.0.9.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
