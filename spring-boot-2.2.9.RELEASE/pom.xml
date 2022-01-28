@@ -51,7 +51,19 @@
 								<version>${nohttp-checkstyle.version}</version>
 							</dependency>
 						</dependencies>
+
 						<executions>
+							<execution>
+								<id>default-compile</id>
+								<configuration>
+									<compilerArgument>-proc:none</compilerArgument>
+									<includes>
+										<include>
+											per.annotation.MyProcessor
+										</include>
+									</includes>
+								</configuration>
+							</execution>
 							<execution>
 								<id>checkstyle-validation</id>
 								<phase>validate</phase>
@@ -129,6 +141,7 @@
 			<activation>
 				<property>
 					<name>repository</name>
+					<value>https://maven.aliyun.com/nexus/content/repositories/central/</value>
 				</property>
 			</activation>
 			<repositories>
@@ -155,36 +168,38 @@
 		<!-- Repositories to allow snapshot and milestone BOM imports during development.
 			This section is stripped by the flatten plugin during install/deploy. -->
 		<repository>
-			<id>central</id>
-			<url>https://repo.maven.apache.org/maven2</url>
+			<id>aliyun</id>
+			<url>https://maven.aliyun.com/repository/public</url>
+<!--			<id>central</id>-->
+<!--			<url>https://repo.maven.apache.org/maven2</url>-->
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
 		<repository>
-			<id>spring-milestone</id>
-			<name>Spring Milestone</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring-snapshot</id>
-			<name>Spring Snapshot</name>
-			<url>https://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>rabbit-milestone</id>
-			<name>Rabbit Milestone</name>
-			<url>https://dl.bintray.com/rabbitmq/maven-milestones</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
+					<id>spring-milestone</id>
+					<name>Spring Milestone</name>
+					<url>https://repo.spring.io/milestone</url>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>spring-snapshot</id>
+					<name>Spring Snapshot</name>
+					<url>https://repo.spring.io/snapshot</url>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>rabbit-milestone</id>
+					<name>Rabbit Milestone</name>
+					<url>https://dl.bintray.com/rabbitmq/maven-milestones</url>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>

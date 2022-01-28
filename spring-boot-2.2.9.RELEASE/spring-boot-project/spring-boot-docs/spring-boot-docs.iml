@@ -7,12 +7,15 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="entityManagerFactory" />
+          <factory-entry name="spring-boot-docs" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="spring_boot_org.springframework.boot.docs.ExitCodeApplication" profiles="dev" autodetected="true" />
+      </configuration>
     </facet>
     <facet type="web" name="Web">
       <configuration>

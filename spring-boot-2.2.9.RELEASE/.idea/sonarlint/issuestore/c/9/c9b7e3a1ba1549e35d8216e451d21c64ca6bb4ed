@@ -1,0 +1,18 @@
+
+a	java:S112°"FDefine and throw a dedicated exception instead of using a generic one.(£ıÆˆûÿÿÿÿ
+l
+java:S1149Ä"PReplace the synchronized class "Stack" by an unsynchronized one such as "Deque".(”“ÓËıÿÿÿÿ
+l
+java:S1149Ê"PReplace the synchronized class "Stack" by an unsynchronized one such as "Deque".(¸°˜ÿşÿÿÿÿ
+g
+java:S1149à"PReplace the synchronized class "Stack" by an unsynchronized one such as "Deque".(Û×Îİ
+u
+java:S2293¸"YReplace the type specification in this constructor call with the diamond operator ("<>").(Öëïıÿÿÿÿ
+p
+java:S2293»"YReplace the type specification in this constructor call with the diamond operator ("<>").(¦œƒ…
+T
+java:S1611ã"8Remove the parentheses around the "descriptor" parameter(ñİ” şÿÿÿÿ
+C
+java:S1125‰"'Remove the unnecessary boolean literal.(ÇÆ±êøÿÿÿÿ
+u
+java:S1192?"ZDefine a constant instead of duplicating this literal "org.springframework.boot." 4 times.(úçìŞûÿÿÿÿ

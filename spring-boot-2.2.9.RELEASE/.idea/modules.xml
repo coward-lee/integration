@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/spring-boot-my-test/demo.iml" filepath="$PROJECT_DIR$/spring-boot-my-test/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-boot-project/spring-boot-tools/org.springframework.boot.gradle.plugin/org.springframework.boot.gradle.plugin.iml" filepath="$PROJECT_DIR$/spring-boot-project/spring-boot-tools/org.springframework.boot.gradle.plugin/org.springframework.boot.gradle.plugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-boot-project/spring-boot/spring-boot.iml" filepath="$PROJECT_DIR$/spring-boot-project/spring-boot/spring-boot.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-boot-project/spring-boot-actuator/spring-boot-actuator.iml" filepath="$PROJECT_DIR$/spring-boot-project/spring-boot-actuator/spring-boot-actuator.iml" />
