@@ -22,6 +22,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.aspectj:aspectjweaver:1.9.7'
+
     implementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     implementation 'junit:junit:4.12'
 }
