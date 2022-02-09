@@ -196,6 +196,7 @@ funParam() {
     echo "param num: $# "
     echo "all params: $*"
 }
+# 参数传递 在函数后面追加每一个空格表示一个传参
 funParam 1 2 3
 ```
      

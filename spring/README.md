@@ -56,7 +56,7 @@
    1. 在spring 文件中开启注解扫描
    2. 使用注解创建User和UserProxy对象  这个就是给两个对象加上@Component注解，这样在初始化上下文的时候上下文回去扫描我们的包下面的class文件来创建
    3. 在增强类上面添加注解@Aspect  
-   4. 在spring配置文件中开始生成代理对象 添加 <aop:aspectj-autoproxy></aop:aspectj-autoproxy> 标签
+   4. 在spring配置文件中开始生成代理对象 添加 \<aop:aspectj-autoproxy\></aop:aspectj-autoproxy> 标签
 3. 配置不同类型的通知
 4. 相同的切入点抽取 @PointCut注解的使用
 5. 如果有多个增强类对同一个方法进行增强，设置增强优先级，
