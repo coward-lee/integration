@@ -10,6 +10,7 @@
  
 # Bean的作用域
 * scope属性 singleton和prototype
+* 如果bean为singleton的话这bean的实例会保存一份到singleObjects(这个是一个map)中，
 # Bean的声明周期
 1. Bean的创建，用构造方法去创建一个bean实例
 2. 为bean的属性赋值对其他bean引用（调用set方法）
