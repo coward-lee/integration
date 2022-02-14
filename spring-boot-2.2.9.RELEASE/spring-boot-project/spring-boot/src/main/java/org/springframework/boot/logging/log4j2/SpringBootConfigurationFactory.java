@@ -35,7 +35,7 @@ import org.springframework.boot.logging.LoggingSystem;
  * <li>Disable its shutdown hook
  * </ol>
  *
- * This factory is ordered last and is triggered by a {@code log4j2.springboot} classpath
+ * This design.parttern.factory is ordered last and is triggered by a {@code log4j2.springboot} classpath
  * resource (which is bundled in this jar). If the {@link Log4J2LoggingSystem} is active,
  * a custom {@link DefaultConfiguration} is returned with the expectation that the system
  * will later re-initialize Log4J2 with the correct configuration file.

@@ -1,6 +1,6 @@
 package org.lee.study.study;
 
-//import org.springframework.beans.factory.BeanFactory;
+//import org.springframework.beans.design.parttern.factory.BeanFactory;
 //import org.springframework.beans.support.ResourceEditorRegistrar;
 //import org.springframework.context.*;
 //import org.springframework.context.expression.StandardBeanExpressionResolver;
@@ -14,14 +14,14 @@ package org.lee.study.study;
 public class SpringDemo {
     public static void main(String[] args) {
 
-//        // Tell the internal bean factory to use the context's class loader etc.
+//        // Tell the internal bean design.parttern.factory to use the context's class loader etc.
 //        beanFactory.setBeanClassLoader(getClassLoader());
 //        if (!shouldIgnoreSpel) {
 //            beanFactory.setBeanExpressionResolver(new StandardBeanExpressionResolver(beanFactory.getBeanClassLoader()));
 //        }
 //        beanFactory.addPropertyEditorRegistrar(new ResourceEditorRegistrar(this, getEnvironment()));
 //
-//        // Configure the bean factory with context callbacks.
+//        // Configure the bean design.parttern.factory with context callbacks.
 //        beanFactory.addBeanPostProcessor(new ApplicationContextAwareProcessor(this));
 //        beanFactory.ignoreDependencyInterface(EnvironmentAware.class);
 //        beanFactory.ignoreDependencyInterface(EmbeddedValueResolverAware.class);
@@ -31,7 +31,7 @@ public class SpringDemo {
 //        beanFactory.ignoreDependencyInterface(ApplicationContextAware.class);
 //        beanFactory.ignoreDependencyInterface(ApplicationStartupAware.class);
 //
-//        // BeanFactory interface not registered as resolvable type in a plain factory.
+//        // BeanFactory interface not registered as resolvable type in a plain design.parttern.factory.
 //        // MessageSource registered (and found for autowiring) as a bean.
 //        beanFactory.registerResolvableDependency(BeanFactory.class, beanFactory);
 //        beanFactory.registerResolvableDependency(ResourceLoader.class, this);

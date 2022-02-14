@@ -103,7 +103,7 @@ public class JsonbTester<T> extends AbstractJsonMarshalTester<T> {
 	 * Utility method to initialize {@link JsonbTester} fields. See {@link JsonbTester
 	 * class-level documentation} for example usage.
 	 * @param testInstance the test instance
-	 * @param jsonb an object factory to create the Jsonb instance
+	 * @param jsonb an object design.parttern.factory to create the Jsonb instance
 	 */
 	public static void initFields(Object testInstance, ObjectFactory<Jsonb> jsonb) {
 		new JsonbTester.JsonbFieldInitializer().initFields(testInstance, jsonb);

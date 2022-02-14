@@ -521,7 +521,7 @@ public class RabbitProperties {
 		public static class Connection {
 
 			/**
-			 * Connection factory cache mode.
+			 * Connection design.parttern.factory cache mode.
 			 */
 			private CacheMode mode = CacheMode.CHANNEL;
 

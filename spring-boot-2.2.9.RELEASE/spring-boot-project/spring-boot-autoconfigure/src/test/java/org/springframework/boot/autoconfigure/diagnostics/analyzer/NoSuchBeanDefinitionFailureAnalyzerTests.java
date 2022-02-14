@@ -159,9 +159,9 @@ class NoSuchBeanDefinitionFailureAnalyzerTests {
 
 	private String determineAnnotationValuePattern() {
 		if (JavaVersion.getJavaVersion().isEqualOrNewerThan(JavaVersion.FOURTEEN)) {
-			return "@org.springframework.beans.factory.annotation.Qualifier\\(\"*alpha\"*\\)";
+			return "@org.springframework.beans.design.parttern.factory.annotation.Qualifier\\(\"*alpha\"*\\)";
 		}
-		return "@org.springframework.beans.factory.annotation.Qualifier\\(value=\"*alpha\"*\\)";
+		return "@org.springframework.beans.design.parttern.factory.annotation.Qualifier\\(value=\"*alpha\"*\\)";
 	}
 
 	@Test

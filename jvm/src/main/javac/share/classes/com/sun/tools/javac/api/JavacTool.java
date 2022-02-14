@@ -74,7 +74,7 @@ public final class JavacTool implements JavaCompiler {
     public JavacTool() {}
 
     /**
-     * Static factory method for creating new instances of this tool.
+     * Static design.parttern.factory method for creating new instances of this tool.
      * @return new instance of this tool
      */
     public static JavacTool create() {

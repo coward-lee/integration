@@ -34,7 +34,7 @@ import org.springframework.core.annotation.AnnotationUtils;
 
 /**
  * Utility class to memorize {@code @Bean} definition metadata during initialization of
- * the bean factory.
+ * the bean design.parttern.factory.
  *
  * @author Dave Syer
  * @since 1.1.0

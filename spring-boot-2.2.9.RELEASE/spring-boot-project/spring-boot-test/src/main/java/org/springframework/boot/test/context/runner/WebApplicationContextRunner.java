@@ -84,7 +84,7 @@ public final class WebApplicationContextRunner extends
 	/**
 	 * Decorate the specified {@code contextFactory} to set a {@link MockServletContext}
 	 * on each newly created {@link WebApplicationContext}.
-	 * @param contextFactory the context factory to decorate
+	 * @param contextFactory the context design.parttern.factory to decorate
 	 * @return an updated supplier that will set the {@link MockServletContext}
 	 */
 	public static Supplier<ConfigurableWebApplicationContext> withMockServletContext(

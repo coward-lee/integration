@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Configuration for a factory bean produced by a bean method on a configuration class
+ * Configuration for a design.parttern.factory bean produced by a bean method on a configuration class
  * found via component scanning.
  *
  * @author Andy Wilkinson

@@ -42,3 +42,10 @@
 # UML 
 note :对uml的注释
 
+
+# 设计模式
+1. 工厂模式     
+2. 原型模式     
+    design.pattern.factory
+3. 构造器模式
+    design.pattern.build

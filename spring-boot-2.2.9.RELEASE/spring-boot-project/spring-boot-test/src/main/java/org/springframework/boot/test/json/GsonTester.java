@@ -103,7 +103,7 @@ public class GsonTester<T> extends AbstractJsonMarshalTester<T> {
 	 * Utility method to initialize {@link GsonTester} fields. See {@link GsonTester
 	 * class-level documentation} for example usage.
 	 * @param testInstance the test instance
-	 * @param gson an object factory to create the Gson instance
+	 * @param gson an object design.parttern.factory to create the Gson instance
 	 */
 	public static void initFields(Object testInstance, ObjectFactory<Gson> gson) {
 		new GsonFieldInitializer().initFields(testInstance, gson);

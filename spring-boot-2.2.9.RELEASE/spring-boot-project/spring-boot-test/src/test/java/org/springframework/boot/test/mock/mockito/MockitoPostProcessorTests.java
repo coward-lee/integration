@@ -328,7 +328,7 @@ class MockitoPostProcessorTests {
 		public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 			Map<String, BeanWrapper> cache = (Map<String, BeanWrapper>) ReflectionTestUtils.getField(beanFactory,
 					"factoryBeanInstanceCache");
-			Assert.isTrue(cache.isEmpty(), "Early initialization of factory bean triggered.");
+			Assert.isTrue(cache.isEmpty(), "Early initialization of design.parttern.factory bean triggered.");
 		}
 
 	}

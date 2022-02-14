@@ -33,9 +33,9 @@ public interface XAConnectionFactoryWrapper {
 	/**
 	 * Wrap the specific {@link XAConnectionFactory} and enroll it with a JTA
 	 * {@link TransactionManager}.
-	 * @param connectionFactory the connection factory to wrap
-	 * @return the wrapped connection factory
-	 * @throws Exception if the connection factory cannot be wrapped
+	 * @param connectionFactory the connection design.parttern.factory to wrap
+	 * @return the wrapped connection design.parttern.factory
+	 * @throws Exception if the connection design.parttern.factory cannot be wrapped
 	 */
 	ConnectionFactory wrapConnectionFactory(XAConnectionFactory connectionFactory) throws Exception;
 

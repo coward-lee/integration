@@ -1,4 +1,4 @@
-package factory.pojo;
+package design.parttern.pojo;
 
 /**
  * 需要产生的对象

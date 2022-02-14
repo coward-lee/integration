@@ -306,7 +306,7 @@ public class RestTemplateBuilder {
 	/**
 	 * Set the {@link ClientHttpRequestFactory} class that should be used with the
 	 * {@link RestTemplate}.
-	 * @param requestFactory the request factory to use
+	 * @param requestFactory the request design.parttern.factory to use
 	 * @return a new builder instance
 	 */
 	public RestTemplateBuilder requestFactory(Class<? extends ClientHttpRequestFactory> requestFactory) {
@@ -328,7 +328,7 @@ public class RestTemplateBuilder {
 	/**
 	 * Set the {@code Supplier} of {@link ClientHttpRequestFactory} that should be called
 	 * each time we {@link #build()} a new {@link RestTemplate} instance.
-	 * @param requestFactory the supplier for the request factory
+	 * @param requestFactory the supplier for the request design.parttern.factory
 	 * @return a new builder instance
 	 * @since 2.0.0
 	 */
@@ -779,7 +779,7 @@ public class RestTemplateBuilder {
 			if (method != null) {
 				return method;
 			}
-			throw new IllegalStateException("Request factory " + requestFactory.getClass()
+			throw new IllegalStateException("Request design.parttern.factory " + requestFactory.getClass()
 					+ " does not have a suitable " + methodName + " method");
 		}
 

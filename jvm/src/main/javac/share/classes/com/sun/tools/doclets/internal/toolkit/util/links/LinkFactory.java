@@ -29,7 +29,7 @@ import com.sun.javadoc.*;
 import com.sun.tools.doclets.internal.toolkit.Content;
 
 /**
- * A factory that constructs links from given link information.
+ * A design.parttern.factory that constructs links from given link information.
  *
  *  <p><b>This is NOT part of any supported API.
  *  If you write code that depends on this, you do so at your own risk.

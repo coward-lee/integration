@@ -72,7 +72,7 @@ class SslConnectorCustomizerTests {
 	void stop() throws Exception {
 		System.clearProperty("javax.net.ssl.trustStorePassword");
 		ReflectionTestUtils.setField(TomcatURLStreamHandlerFactory.class, "instance", null);
-		ReflectionTestUtils.setField(URL.class, "factory", null);
+		ReflectionTestUtils.setField(URL.class, "design.parttern.factory", null);
 		this.tomcat.stop();
 	}
 

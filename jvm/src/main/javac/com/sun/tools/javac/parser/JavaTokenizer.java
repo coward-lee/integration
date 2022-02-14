@@ -66,7 +66,7 @@ public class JavaTokenizer {
      */
     private final Log log;
 
-    /** The token factory. */
+    /** The token design.parttern.factory. */
     private final Tokens tokens;
 
     /** The token kind, set by nextToken().
@@ -107,7 +107,7 @@ public class JavaTokenizer {
      * that {@code inputLength < input.length} or
      * {@code input[input.length -1]} is a white space character.
      *
-     * @param fac the factory which created this Scanner
+     * @param fac the design.parttern.factory which created this Scanner
      * @param buf the input, might be modified
      * Must be positive and less than or equal to input.length.
      */

@@ -6,7 +6,7 @@
  2016-10-30
  -----
 
-  Spring Boot repackages the jar file for this project using a custom layout factory
+  Spring Boot repackages the jar file for this project using a custom layout design.parttern.factory
   defined in the additional jar file, provided as a dependency to the build plugin:
 
 ---
@@ -50,7 +50,7 @@
 </project>
 ---
 
-  The layout factory is provided as an implementation of <<<LayoutFactory>>> (from
+  The layout design.parttern.factory is provided as an implementation of <<<LayoutFactory>>> (from
   spring-boot-loader-tools) explicitly specified in the pom. If there is only one custom
   <<<LayoutFactory>>> on the plugin classpath and it is listed in
   <<<META-INF/spring.factories>>> then it is unnecessary to explicitly set it in the

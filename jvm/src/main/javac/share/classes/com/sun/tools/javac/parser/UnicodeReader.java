@@ -77,7 +77,7 @@ public class UnicodeReader {
      * that {@code inputLength < input.length} or
      * {@code input[input.length -1]} is a white space character.
      *
-     * @param sf the factory which created this Scanner
+     * @param sf the design.parttern.factory which created this Scanner
      * @param buffer the input, might be modified
      * Must be positive and less than or equal to input.length.
      */

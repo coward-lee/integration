@@ -72,7 +72,7 @@ public abstract class Configuration {
     }
 
     /**
-     * The factory for builders.
+     * The design.parttern.factory for builders.
      */
     protected BuilderFactory builderFactory;
 
@@ -313,9 +313,9 @@ public abstract class Configuration {
     }
 
     /**
-     * Return the builder factory for this doclet.
+     * Return the builder design.parttern.factory for this doclet.
      *
-     * @return the builder factory for this doclet.
+     * @return the builder design.parttern.factory for this doclet.
      */
     public BuilderFactory getBuilderFactory() {
         if (builderFactory == null) {
@@ -945,7 +945,7 @@ public abstract class Configuration {
     }
 
     /**
-     * Return the doclet specific instance of a writer factory.
+     * Return the doclet specific instance of a writer design.parttern.factory.
      * @return the {@link WriterFactory} for the doclet.
      */
     public abstract WriterFactory getWriterFactory();

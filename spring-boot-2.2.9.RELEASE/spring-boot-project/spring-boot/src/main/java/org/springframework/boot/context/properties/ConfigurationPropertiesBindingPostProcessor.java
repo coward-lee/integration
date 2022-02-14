@@ -81,7 +81,7 @@ public class ConfigurationPropertiesBindingPostProcessor
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// We can't use constructor injection of the application context because
-		// it causes eager factory bean initialization
+		// it causes eager design.parttern.factory bean initialization
 		this.registry = (BeanDefinitionRegistry) this.applicationContext.getAutowireCapableBeanFactory();
 		this.binder = ConfigurationPropertiesBinder.get(this.applicationContext);
 	}

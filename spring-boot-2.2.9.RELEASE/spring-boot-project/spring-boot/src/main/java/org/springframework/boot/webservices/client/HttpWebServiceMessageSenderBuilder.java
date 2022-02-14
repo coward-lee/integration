@@ -65,7 +65,7 @@ public class HttpWebServiceMessageSenderBuilder {
 	/**
 	 * Set the {@code Supplier} of {@link ClientHttpRequestFactory} that should be called
 	 * to create the HTTP-based {@link WebServiceMessageSender}.
-	 * @param requestFactorySupplier the supplier for the request factory
+	 * @param requestFactorySupplier the supplier for the request design.parttern.factory
 	 * @return a new builder instance
 	 */
 	public HttpWebServiceMessageSenderBuilder requestFactory(
@@ -111,7 +111,7 @@ public class HttpWebServiceMessageSenderBuilder {
 				return method;
 			}
 			throw new IllegalStateException(
-					"Request factory " + factory.getClass() + " does not have a " + this.methodName + "(int) method");
+					"Request design.parttern.factory " + factory.getClass() + " does not have a " + this.methodName + "(int) method");
 		}
 
 	}

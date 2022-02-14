@@ -47,7 +47,7 @@ import com.sun.tools.javac.util.Position;
  */
 public class DocTreeMaker {
 
-    /** The context key for the tree factory. */
+    /** The context key for the tree design.parttern.factory. */
     protected static final Context.Key<DocTreeMaker> treeMakerKey =
         new Context.Key<DocTreeMaker>();
 
@@ -63,7 +63,7 @@ public class DocTreeMaker {
      */
     public int pos = Position.NOPOS;
 
-    /** Access to diag factory for ErroneousTrees. */
+    /** Access to diag design.parttern.factory for ErroneousTrees. */
     private final JCDiagnostic.Factory diags;
 
     /** Create a tree maker with NOPOS as initial position.

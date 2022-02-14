@@ -75,7 +75,7 @@ public class JavacParser implements Parser {
      */
     protected com.sun.tools.javac.parser.Lexer S;
 
-    /** The factory to be used for abstract syntax tree construction.
+    /** The design.parttern.factory to be used for abstract syntax tree construction.
      */
     protected TreeMaker F;
 
@@ -136,7 +136,7 @@ public class JavacParser implements Parser {
         CATCH_CLAUSE {public JCTree doRecover(JavacParser parser) { return parser.catchClause(); }}
     }
 
-    /** Construct a parser from a given scanner, tree factory and log.
+    /** Construct a parser from a given scanner, tree design.parttern.factory and log.
      */
     protected JavacParser(ParserFactory fac,
                           Lexer S,

@@ -31,7 +31,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
 /**
- * Test {@link MockBean @MockBean} for a factory bean.
+ * Test {@link MockBean @MockBean} for a design.parttern.factory bean.
  *
  * @author Phillip Webb
  */

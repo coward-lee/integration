@@ -121,7 +121,7 @@ public abstract class AbstractApplicationContextRunner<SELF extends AbstractAppl
 
 	/**
 	 * Create a new {@link AbstractApplicationContextRunner} instance.
-	 * @param contextFactory the factory used to create the actual context
+	 * @param contextFactory the design.parttern.factory used to create the actual context
 	 */
 	protected AbstractApplicationContextRunner(Supplier<C> contextFactory) {
 		this(contextFactory, Collections.emptyList(), TestPropertyValues.empty(), TestPropertyValues.empty(), null,
@@ -130,7 +130,7 @@ public abstract class AbstractApplicationContextRunner<SELF extends AbstractAppl
 
 	/**
 	 * Create a new {@link AbstractApplicationContextRunner} instance.
-	 * @param contextFactory the factory used to create the actual context
+	 * @param contextFactory the design.parttern.factory used to create the actual context
 	 * @param initializers the initializers
 	 * @param environmentProperties the environment properties
 	 * @param systemProperties the system properties
@@ -270,7 +270,7 @@ public abstract class AbstractApplicationContextRunner<SELF extends AbstractAppl
 	 * user configurations} in the order of registration.
 	 * @param type the type of the bean
 	 * @param supplier a supplier for the bean
-	 * @param customizers one or more callbacks for customizing the factory's
+	 * @param customizers one or more callbacks for customizing the design.parttern.factory's
 	 * {@link BeanDefinition}, e.g. setting a lazy-init or primary flag
 	 * @param <T> the type of the bean
 	 * @return a new instance with the updated bean
@@ -289,7 +289,7 @@ public abstract class AbstractApplicationContextRunner<SELF extends AbstractAppl
 	 * @param name the bean name or {@code null} to use a generated name
 	 * @param type the type of the bean
 	 * @param supplier a supplier for the bean
-	 * @param customizers one or more callbacks for customizing the factory's
+	 * @param customizers one or more callbacks for customizing the design.parttern.factory's
 	 * {@link BeanDefinition}, e.g. setting a lazy-init or primary flag
 	 * @param <T> the type of the bean
 	 * @return a new instance with the updated bean

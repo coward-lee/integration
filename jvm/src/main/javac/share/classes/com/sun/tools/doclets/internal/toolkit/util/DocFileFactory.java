@@ -50,7 +50,7 @@ abstract class DocFileFactory {
             new WeakHashMap<Configuration, DocFileFactory>();
 
     /**
-     * Get the appropriate factory, based on the file manager given in the
+     * Get the appropriate design.parttern.factory, based on the file manager given in the
      * configuration.
      */
     static synchronized DocFileFactory getFactory(Configuration configuration) {

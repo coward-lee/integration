@@ -47,9 +47,9 @@ import static com.sun.tools.javac.util.JCDiagnostic.DiagnosticType.*;
  *  deletion without notice.</b>
  */
 public class JCDiagnostic implements Diagnostic<JavaFileObject> {
-    /** A factory for creating diagnostic objects. */
+    /** A design.parttern.factory for creating diagnostic objects. */
     public static class Factory {
-        /** The context key for the diagnostic factory. */
+        /** The context key for the diagnostic design.parttern.factory. */
         protected static final Context.Key<JCDiagnostic.Factory> diagnosticFactoryKey =
             new Context.Key<JCDiagnostic.Factory>();
 
@@ -65,7 +65,7 @@ public class JCDiagnostic implements Diagnostic<JavaFileObject> {
         final String prefix;
         final Set<DiagnosticFlag> defaultErrorFlags;
 
-        /** Create a new diagnostic factory. */
+        /** Create a new diagnostic design.parttern.factory. */
         protected Factory(Context context) {
             this(JavacMessages.instance(context), "compiler");
             context.put(diagnosticFactoryKey, this);
@@ -84,7 +84,7 @@ public class JCDiagnostic implements Diagnostic<JavaFileObject> {
                 defaultErrorFlags.add(DiagnosticFlag.RECOVERABLE);
         }
 
-        /** Create a new diagnostic factory. */
+        /** Create a new diagnostic design.parttern.factory. */
         public Factory(JavacMessages messages, String prefix) {
             this.prefix = prefix;
             this.formatter = new BasicDiagnosticFormatter(messages);

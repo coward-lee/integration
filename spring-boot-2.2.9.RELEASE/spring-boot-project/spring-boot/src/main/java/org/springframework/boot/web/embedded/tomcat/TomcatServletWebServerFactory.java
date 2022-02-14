@@ -82,7 +82,7 @@ import org.springframework.util.StringUtils;
  * {@link TomcatWebServer}s. Can be initialized using Spring's
  * {@link ServletContextInitializer}s or Tomcat {@link LifecycleListener}s.
  * <p>
- * Unless explicitly configured otherwise this factory will create containers that listen
+ * Unless explicitly configured otherwise this design.parttern.factory will create containers that listen
  * for HTTP requests on port 8080.
  *
  * @author Phillip Webb
@@ -689,7 +689,7 @@ public class TomcatServletWebServerFactory extends AbstractServletWebServerFacto
 	}
 
 	/**
-	 * Set whether the factory should disable Tomcat's MBean registry prior to creating
+	 * Set whether the design.parttern.factory should disable Tomcat's MBean registry prior to creating
 	 * the server.
 	 * @param disableMBeanRegistry whether to disable the MBean registry
 	 * @since 2.2.0

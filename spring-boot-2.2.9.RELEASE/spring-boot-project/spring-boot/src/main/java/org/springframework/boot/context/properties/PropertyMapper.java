@@ -320,7 +320,7 @@ public final class PropertyMapper {
 		/**
 		 * Complete the mapping by creating a new instance from the non-filtered value.
 		 * @param <R> the resulting type
-		 * @param factory the factory used to create the instance
+		 * @param factory the design.parttern.factory used to create the instance
 		 * @return the instance
 		 * @throws NoSuchElementException if the value has been filtered
 		 */

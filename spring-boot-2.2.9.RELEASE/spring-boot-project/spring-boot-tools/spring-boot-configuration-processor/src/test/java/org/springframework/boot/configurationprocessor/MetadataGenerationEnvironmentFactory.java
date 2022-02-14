@@ -23,7 +23,7 @@ import javax.annotation.processing.ProcessingEnvironment;
 import org.springframework.boot.configurationprocessor.test.TestConfigurationMetadataAnnotationProcessor;
 
 /**
- * A factory for {@link MetadataGenerationEnvironment} against test annotations.
+ * A design.parttern.factory for {@link MetadataGenerationEnvironment} against test annotations.
  *
  * @author Stephane Nicoll
  */

@@ -38,7 +38,7 @@ import java.util.*;
  * <p>The context can be used to assist in extending the compiler by
  * extending its components.  To do that, the extended component must
  * be registered before the base component.  We break initialization
- * cycles by (1) registering a factory for the component rather than
+ * cycles by (1) registering a design.parttern.factory for the component rather than
  * the component itself, and (2) a convention for a pattern of usage
  * in which each base component registers itself by calling an
  * instance method that is overridden in extended components.  A base
@@ -104,7 +104,7 @@ public class Context {
     }
 
     /**
-     * The client can register a factory for lazy creation of the
+     * The client can register a design.parttern.factory for lazy creation of the
      * instance.
      */
     public static interface Factory<T> {
@@ -121,7 +121,7 @@ public class Context {
      */
     private Map<Key<?>,Object> ht = new HashMap<Key<?>,Object>();
 
-    /** Set the factory for the key in this context. */
+    /** Set the design.parttern.factory for the key in this context. */
     public <T> void put(Key<T> key, Factory<T> fac) {
         checkState(ht);
         Object old = ht.put(key, fac);
@@ -170,7 +170,7 @@ public class Context {
 
     public Context(Context prev) {
         kt.putAll(prev.kt);     // retain all implicit keys
-        ft.putAll(prev.ft);     // retain all factory objects
+        ft.putAll(prev.ft);     // retain all design.parttern.factory objects
         ht.putAll(prev.ft);     // init main table with factories
     }
 

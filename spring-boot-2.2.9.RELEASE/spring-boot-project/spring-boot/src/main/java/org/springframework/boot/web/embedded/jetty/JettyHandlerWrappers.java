@@ -30,7 +30,7 @@ import org.eclipse.jetty.server.handler.gzip.GzipHandler;
 import org.springframework.boot.web.server.Compression;
 
 /**
- * Jetty {@code HandlerWrapper} static factory.
+ * Jetty {@code HandlerWrapper} static design.parttern.factory.
  *
  * @author Brian Clozel
  */

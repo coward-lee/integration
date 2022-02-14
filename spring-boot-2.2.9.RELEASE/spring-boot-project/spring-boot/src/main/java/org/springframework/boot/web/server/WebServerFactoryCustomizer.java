@@ -20,7 +20,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 
 /**
  * Strategy interface for customizing {@link WebServerFactory web server factories}. Any
- * beans of this type will get a callback with the server factory before the server itself
+ * beans of this type will get a callback with the server design.parttern.factory before the server itself
  * is started, so you can set the port, address, error pages etc.
  * <p>
  * Beware: calls to this interface are usually made from a
@@ -29,7 +29,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
  * It might be safer to lookup dependencies lazily in the enclosing BeanFactory rather
  * than injecting them with {@code @Autowired}.
  *
- * @param <T> the configurable web server factory
+ * @param <T> the configurable web server design.parttern.factory
  * @author Phillip Webb
  * @author Dave Syer
  * @author Brian Clozel
@@ -41,7 +41,7 @@ public interface WebServerFactoryCustomizer<T extends WebServerFactory> {
 
 	/**
 	 * Customize the specified {@link WebServerFactory}.
-	 * @param factory the web server factory to customize
+	 * @param factory the web server design.parttern.factory to customize
 	 */
 	void customize(T factory);
 

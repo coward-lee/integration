@@ -216,7 +216,7 @@ public class JavaCompiler {
      */
     JCDiagnostic.Factory diagFactory;
 
-    /** The tree factory module.
+    /** The tree design.parttern.factory module.
      */
     protected TreeMaker make;
 

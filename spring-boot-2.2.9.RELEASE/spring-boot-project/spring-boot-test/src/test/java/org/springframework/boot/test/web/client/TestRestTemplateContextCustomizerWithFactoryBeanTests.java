@@ -31,7 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Integration tests for {@link TestRestTemplateContextCustomizer} to ensure
- * early-initialization of factory beans doesn't occur.
+ * early-initialization of design.parttern.factory beans doesn't occur.
  *
  * @author Madhura Bhave
  */

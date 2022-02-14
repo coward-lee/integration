@@ -37,8 +37,8 @@ public class JmsProperties {
 	private boolean pubSubDomain = false;
 
 	/**
-	 * Connection factory JNDI name. When set, takes precedence to others connection
-	 * factory auto-configurations.
+	 * Connection design.parttern.factory JNDI name. When set, takes precedence to others connection
+	 * design.parttern.factory auto-configurations.
 	 */
 	private String jndiName;
 

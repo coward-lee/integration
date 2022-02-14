@@ -1,4 +1,4 @@
-package factory.factory;
+package design.parttern.factory;
 
 import java.io.*;
 import java.util.HashMap;

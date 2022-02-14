@@ -37,7 +37,7 @@ import org.springframework.core.Ordered;
  * {@link WebServerFactoryCustomizer} that customizes the {@link WebServerFactory} used to
  * create the management context's web server.
  *
- * @param <T> the type of web server factory to customize
+ * @param <T> the type of web server design.parttern.factory to customize
  * @author Andy Wilkinson
  * @since 2.0.0
  */

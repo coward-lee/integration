@@ -1,8 +1,8 @@
-package factory;
+package design.parttern;
 
-import factory.factory.AbstractFactory;
-import factory.factory.FactoryMethod.*;
-import factory.factory.SimpleFactory;
+import design.parttern.factory.AbstractFactory;
+import design.parttern.factory.FactoryMethod.*;
+import design.parttern.factory.SimpleFactory;
 
 public class FactoryMain {
     public static void main(String[] args) {

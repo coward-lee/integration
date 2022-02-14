@@ -1563,7 +1563,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
      *      x_0.super(x_1, ..., x_n)
      *    }
      *
-     *  @param make     The tree factory.
+     *  @param make     The tree design.parttern.factory.
      *  @param c        The class owning the default constructor.
      *  @param argtypes The parameter types of the constructor.
      *  @param thrown   The thrown exceptions of the constructor.
@@ -1653,7 +1653,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
      *
      *  where id_0, ..., id_n are the names of the given parameters.
      *
-     *  @param make    The tree factory
+     *  @param make    The tree design.parttern.factory
      *  @param params  The parameters that need to be passed to super
      *  @param typarams  The type parameters that need to be passed to super
      *  @param based   Is first parameter a this$n?

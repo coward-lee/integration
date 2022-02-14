@@ -70,7 +70,7 @@ public class Scanner implements Lexer {
      * that {@code inputLength < input.length} or
      * {@code input[input.length -1]} is a white space character.
      *
-     * @param fac the factory which created this Scanner
+     * @param fac the design.parttern.factory which created this Scanner
      * @param buf the input, might be modified
      * Must be positive and less than or equal to input.length.
      */

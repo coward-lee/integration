@@ -64,8 +64,8 @@ class RabbitConnectionFactoryMetricsPostProcessor implements BeanPostProcessor, 
 
 	/**
 	 * Get the name of a ConnectionFactory based on its {@code beanName}.
-	 * @param beanName the name of the connection factory bean
-	 * @return a name for the given connection factory
+	 * @param beanName the name of the connection design.parttern.factory bean
+	 * @return a name for the given connection design.parttern.factory
 	 */
 	private String getConnectionFactoryName(String beanName) {
 		if (beanName.length() > CONNECTION_FACTORY_SUFFIX.length()

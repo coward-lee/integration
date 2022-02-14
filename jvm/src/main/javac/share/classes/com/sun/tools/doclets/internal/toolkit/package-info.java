@@ -37,7 +37,7 @@
             {@link com.sun.tools.doclets.internal.toolkit.Configuration}.
         </li>
         <li>
-            The doclet should have a writer factory that implements
+            The doclet should have a writer design.parttern.factory that implements
             {@link com.sun.tools.doclets.internal.toolkit.WriterFactory}.
             This class constructs writers that write doclet specific output.
         </li>
