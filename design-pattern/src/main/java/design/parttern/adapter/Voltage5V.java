@@ -1,4 +1,5 @@
 package design.parttern.adapter;
 
-public class Volatage5V {
+public interface Voltage5V {
+    int outputV5();
 }

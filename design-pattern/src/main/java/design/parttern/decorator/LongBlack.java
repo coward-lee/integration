@@ -1,8 +1,8 @@
 package design.parttern.decorator;
 
-public class LongCoffee extends Coffee{
-    @Override
-    float cost() {
-        return super.cost();
+public class LongBlack extends Coffee{
+    public LongBlack() {
+        setDesc("long back");
+        setPrice(4.0f);
     }
 }

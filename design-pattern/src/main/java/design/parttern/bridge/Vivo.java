@@ -1,4 +1,4 @@
-package design.parttern.brige;
+package design.parttern.bridge;
 
 public class Vivo implements Brand{
     @Override

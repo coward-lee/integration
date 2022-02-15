@@ -1,4 +1,7 @@
 package design.parttern.adapter;
 
-public class Volatage220V {
+public class Voltage220V {
+    public int output(){
+        return 220;
+    }
 }

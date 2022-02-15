@@ -1,12 +1,26 @@
 package design.parttern.adapter;
 
+import java.util.Objects;
+
 /**
- * 类适配器：
- * 缺点适配内容多了以后，适配方法也会增加
+ * 对象适配器：
+ * 他不是实现适配的类，而是依赖适配的类.
  */
-public class VoltageAdapter extends Voltage220V implements Voltage5V {
-    public int outputFive(){
-        System.out.println("220V转化为5V");
+public class ObjectAdapter implements Voltage5V {
+    private Voltage220V voltage220V;
+
+    public ObjectAdapter(Voltage220V voltage220V) {
+        this.voltage220V = voltage220V;
+    }
+
+
+    @Override
+    public int outputV5() {
+        if (Objects.nonNull(voltage220V)){
+            int src = voltage220V.output();
+            System.out.println("原来的电压："+src);
+            System.out.println("变压后的电压："+5);
+        }
         return 5;
     }
 }

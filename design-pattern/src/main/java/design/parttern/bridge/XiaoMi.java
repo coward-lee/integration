@@ -1,4 +1,4 @@
-package design.parttern.brige;
+package design.parttern.bridge;
 
 public class XiaoMi implements Brand{
     @Override

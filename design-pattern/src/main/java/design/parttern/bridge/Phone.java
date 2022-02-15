@@ -1,4 +1,4 @@
-package design.parttern.brige;
+package design.parttern.bridge;
 
 public abstract class Phone {
 

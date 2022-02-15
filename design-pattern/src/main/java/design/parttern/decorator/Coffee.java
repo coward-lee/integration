@@ -1,6 +1,6 @@
 package design.parttern.decorator;
 
-public class Coffe extends Drink{
+public class Coffee extends Drink{
     @Override
     float cost() {
         return getPrice();
