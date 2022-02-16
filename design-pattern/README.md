@@ -45,18 +45,33 @@ note :对uml的注释
 
 # 设计模式
 1. 工厂模式     
-2. 原型模式     
-    design.pattern.factory
-3. 构造器模式
-    design.pattern.build
-4. 适配器模式
-    design.pattern.build
-    1. 类的适配器    VoltageAdapter
-    2. 对象适配器    VoltageAdapter2
-    3. 接口适配器    DefaultAdapterPattern
+2. 原型模式         
+    包：design.pattern.factory
+3. 构造器模式        
+    包：design.pattern.build
+4. 适配器模式        
+    包：design.pattern.build      
+    1. 类的适配器    VoltageAdapter      
+    2. 对象适配器    VoltageAdapter2     
+    3. 接口适配器    DefaultAdapterPattern       
     4. 源码分析： spring-mvc中adapter个controller的映射关系的适配，在DispatcherServlet#doDispatch 方法 
-5. 桥接器模式
-    design.pattern.bridge
-6. 装饰着模式
-    decorator
-    和桥接有相似之处，都是为了增强拓展性，被装饰者可以被装饰器不断的进行装饰叠加。
+5. 桥接器模式        
+    包：design.pattern.bridge     
+6. 装饰着模式        
+    包：design.pattern.decorator      
+    和桥接有相似之处，都是为了增强拓展性，被装饰者可以被装饰器不断的进行装饰叠加。     
+7. 组合模式             
+    包：design.pattern.composite      
+    Map 组合的父级节点（这里他是接口）,AbstractMap（这里是抽象类）     
+    HashMap  这个是中间的节点，实现了接口，继承了抽象类      
+    Node为叶子节点       
+    Map下面的体系使用的就是组合模式       
+8. 外观模式             
+    包：design.pattern.facade     
+    外观类：去整合所有需要调用的子系统/模块，并为之提供调用端统一地调用接口        
+    调用者：外观调用者       
+    子系统结合： 之模块或者子系统，处理Facade对象指派的任务，他是实际功能的提供者      
+ 9. 享元模式（flyweight Pattern, 也称之为蝇量模式）
+    包：design.pattern.
+    当需求相似度很高的时候可以使用这个模式
+    享元模式使用的时候需要分析出来内部状态（相对稳定）和外部状态（变化相对较多）。
