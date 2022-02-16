@@ -148,12 +148,12 @@ public class CliTester implements BeforeEachCallback, AfterEachCallback {
 	}
 
 	/**
-	 * The TomcatURLStreamHandlerFactory fails if the factory is already set, use
+	 * The TomcatURLStreamHandlerFactory fails if the design.parttern.factory is already set, use
 	 * reflection to reset it.
 	 */
 	private void clearUrlHandler() {
 		try {
-			Field field = URL.class.getDeclaredField("factory");
+			Field field = URL.class.getDeclaredField("design.parttern.factory");
 			field.setAccessible(true);
 			field.set(null, null);
 		}

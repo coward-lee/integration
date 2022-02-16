@@ -37,7 +37,7 @@ import com.sun.tools.javac.util.Names;
 
 
 /**
- * A factory for creating scanners.
+ * A design.parttern.factory for creating scanners.
  *
  *  <p><b>This is NOT part of any supported API.
  *  If you write code that depends on this, you do so at your own
@@ -45,7 +45,7 @@ import com.sun.tools.javac.util.Names;
  *  or deletion without notice.</b>
  */
 public class ScannerFactory {
-    /** The context key for the scanner factory. */
+    /** The context key for the scanner design.parttern.factory. */
     public static final Context.Key<ScannerFactory> scannerFactoryKey =
         new Context.Key<ScannerFactory>();
 
@@ -62,7 +62,7 @@ public class ScannerFactory {
     final Source source;
     final com.sun.tools.javac.parser.Tokens tokens;
 
-    /** Create a new scanner factory. */
+    /** Create a new scanner design.parttern.factory. */
     protected ScannerFactory(Context context) {
         context.put(scannerFactoryKey, this);
         this.log = Log.instance(context);

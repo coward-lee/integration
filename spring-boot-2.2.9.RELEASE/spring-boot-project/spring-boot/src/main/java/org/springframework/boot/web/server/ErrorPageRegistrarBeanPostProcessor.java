@@ -31,7 +31,7 @@ import org.springframework.util.Assert;
 
 /**
  * {@link BeanPostProcessor} that applies all {@link ErrorPageRegistrar}s from the bean
- * factory to {@link ErrorPageRegistry} beans.
+ * design.parttern.factory to {@link ErrorPageRegistry} beans.
  *
  * @author Phillip Webb
  * @author Stephane Nicoll

@@ -71,7 +71,7 @@ import org.springframework.util.StringUtils;
  * Can be initialized using Spring's {@link ServletContextInitializer}s or Jetty
  * {@link Configuration}s.
  * <p>
- * Unless explicitly configured otherwise this factory will create servers that listen for
+ * Unless explicitly configured otherwise this design.parttern.factory will create servers that listen for
  * HTTP requests on port 8080.
  *
  * @author Phillip Webb

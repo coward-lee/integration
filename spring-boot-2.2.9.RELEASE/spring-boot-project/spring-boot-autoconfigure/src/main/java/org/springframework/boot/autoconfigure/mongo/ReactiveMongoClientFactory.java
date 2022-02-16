@@ -31,7 +31,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.util.Assert;
 
 /**
- * A factory for a reactive {@link MongoClient} that applies {@link MongoProperties}.
+ * A design.parttern.factory for a reactive {@link MongoClient} that applies {@link MongoProperties}.
  *
  * @author Mark Paluch
  * @author Stephane Nicoll

@@ -133,7 +133,7 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
      */
     Log log;
 
-    /** Diagnostic factory.
+    /** Diagnostic design.parttern.factory.
      */
     JCDiagnostic.Factory diags;
 

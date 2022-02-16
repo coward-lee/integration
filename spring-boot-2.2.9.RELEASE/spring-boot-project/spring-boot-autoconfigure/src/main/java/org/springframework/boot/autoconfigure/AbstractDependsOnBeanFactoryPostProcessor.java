@@ -55,9 +55,9 @@ public abstract class AbstractDependsOnBeanFactoryPostProcessor implements BeanF
 	private final Function<ListableBeanFactory, Set<String>> dependsOn;
 
 	/**
-	 * Create an instance with target bean, factory bean classes, and dependency names.
+	 * Create an instance with target bean, design.parttern.factory bean classes, and dependency names.
 	 * @param beanClass target bean class
-	 * @param factoryBeanClass target factory bean class
+	 * @param factoryBeanClass target design.parttern.factory bean class
 	 * @param dependsOn dependency names
 	 */
 	protected AbstractDependsOnBeanFactoryPostProcessor(Class<?> beanClass,
@@ -68,9 +68,9 @@ public abstract class AbstractDependsOnBeanFactoryPostProcessor implements BeanF
 	}
 
 	/**
-	 * Create an instance with target bean, factory bean classes, and dependency types.
+	 * Create an instance with target bean, design.parttern.factory bean classes, and dependency types.
 	 * @param beanClass target bean class
-	 * @param factoryBeanClass target factory bean class
+	 * @param factoryBeanClass target design.parttern.factory bean class
 	 * @param dependencyTypes dependency types
 	 * @since 2.1.7
 	 */

@@ -654,7 +654,7 @@ public class TagletManager {
                 SimpleTaglet.PACKAGE + SimpleTaglet.TYPE + SimpleTaglet.OVERVIEW));
         addStandardTaglet(new SimpleTaglet("serialData", message.getText("doclet.SerialData"),
             SimpleTaglet.EXCLUDED));
-        customTags.put((temp = new SimpleTaglet("factory", message.getText("doclet.Factory"),
+        customTags.put((temp = new SimpleTaglet("design.parttern.factory", message.getText("doclet.Factory"),
             SimpleTaglet.METHOD)).getName(), temp);
         addStandardTaglet(new SeeTaglet());
         //Standard inline tags

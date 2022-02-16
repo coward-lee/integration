@@ -265,7 +265,7 @@ public class LambdaToMethod extends TreeTranslator {
     /**
      * Translate a lambda into a method to be inserted into the class.
      * Then replace the lambda site with an invokedynamic call of to lambda
-     * meta-factory, which will use the lambda method.
+     * meta-design.parttern.factory, which will use the lambda method.
      * @param tree
      */
     @Override
@@ -348,7 +348,7 @@ public class LambdaToMethod extends TreeTranslator {
         //then, determine the arguments to the indy call
         List<JCExpression> indy_args = translate(syntheticInits.toList(), localContext.prev);
 
-        //build a sam instance using an indy call to the meta-factory
+        //build a sam instance using an indy call to the meta-design.parttern.factory
         int refKind = referenceKind(sym);
 
         //convert to an invokedynamic call
@@ -365,7 +365,7 @@ public class LambdaToMethod extends TreeTranslator {
 
     /**
      * Translate a method reference into an invokedynamic call to the
-     * meta-factory.
+     * meta-design.parttern.factory.
      * @param tree
      */
     @Override
@@ -408,7 +408,7 @@ public class LambdaToMethod extends TreeTranslator {
         List<JCExpression> indy_args = init==null? List.<JCExpression>nil() : translate(List.of(init), localContext.prev);
 
 
-        //build a sam instance using an indy call to the meta-factory
+        //build a sam instance using an indy call to the meta-design.parttern.factory
         result = makeMetafactoryIndyCall(localContext, localContext.referenceKind(), refSym, indy_args);
     }
 
@@ -953,7 +953,7 @@ public class LambdaToMethod extends TreeTranslator {
     }
 
     /**
-     * Generate an indy method call to the meta factory
+     * Generate an indy method call to the meta design.parttern.factory
      */
     private JCExpression makeMetafactoryIndyCall(TranslationContext<?> context,
             int refKind, Symbol refSym, List<JCExpression> indy_args) {
@@ -1685,7 +1685,7 @@ public class LambdaToMethod extends TreeTranslator {
             /** the enclosing translation context (set for nested lambdas/mref) */
             final TranslationContext<?> prev;
 
-            /** list of methods to be bridged by the meta-factory */
+            /** list of methods to be bridged by the meta-design.parttern.factory */
             final List<Symbol> bridges;
 
             TranslationContext(T tree) {

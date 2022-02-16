@@ -92,7 +92,7 @@ public class PoolingConnectionFactoryBean extends PoolingConnectionFactory
 	/**
 	 * Set the {@link XAConnectionFactory} directly, instead of calling
 	 * {@link #setClassName(String)}.
-	 * @param connectionFactory the connection factory to use
+	 * @param connectionFactory the connection design.parttern.factory to use
 	 */
 	public void setConnectionFactory(XAConnectionFactory connectionFactory) {
 		this.connectionFactory = connectionFactory;

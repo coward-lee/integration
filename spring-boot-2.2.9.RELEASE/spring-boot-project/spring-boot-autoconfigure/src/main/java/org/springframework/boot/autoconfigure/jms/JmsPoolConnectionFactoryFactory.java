@@ -38,8 +38,8 @@ public class JmsPoolConnectionFactoryFactory {
 	/**
 	 * Create a {@link JmsPoolConnectionFactory} based on the specified
 	 * {@link ConnectionFactory}.
-	 * @param connectionFactory the connection factory to wrap
-	 * @return a pooled connection factory
+	 * @param connectionFactory the connection design.parttern.factory to wrap
+	 * @return a pooled connection design.parttern.factory
 	 */
 	public JmsPoolConnectionFactory createPooledConnectionFactory(ConnectionFactory connectionFactory) {
 		JmsPoolConnectionFactory pooledConnectionFactory = new JmsPoolConnectionFactory();

@@ -326,7 +326,7 @@ public class WebServiceTemplateBuilder {
 
 	/**
 	 * Sets the {@link WebServiceMessageFactory} to use for creating messages.
-	 * @param messageFactory the message factory to use for creating messages
+	 * @param messageFactory the message design.parttern.factory to use for creating messages
 	 * @return a new builder instance.
 	 * @see WebServiceTemplate#setMessageFactory(WebServiceMessageFactory)
 	 **/
@@ -376,7 +376,7 @@ public class WebServiceTemplateBuilder {
 
 	/**
 	 * Set the {@link TransformerFactory} implementation to use.
-	 * @param transformerFactoryClass the transformer factory implementation to use
+	 * @param transformerFactoryClass the transformer design.parttern.factory implementation to use
 	 * @return a new builder instance.
 	 * @see WebServiceTemplate#setTransformerFactoryClass(Class)
 	 */

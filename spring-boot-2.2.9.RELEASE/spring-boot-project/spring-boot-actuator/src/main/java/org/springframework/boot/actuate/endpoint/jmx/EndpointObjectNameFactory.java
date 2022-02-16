@@ -20,7 +20,7 @@ import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
 /**
- * A factory to create an {@link ObjectName} for an {@link EndpointMBean}.
+ * A design.parttern.factory to create an {@link ObjectName} for an {@link EndpointMBean}.
  *
  * @author Stephane Nicoll
  * @since 2.0.0

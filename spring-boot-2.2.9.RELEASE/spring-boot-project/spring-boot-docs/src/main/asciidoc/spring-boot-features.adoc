@@ -267,7 +267,7 @@ The `ApplicationArguments` interface provides access to both the raw `String[]` 
 [source,java,indent=0]
 ----
 	import org.springframework.boot.*;
-	import org.springframework.beans.factory.annotation.*;
+	import org.springframework.beans.design.parttern.factory.annotation.*;
 	import org.springframework.stereotype.*;
 
 	@Component
@@ -379,7 +379,7 @@ To provide a concrete example, suppose you develop a `@Component` that uses a `n
 [source,java,indent=0]
 ----
 	import org.springframework.stereotype.*;
-	import org.springframework.beans.factory.annotation.*;
+	import org.springframework.beans.design.parttern.factory.annotation.*;
 
 	@Component
 	public class MyBean {
@@ -2969,11 +2969,11 @@ If the preceding customization techniques are too limited, you can register the 
 ----
 	@Bean
 	public ConfigurableServletWebServerFactory webServerFactory() {
-		TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
-		factory.setPort(9000);
-		factory.setSessionTimeout(10, TimeUnit.MINUTES);
-		factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/notfound.html"));
-		return factory;
+		TomcatServletWebServerFactory design.parttern.factory = new TomcatServletWebServerFactory();
+		design.parttern.factory.setPort(9000);
+		design.parttern.factory.setSessionTimeout(10, TimeUnit.MINUTES);
+		design.parttern.factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/notfound.html"));
+		return design.parttern.factory;
 	}
 ----
 
@@ -3517,7 +3517,7 @@ Spring's `JdbcTemplate` and `NamedParameterJdbcTemplate` classes are auto-config
 
 [source,java,indent=0]
 ----
-	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.beans.design.parttern.factory.annotation.Autowired;
 	import org.springframework.jdbc.core.JdbcTemplate;
 	import org.springframework.stereotype.Component;
 
@@ -3895,7 +3895,7 @@ TIP: You can also register an arbitrary number of beans that implement `LettuceC
 If you use Jedis, `JedisClientConfigurationBuilderCustomizer` is also available.
 
 If you add your own `@Bean` of any of the auto-configured types, it replaces the default (except in the case of `RedisTemplate`, when the exclusion is based on the bean name, `redisTemplate`, not its type).
-By default, if `commons-pool2` is on the classpath, you get a pooled connection factory.
+By default, if `commons-pool2` is on the classpath, you get a pooled connection design.parttern.factory.
 
 
 
@@ -3966,7 +3966,7 @@ TIP: If you do not use Spring Data Mongo, you can inject `com.mongodb.MongoClien
 If you want to take complete control of establishing the MongoDB connection, you can also declare your own `MongoDbFactory` or `MongoClient` bean.
 
 NOTE: If you are using the reactive driver, Netty is required for SSL.
-The auto-configuration configures this factory automatically if Netty is available and the factory to use hasn't been customized already.
+The auto-configuration configures this design.parttern.factory automatically if Netty is available and the design.parttern.factory to use hasn't been customized already.
 
 
 
@@ -3977,7 +3977,7 @@ As with `JdbcTemplate`, Spring Boot auto-configures a bean for you to inject the
 
 [source,java,indent=0]
 ----
-	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.beans.design.parttern.factory.annotation.Autowired;
 	import org.springframework.data.mongodb.core.MongoTemplate;
 	import org.springframework.stereotype.Component;
 
@@ -5038,7 +5038,7 @@ Spring's `JmsTemplate` is auto-configured, and you can autowire it directly into
 
 [source,java,indent=0]
 ----
-	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.beans.design.parttern.factory.annotation.Autowired;
 	import org.springframework.jms.core.JmsTemplate;
 	import org.springframework.stereotype.Component;
 
@@ -5066,9 +5066,9 @@ If a `DestinationResolver` or a `MessageConverter` bean is defined, it is associ
 ==== Receiving a Message
 When the JMS infrastructure is present, any bean can be annotated with `@JmsListener` to create a listener endpoint.
 If no `JmsListenerContainerFactory` has been defined, a default one is configured automatically.
-If a `DestinationResolver` or a `MessageConverter` beans is defined, it is associated automatically to the default factory.
+If a `DestinationResolver` or a `MessageConverter` beans is defined, it is associated automatically to the default design.parttern.factory.
 
-By default, the default factory is transactional.
+By default, the default design.parttern.factory is transactional.
 If you run in an infrastructure where a `JtaTransactionManager` is present, it is associated to the listener container by default.
 If not, the `sessionTransacted` flag is enabled.
 In that latter scenario, you can associate your local data store transaction to the processing of an incoming message by adding `@Transactional` on your listener method (or a delegate thereof).
@@ -5094,7 +5094,7 @@ TIP: See {spring-framework-api}/jms/annotation/EnableJms.html[the Javadoc of `@E
 
 If you need to create more `JmsListenerContainerFactory` instances or if you want to override the default, Spring Boot provides a `DefaultJmsListenerContainerFactoryConfigurer` that you can use to initialize a `DefaultJmsListenerContainerFactory` with the same settings as the one that is auto-configured.
 
-For instance, the following example exposes another factory that uses a specific `MessageConverter`:
+For instance, the following example exposes another design.parttern.factory that uses a specific `MessageConverter`:
 
 [source,java,indent=0]
 ----
@@ -5104,17 +5104,17 @@ For instance, the following example exposes another factory that uses a specific
 		@Bean
 		public DefaultJmsListenerContainerFactory myFactory(
 				DefaultJmsListenerContainerFactoryConfigurer configurer) {
-			DefaultJmsListenerContainerFactory factory =
+			DefaultJmsListenerContainerFactory design.parttern.factory =
 					new DefaultJmsListenerContainerFactory();
-			configurer.configure(factory, connectionFactory());
-			factory.setMessageConverter(myMessageConverter());
-			return factory;
+			configurer.configure(design.parttern.factory, connectionFactory());
+			design.parttern.factory.setMessageConverter(myMessageConverter());
+			return design.parttern.factory;
 		}
 
 	}
 ----
 
-Then you can use the factory in any `@JmsListener`-annotated method as follows:
+Then you can use the design.parttern.factory in any `@JmsListener`-annotated method as follows:
 
 [source,java,indent=0]
 [subs="verbatim,quotes"]
@@ -5178,7 +5178,7 @@ Spring's `AmqpTemplate` and `AmqpAdmin` are auto-configured, and you can autowir
 ----
 	import org.springframework.amqp.core.AmqpAdmin;
 	import org.springframework.amqp.core.AmqpTemplate;
-	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.beans.design.parttern.factory.annotation.Autowired;
 	import org.springframework.stereotype.Component;
 
 	@Component
@@ -5220,7 +5220,7 @@ You can also customize the `RetryTemplate` programmatically by declaring a `Rabb
 ==== Receiving a Message
 When the Rabbit infrastructure is present, any bean can be annotated with `@RabbitListener` to create a listener endpoint.
 If no `RabbitListenerContainerFactory` has been defined, a default `SimpleRabbitListenerContainerFactory` is automatically configured and you can switch to a direct container using the configprop:spring.rabbitmq.listener.type[] property.
-If a `MessageConverter` or a `MessageRecoverer` bean is defined, it is automatically associated with the default factory.
+If a `MessageConverter` or a `MessageRecoverer` bean is defined, it is automatically associated with the default design.parttern.factory.
 
 The following sample component creates a listener endpoint on the `someQueue` queue:
 
@@ -5244,7 +5244,7 @@ If you need to create more `RabbitListenerContainerFactory` instances or if you 
 TIP: It does not matter which container type you chose.
 Those two beans are exposed by the auto-configuration.
 
-For instance, the following configuration class exposes another factory that uses a specific `MessageConverter`:
+For instance, the following configuration class exposes another design.parttern.factory that uses a specific `MessageConverter`:
 
 [source,java,indent=0]
 ----
@@ -5254,17 +5254,17 @@ For instance, the following configuration class exposes another factory that use
 		@Bean
 		public SimpleRabbitListenerContainerFactory myFactory(
 				SimpleRabbitListenerContainerFactoryConfigurer configurer) {
-			SimpleRabbitListenerContainerFactory factory =
+			SimpleRabbitListenerContainerFactory design.parttern.factory =
 					new SimpleRabbitListenerContainerFactory();
-			configurer.configure(factory, connectionFactory);
-			factory.setMessageConverter(myMessageConverter());
-			return factory;
+			configurer.configure(design.parttern.factory, connectionFactory);
+			design.parttern.factory.setMessageConverter(myMessageConverter());
+			return design.parttern.factory;
 		}
 
 	}
 ----
 
-Then you can use the factory in any `@RabbitListener`-annotated method, as follows:
+Then you can use the design.parttern.factory in any `@RabbitListener`-annotated method, as follows:
 
 [source,java,indent=0]
 [subs="verbatim,quotes"]
@@ -5358,10 +5358,10 @@ The following component creates a listener endpoint on the `someTopic` topic:
 	}
 ----
 
-If a `KafkaTransactionManager` bean is defined, it is automatically associated to the container factory.
-Similarly, if a `ErrorHandler`, `AfterRollbackProcessor` or `ConsumerAwareRebalanceListener` bean is defined, it is automatically associated to the default factory.
+If a `KafkaTransactionManager` bean is defined, it is automatically associated to the container design.parttern.factory.
+Similarly, if a `ErrorHandler`, `AfterRollbackProcessor` or `ConsumerAwareRebalanceListener` bean is defined, it is automatically associated to the default design.parttern.factory.
 
-Depending on the listener type, a `RecordMessageConverter` or `BatchMessageConverter` bean is associated to the default factory.
+Depending on the listener type, a `RecordMessageConverter` or `BatchMessageConverter` bean is associated to the default design.parttern.factory.
 If only a `RecordMessageConverter` bean is present for a batch listener, it is wrapped in a `BatchMessageConverter`.
 
 TIP: A custom `ChainedKafkaTransactionManager` must be marked `@Primary` as it usually references the auto-configured `KafkaTransactionManager` bean.
@@ -5370,7 +5370,7 @@ TIP: A custom `ChainedKafkaTransactionManager` must be marked `@Primary` as it u
 
 [[boot-features-kafka-streams]]
 ==== Kafka Streams
-Spring for Apache Kafka provides a factory bean to create a `StreamsBuilder` object and manage the lifecycle of its streams.
+Spring for Apache Kafka provides a design.parttern.factory bean to create a `StreamsBuilder` object and manage the lifecycle of its streams.
 Spring Boot auto-configures the required `KafkaStreamsConfiguration` bean as long as `kafka-streams` is on the classpath and Kafka Streams is enabled via the `@EnableKafkaStreams` annotation.
 
 Enabling Kafka Streams means that the application id and bootstrap servers must be set.
@@ -5380,7 +5380,7 @@ The latter can be set globally or specifically overridden only for streams.
 Several additional properties are available using dedicated properties; other arbitrary Kafka properties can be set using the `spring.kafka.streams.properties` namespace.
 See also <<boot-features-kafka-extra-props>> for more information.
 
-To use the factory bean, wire `StreamsBuilder` into your `@Bean` as shown in the following example:
+To use the design.parttern.factory bean, wire `StreamsBuilder` into your `@Bean` as shown in the following example:
 
 [source,java,indent=0]
 ----
@@ -6230,7 +6230,7 @@ The following example replaces an existing `RemoteService` bean with a mock impl
 [source,java,indent=0]
 ----
 	import org.junit.jupiter.api.Test;
-	import org.springframework.beans.factory.annotation.*;
+	import org.springframework.beans.design.parttern.factory.annotation.*;
 	import org.springframework.boot.test.context.*;
 	import org.springframework.boot.test.mock.mockito.*;
 
@@ -6318,7 +6318,7 @@ The following example shows a test class for Jackson:
 [source,java,indent=0]
 ----
 	import org.junit.jupiter.api.Test;
-	import org.springframework.beans.factory.annotation.*;
+	import org.springframework.beans.design.parttern.factory.annotation.*;
 	import org.springframework.boot.test.autoconfigure.json.*;
 	import org.springframework.boot.test.context.*;
 	import org.springframework.boot.test.json.*;
@@ -6390,7 +6390,7 @@ The following example uses `MockMvc`:
 [source,java,indent=0]
 ----
 	import org.junit.jupiter.api.*;
-	import org.springframework.beans.factory.annotation.*;
+	import org.springframework.beans.design.parttern.factory.annotation.*;
 	import org.springframework.boot.test.autoconfigure.web.servlet.*;
 	import org.springframework.boot.test.mock.mockito.*;
 
@@ -6428,7 +6428,7 @@ The following example uses HtmlUnit:
 ----
 	import com.gargoylesoftware.htmlunit.*;
 	import org.junit.jupiter.api.*;
-	import org.springframework.beans.factory.annotation.*;
+	import org.springframework.beans.design.parttern.factory.annotation.*;
 	import org.springframework.boot.test.autoconfigure.web.servlet.*;
 	import org.springframework.boot.test.mock.mockito.*;
 
@@ -6490,7 +6490,7 @@ The following example shows a class that uses both `@WebFluxTest` and a `WebTest
 ----
 	import org.junit.jupiter.api.Test;
 
-	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.beans.design.parttern.factory.annotation.Autowired;
 	import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 	import org.springframework.http.MediaType;
 	import org.springframework.test.web.reactive.server.WebTestClient;
@@ -6698,7 +6698,7 @@ The following class shows the `@DataMongoTest` annotation in use:
 
 [source,java,indent=0]
 ----
-	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.beans.design.parttern.factory.annotation.Autowired;
 	import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 	import org.springframework.data.mongodb.core.MongoTemplate;
 
@@ -6741,7 +6741,7 @@ The following example shows a typical setup for using Neo4J tests in Spring Boot
 
 [source,java,indent=0]
 ----
-	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.beans.design.parttern.factory.annotation.Autowired;
 	import org.springframework.boot.test.autoconfigure.data.neo4j.DataNeo4jTest;
 
 	@DataNeo4jTest
@@ -6786,7 +6786,7 @@ The following example shows the `@DataRedisTest` annotation in use:
 
 [source,java,indent=0]
 ----
-	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.beans.design.parttern.factory.annotation.Autowired;
 	import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest;
 
 	@DataRedisTest
@@ -6814,7 +6814,7 @@ The following example shows the `@DataLdapTest` annotation in use:
 
 [source,java,indent=0]
 ----
-	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.beans.design.parttern.factory.annotation.Autowired;
 	import org.springframework.boot.test.autoconfigure.data.ldap.DataLdapTest;
 	import org.springframework.ldap.core.LdapTemplate;
 
@@ -6898,7 +6898,7 @@ You can inject it by using `@Autowired` and use it in your tests as you normally
 ----
 	import org.junit.jupiter.api.Test;
 
-	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.beans.design.parttern.factory.annotation.Autowired;
 	import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 	import org.springframework.http.MediaType;
 	import org.springframework.test.web.servlet.MockMvc;

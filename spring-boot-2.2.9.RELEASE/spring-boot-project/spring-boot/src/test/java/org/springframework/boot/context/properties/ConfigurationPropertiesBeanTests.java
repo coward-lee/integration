@@ -173,7 +173,7 @@ class ConfigurationPropertiesBeanTests {
 	@Test
 	void getWhenHasFactoryMethodAndBeanAnnotationFavorsFactoryMethod() throws Throwable {
 		get(AnnotatedBeanConfiguration.class, "annotatedBean",
-				(propertiesBean) -> assertThat(propertiesBean.getAnnotation().prefix()).isEqualTo("factory"));
+				(propertiesBean) -> assertThat(propertiesBean.getAnnotation().prefix()).isEqualTo("design.parttern.factory"));
 	}
 
 	@Test
@@ -352,7 +352,7 @@ class ConfigurationPropertiesBeanTests {
 	static class AnnotatedBeanConfiguration {
 
 		@Bean
-		@ConfigurationProperties(prefix = "factory")
+		@ConfigurationProperties(prefix = "design.parttern.factory")
 		AnnotatedBean annotatedBean() {
 			return new AnnotatedBean();
 		}

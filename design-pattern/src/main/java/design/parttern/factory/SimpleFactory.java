@@ -1,6 +1,6 @@
-package factory.factory;
+package design.parttern.factory;
 
-import factory.pojo.Product;
+import design.parttern.pojo.Product;
 
 /**
  * 简单工厂模式

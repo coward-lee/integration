@@ -102,7 +102,7 @@ class RabbitAutoConfigurationTests {
 			assertThat(connectionFactory.isPublisherConfirms()).isFalse();
 			assertThat(connectionFactory.isPublisherReturns()).isFalse();
 			assertThat(context.containsBean("rabbitListenerContainerFactory"))
-					.as("Listener container factory should be created by default").isTrue();
+					.as("Listener container design.parttern.factory should be created by default").isTrue();
 		});
 	}
 

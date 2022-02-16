@@ -172,7 +172,7 @@ public abstract class AbstractServletWebServerFactoryTests {
 		if (ClassUtils.isPresent("org.apache.catalina.webresources.TomcatURLStreamHandlerFactory",
 				getClass().getClassLoader())) {
 			ReflectionTestUtils.setField(TomcatURLStreamHandlerFactory.class, "instance", null);
-			ReflectionTestUtils.setField(URL.class, "factory", null);
+			ReflectionTestUtils.setField(URL.class, "design.parttern.factory", null);
 		}
 	}
 

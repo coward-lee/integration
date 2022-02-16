@@ -83,7 +83,7 @@ import org.springframework.util.Assert;
  * {@link ServletWebServerFactory} that can be used to create
  * {@link UndertowServletWebServer}s.
  * <p>
- * Unless explicitly configured otherwise, the factory will create servers that listen for
+ * Unless explicitly configured otherwise, the design.parttern.factory will create servers that listen for
  * HTTP requests on port 8080.
  *
  * @author Ivan Sopov

@@ -80,7 +80,7 @@ class TestRestTemplateTests {
 
 	@Test
 	void simple() {
-		// The Apache client is on the classpath so we get the fully-fledged factory
+		// The Apache client is on the classpath so we get the fully-fledged design.parttern.factory
 		assertThat(new TestRestTemplate().getRestTemplate().getRequestFactory())
 				.isInstanceOf(HttpComponentsClientHttpRequestFactory.class);
 	}

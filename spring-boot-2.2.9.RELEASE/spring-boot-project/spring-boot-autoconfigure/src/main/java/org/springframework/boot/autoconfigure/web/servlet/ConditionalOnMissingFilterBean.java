@@ -37,7 +37,7 @@ import org.springframework.core.annotation.AliasFor;
  * {@link FilterRegistrationBean}.
  * <p>
  * When placed on a {@code @Bean} method, the bean class defaults to the return type of
- * the factory method or the type of the {@link Filter} if the bean is a
+ * the design.parttern.factory method or the type of the {@link Filter} if the bean is a
  * {@link FilterRegistrationBean}:
  *
  * <pre class="code">

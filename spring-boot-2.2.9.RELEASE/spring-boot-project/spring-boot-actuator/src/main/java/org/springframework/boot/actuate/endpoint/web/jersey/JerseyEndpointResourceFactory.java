@@ -58,7 +58,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 /**
- * A factory for creating Jersey {@link Resource Resources} for {@link WebOperation web
+ * A design.parttern.factory for creating Jersey {@link Resource Resources} for {@link WebOperation web
  * endpoint operations}.
  *
  * @author Andy Wilkinson

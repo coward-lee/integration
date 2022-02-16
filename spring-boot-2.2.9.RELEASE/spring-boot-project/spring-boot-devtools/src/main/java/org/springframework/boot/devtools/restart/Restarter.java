@@ -224,7 +224,7 @@ public class Restarter {
 
 	/**
 	 * Return a {@link ThreadFactory} that can be used to create leak safe threads.
-	 * @return a leak safe thread factory
+	 * @return a leak safe thread design.parttern.factory
 	 */
 	public ThreadFactory getThreadFactory() {
 		return new LeakSafeThreadFactory();

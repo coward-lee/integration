@@ -69,7 +69,7 @@ public @interface ManagementContextConfiguration {
 	 * configuration class as well as for external calls to this configuration's
 	 * {@code @Bean} methods, e.g. from another configuration class. If this is not needed
 	 * since each of this particular configuration's {@code @Bean} methods is
-	 * self-contained and designed as a plain factory method for container use, switch
+	 * self-contained and designed as a plain design.parttern.factory method for container use, switch
 	 * this flag to {@code false} in order to avoid CGLIB subclass processing.
 	 * <p>
 	 * Turning off bean method interception effectively processes {@code @Bean} methods

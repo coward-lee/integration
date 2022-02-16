@@ -77,7 +77,7 @@ public class LiveReloadServer {
 	/**
 	 * Create a new {@link LiveReloadServer} listening on the default port with a specific
 	 * {@link ThreadFactory}.
-	 * @param threadFactory the thread factory
+	 * @param threadFactory the thread design.parttern.factory
 	 */
 	public LiveReloadServer(ThreadFactory threadFactory) {
 		this(DEFAULT_PORT, threadFactory);
@@ -95,7 +95,7 @@ public class LiveReloadServer {
 	 * Create a new {@link LiveReloadServer} listening on the specified port with a
 	 * specific {@link ThreadFactory}.
 	 * @param port the listen port
-	 * @param threadFactory the thread factory
+	 * @param threadFactory the thread design.parttern.factory
 	 */
 	public LiveReloadServer(int port, ThreadFactory threadFactory) {
 		this.port = port;

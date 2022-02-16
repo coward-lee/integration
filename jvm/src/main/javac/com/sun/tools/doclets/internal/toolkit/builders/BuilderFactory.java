@@ -34,7 +34,7 @@ import com.sun.tools.doclets.internal.toolkit.*;
 import com.sun.tools.doclets.internal.toolkit.util.*;
 
 /**
- * The factory for constructing builders.
+ * The design.parttern.factory for constructing builders.
  *
  *  <p><b>This is NOT part of any supported API.
  *  If you write code that depends on this, you do so at your own risk.
@@ -53,14 +53,14 @@ public class BuilderFactory {
     private final Configuration configuration;
 
     /**
-     * The factory to retrieve the required writers from.
+     * The design.parttern.factory to retrieve the required writers from.
      */
     private final WriterFactory writerFactory;
 
     private final AbstractBuilder.Context context;
 
     /**
-     * Construct a builder factory using the given configuration.
+     * Construct a builder design.parttern.factory using the given configuration.
      * @param configuration the configuration for the current doclet
      * being executed.
      */

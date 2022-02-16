@@ -151,7 +151,7 @@ public class JacksonTester<T> extends AbstractJsonMarshalTester<T> {
 	 * Utility method to initialize {@link JacksonTester} fields. See {@link JacksonTester
 	 * class-level documentation} for example usage.
 	 * @param testInstance the test instance
-	 * @param objectMapperFactory a factory to create the object mapper
+	 * @param objectMapperFactory a design.parttern.factory to create the object mapper
 	 * @see #initFields(Object, ObjectMapper)
 	 */
 	public static void initFields(Object testInstance, ObjectFactory<ObjectMapper> objectMapperFactory) {

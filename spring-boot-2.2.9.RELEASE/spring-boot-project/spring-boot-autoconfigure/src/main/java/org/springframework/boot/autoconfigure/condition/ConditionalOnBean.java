@@ -33,7 +33,7 @@ import org.springframework.context.annotation.Conditional;
  * bean.
  * <p>
  * When placed on a {@code @Bean} method, the bean class defaults to the return type of
- * the factory method:
+ * the design.parttern.factory method:
  *
  * <pre class="code">
  * &#064;Configuration

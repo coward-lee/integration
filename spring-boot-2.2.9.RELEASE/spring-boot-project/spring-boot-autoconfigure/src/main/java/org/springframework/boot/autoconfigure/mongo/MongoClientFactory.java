@@ -29,7 +29,7 @@ import com.mongodb.ServerAddress;
 import org.springframework.core.env.Environment;
 
 /**
- * A factory for a blocking {@link MongoClient} that applies {@link MongoProperties}.
+ * A design.parttern.factory for a blocking {@link MongoClient} that applies {@link MongoProperties}.
  *
  * @author Dave Syer
  * @author Phillip Webb

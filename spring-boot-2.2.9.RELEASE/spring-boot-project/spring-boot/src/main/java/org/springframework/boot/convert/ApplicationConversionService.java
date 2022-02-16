@@ -149,7 +149,7 @@ public class ApplicationConversionService extends FormattingConversionService {
 	 * Add {@link GenericConverter}, {@link Converter}, {@link Printer}, {@link Parser}
 	 * and {@link Formatter} beans from the specified context.
 	 * @param registry the service to register beans with
-	 * @param beanFactory the bean factory to get the beans from
+	 * @param beanFactory the bean design.parttern.factory to get the beans from
 	 * @since 2.2.0
 	 */
 	public static void addBeans(FormatterRegistry registry, ListableBeanFactory beanFactory) {

@@ -1,6 +1,6 @@
-package factory.factory;
+package design.parttern.factory;
 
-import factory.pojo.Car;
+import design.parttern.pojo.Car;
 
 /**
  * 满足开闭原则的工厂方法模式

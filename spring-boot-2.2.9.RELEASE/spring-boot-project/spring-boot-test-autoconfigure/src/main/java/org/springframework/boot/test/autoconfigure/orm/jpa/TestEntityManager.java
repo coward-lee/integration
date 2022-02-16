@@ -38,7 +38,7 @@ public class TestEntityManager {
 	/**
 	 * Create a new {@link TestEntityManager} instance for the given
 	 * {@link EntityManagerFactory}.
-	 * @param entityManagerFactory the source entity manager factory
+	 * @param entityManagerFactory the source entity manager design.parttern.factory
 	 */
 	public TestEntityManager(EntityManagerFactory entityManagerFactory) {
 		Assert.notNull(entityManagerFactory, "EntityManagerFactory must not be null");

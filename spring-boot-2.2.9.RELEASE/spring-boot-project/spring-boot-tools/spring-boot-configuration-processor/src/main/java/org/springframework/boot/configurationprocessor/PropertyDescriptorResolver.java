@@ -46,7 +46,7 @@ class PropertyDescriptorResolver {
 	/**
 	 * Return the {@link PropertyDescriptor} instances that are valid candidates for the
 	 * specified {@link TypeElement type} based on the specified {@link ExecutableElement
-	 * factory method}, if any.
+	 * design.parttern.factory method}, if any.
 	 * @param type the target type
 	 * @param factoryMethod the method that triggered the metadata for that {@code type}
 	 * or {@code null}

@@ -44,7 +44,7 @@ public final class DefaultJmsListenerContainerFactoryConfigurer {
 
 	/**
 	 * Set the {@link DestinationResolver} to use or {@code null} if no destination
-	 * resolver should be associated with the factory by default.
+	 * resolver should be associated with the design.parttern.factory by default.
 	 * @param destinationResolver the {@link DestinationResolver}
 	 */
 	void setDestinationResolver(DestinationResolver destinationResolver) {
@@ -78,7 +78,7 @@ public final class DefaultJmsListenerContainerFactoryConfigurer {
 	}
 
 	/**
-	 * Configure the specified jms listener container factory. The factory can be further
+	 * Configure the specified jms listener container design.parttern.factory. The design.parttern.factory can be further
 	 * tuned and default settings can be overridden.
 	 * @param factory the {@link DefaultJmsListenerContainerFactory} instance to configure
 	 * @param connectionFactory the {@link ConnectionFactory} to use

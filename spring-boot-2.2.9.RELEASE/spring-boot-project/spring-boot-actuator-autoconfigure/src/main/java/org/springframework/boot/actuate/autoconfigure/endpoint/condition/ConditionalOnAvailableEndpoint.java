@@ -40,7 +40,7 @@ import org.springframework.core.env.Environment;
  * conditions should match for the endpoint to be considered available.
  * <p>
  * When placed on a {@code @Bean} method, the endpoint defaults to the return type of the
- * factory method:
+ * design.parttern.factory method:
  *
  * <pre class="code">
  * &#064;Configuration

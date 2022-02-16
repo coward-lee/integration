@@ -32,10 +32,10 @@ import io.rsocket.RSocketFactory.ServerRSocketFactory;
 public interface ServerRSocketFactoryProcessor {
 
 	/**
-	 * Apply this {@code ServerRSocketFactoryProcessor} to the given factory instance
+	 * Apply this {@code ServerRSocketFactoryProcessor} to the given design.parttern.factory instance
 	 * before it's used.
-	 * @param factory the factory to process
-	 * @return the processed factory instance
+	 * @param factory the design.parttern.factory to process
+	 * @return the processed design.parttern.factory instance
 	 */
 	ServerRSocketFactory process(ServerRSocketFactory factory);
 

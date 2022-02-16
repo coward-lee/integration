@@ -435,17 +435,17 @@ public interface StandardJavaFileManager extends JavaFileManager {
     }
 
      /**
-      * Specify a factory that can be used to generate a path from a string, or series of strings.
+      * Specify a design.parttern.factory that can be used to generate a path from a string, or series of strings.
       *
-      * If this method is not called, a factory whose {@code getPath} method is
+      * If this method is not called, a design.parttern.factory whose {@code getPath} method is
       * equivalent to calling
       * {@link java.nio.file.Paths#get(String, String...) java.nio.file.Paths.get(first, more)}
       * will be used.
       *
       * @implSpec
-      * The default implementation of this method ignores the factory that is provided.
+      * The default implementation of this method ignores the design.parttern.factory that is provided.
       *
-      * @param f  the factory
+      * @param f  the design.parttern.factory
       *
       * @since 9
       */

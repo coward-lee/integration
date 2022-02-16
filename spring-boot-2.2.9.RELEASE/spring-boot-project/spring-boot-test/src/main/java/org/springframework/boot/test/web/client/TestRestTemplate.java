@@ -949,8 +949,8 @@ public class TestRestTemplate {
 	/**
 	 * Creates a new {@code TestRestTemplate} with the same configuration as this one,
 	 * except that it will send basic authorization headers using the given
-	 * {@code username} and {@code password}. The request factory used is a new instance
-	 * of the underlying {@link RestTemplate}'s request factory type (when possible).
+	 * {@code username} and {@code password}. The request design.parttern.factory used is a new instance
+	 * of the underlying {@link RestTemplate}'s request design.parttern.factory type (when possible).
 	 * @param username the username
 	 * @param password the password
 	 * @return the new template

@@ -47,7 +47,7 @@ public class ClassPathFileSystemWatcher implements InitializingBean, DisposableB
 
 	/**
 	 * Create a new {@link ClassPathFileSystemWatcher} instance.
-	 * @param fileSystemWatcherFactory a factory to create the underlying
+	 * @param fileSystemWatcherFactory a design.parttern.factory to create the underlying
 	 * {@link FileSystemWatcher} used to monitor the local file system
 	 * @param restartStrategy the classpath restart strategy
 	 * @param urls the URLs to watch

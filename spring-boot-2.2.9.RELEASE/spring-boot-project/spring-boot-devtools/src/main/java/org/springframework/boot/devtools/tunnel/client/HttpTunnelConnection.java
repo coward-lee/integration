@@ -66,7 +66,7 @@ public class HttpTunnelConnection implements TunnelConnection {
 	/**
 	 * Create a new {@link HttpTunnelConnection} instance.
 	 * @param url the URL to connect to
-	 * @param requestFactory the HTTP request factory
+	 * @param requestFactory the HTTP request design.parttern.factory
 	 */
 	public HttpTunnelConnection(String url, ClientHttpRequestFactory requestFactory) {
 		this(url, requestFactory, null);
@@ -75,7 +75,7 @@ public class HttpTunnelConnection implements TunnelConnection {
 	/**
 	 * Create a new {@link HttpTunnelConnection} instance.
 	 * @param url the URL to connect to
-	 * @param requestFactory the HTTP request factory
+	 * @param requestFactory the HTTP request design.parttern.factory
 	 * @param executor the executor used to handle connections
 	 */
 	protected HttpTunnelConnection(String url, ClientHttpRequestFactory requestFactory, Executor executor) {

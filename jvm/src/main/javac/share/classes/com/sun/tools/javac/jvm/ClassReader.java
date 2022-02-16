@@ -2588,7 +2588,7 @@ public class ClassReader {
             }
             return buf;
         }
-        /** Static factory for CompletionFailure objects.
+        /** Static design.parttern.factory for CompletionFailure objects.
          *  In practice, only one can be used at a time, so we share one
          *  to reduce the expense of allocating new exception objects.
          */

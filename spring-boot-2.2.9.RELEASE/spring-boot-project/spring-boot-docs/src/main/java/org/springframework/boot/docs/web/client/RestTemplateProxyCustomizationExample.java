@@ -37,7 +37,7 @@ public class RestTemplateProxyCustomizationExample {
 
 	/**
 	 * A {@link RestTemplateCustomizer} that applies an HttpComponents-based request
-	 * factory that is configured to use a proxy.
+	 * design.parttern.factory that is configured to use a proxy.
 	 */
 	// tag::customizer[]
 	static class ProxyCustomizer implements RestTemplateCustomizer {

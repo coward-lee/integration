@@ -36,7 +36,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class RedisProperties {
 
 	/**
-	 * Database index used by the connection factory.
+	 * Database index used by the connection design.parttern.factory.
 	 */
 	private int database = 0;
 

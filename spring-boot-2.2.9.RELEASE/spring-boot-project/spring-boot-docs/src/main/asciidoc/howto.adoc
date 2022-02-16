@@ -643,7 +643,7 @@ See the list of <<appendix-application-properties.adoc#common-application-proper
 
 The previous sections covered already many common use cases, such as compression, SSL or HTTP/2.
 However, if a configuration key doesn't exist for your use case, you should then look at {spring-boot-module-api}/web/server/WebServerFactoryCustomizer.html[`WebServerFactoryCustomizer`].
-You can declare such a component and get access to the server factory relevant to your choice: you should select the variant for the chosen Server (Tomcat, Jetty, Reactor Netty, Undertow) and the chosen web stack (Servlet or Reactive).
+You can declare such a component and get access to the server design.parttern.factory relevant to your choice: you should select the variant for the chosen Server (Tomcat, Jetty, Reactor Netty, Undertow) and the chosen web stack (Servlet or Reactive).
 
 The example below is for Tomcat with the `spring-boot-starter-web` (Servlet stack):
 
@@ -654,8 +654,8 @@ The example below is for Tomcat with the `spring-boot-starter-web` (Servlet stac
 			implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
 
 		@Override
-		public void customize(TomcatServletWebServerFactory factory) {
-			// customize the factory here
+		public void customize(TomcatServletWebServerFactory design.parttern.factory) {
+			// customize the design.parttern.factory here
 		}
 	}
 ----
@@ -913,8 +913,8 @@ Add an `UndertowBuilderCustomizer` to the `UndertowServletWebServerFactory` and 
 ----
 	@Bean
 	public UndertowServletWebServerFactory servletWebServerFactory() {
-		UndertowServletWebServerFactory factory = new UndertowServletWebServerFactory();
-		factory.addBuilderCustomizers(new UndertowBuilderCustomizer() {
+		UndertowServletWebServerFactory design.parttern.factory = new UndertowServletWebServerFactory();
+		design.parttern.factory.addBuilderCustomizers(new UndertowBuilderCustomizer() {
 
 			@Override
 			public void customize(Builder builder) {
@@ -922,7 +922,7 @@ Add an `UndertowBuilderCustomizer` to the `UndertowServletWebServerFactory` and 
 			}
 
 		});
-		return factory;
+		return design.parttern.factory;
 	}
 ----
 
@@ -1263,7 +1263,7 @@ This section answers questions related to using them.
 As described in <<spring-boot-features.adoc#boot-features-resttemplate-customization>>, you can use a `RestTemplateCustomizer` with `RestTemplateBuilder` to build a customized `RestTemplate`.
 This is the recommended approach for creating a `RestTemplate` configured to use a proxy.
 
-The exact details of the proxy configuration depend on the underlying client request factory that is being used.
+The exact details of the proxy configuration depend on the underlying client request design.parttern.factory that is being used.
 The following example configures `HttpComponentsClientRequestFactory` with an `HttpClient` that uses a proxy for all hosts except `192.168.0.5`:
 
 [source,java,indent=0]
@@ -2112,7 +2112,7 @@ If you want to use the `DefaultJmsListenerContainerFactoryConfigurer` to reuse S
 	}
 ----
 
-The preceding example overrides the default factory, and it should be applied to any other factory that your application defines, if any.
+The preceding example overrides the default design.parttern.factory, and it should be applied to any other design.parttern.factory that your application defines, if any.
 
 
 

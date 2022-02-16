@@ -427,7 +427,7 @@ public class TomcatReactiveWebServerFactory extends AbstractReactiveWebServerFac
 	}
 
 	/**
-	 * Set whether the factory should disable Tomcat's MBean registry prior to creating
+	 * Set whether the design.parttern.factory should disable Tomcat's MBean registry prior to creating
 	 * the server.
 	 * @param disableMBeanRegistry whether to disable the MBean registry
 	 * @since 2.2.0

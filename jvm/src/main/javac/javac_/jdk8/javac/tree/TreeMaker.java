@@ -47,7 +47,7 @@ import static com.sun.tools.javac.code.TypeTag.*;
  */
 public class TreeMaker implements com.sun.tools.javac.tree.JCTree.Factory {
 
-    /** The context key for the tree factory. */
+    /** The context key for the tree design.parttern.factory. */
     protected static final Context.Key<TreeMaker> treeMakerKey =
         new Context.Key<TreeMaker>();
 

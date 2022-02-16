@@ -52,7 +52,7 @@ import com.sun.tools.javac.util.BaseFileManager;
  *  <p>PathFileObjects are, for the most part, straightforward wrappers around
  *  Path objects. The primary complexity is the support for "inferBinaryName".
  *  This is left as an abstract method, implemented by each of a number of
- *  different factory methods, which compute the binary name based on
+ *  different design.parttern.factory methods, which compute the binary name based on
  *  information available at the time the file object is created.
  *
  *  <p><b>This is NOT part of any supported API.

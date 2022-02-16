@@ -133,7 +133,7 @@ public class ConcurrentKafkaListenerContainerFactoryConfigurer {
 	}
 
 	/**
-	 * Configure the specified Kafka listener container factory. The factory can be
+	 * Configure the specified Kafka listener container design.parttern.factory. The design.parttern.factory can be
 	 * further tuned and default settings can be overridden.
 	 * @param listenerFactory the {@link ConcurrentKafkaListenerContainerFactory} instance
 	 * to configure

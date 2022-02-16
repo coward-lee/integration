@@ -47,7 +47,7 @@ import org.springframework.validation.annotation.Validated;
 /**
  * Provides access to {@link ConfigurationProperties @ConfigurationProperties} bean
  * details, regardless of if the annotation was used directly or on a {@link Bean @Bean}
- * factory method. This class can be used to access {@link #getAll(ApplicationContext)
+ * design.parttern.factory method. This class can be used to access {@link #getAll(ApplicationContext)
  * all} configuration properties beans in an ApplicationContext, or
  * {@link #get(ApplicationContext, Object, String) individual beans} on a case-by-case
  * basis (for example, in a {@link BeanPostProcessor}).
@@ -112,7 +112,7 @@ public final class ConfigurationPropertiesBean {
 
 	/**
 	 * Return the {@link ConfigurationProperties} annotation for the bean. The annotation
-	 * may be defined on the bean itself or from the factory method that create the bean
+	 * may be defined on the bean itself or from the design.parttern.factory method that create the bean
 	 * (usually a {@link Bean @Bean} method).
 	 * @return the configuration properties annotation
 	 */
@@ -133,7 +133,7 @@ public final class ConfigurationPropertiesBean {
 	 * Return all {@link ConfigurationProperties @ConfigurationProperties} beans contained
 	 * in the given application context. Both directly annotated beans, as well as beans
 	 * that have {@link ConfigurationProperties @ConfigurationProperties} annotated
-	 * factory methods are included.
+	 * design.parttern.factory methods are included.
 	 * @param applicationContext the source application context
 	 * @return a map of all configuration properties beans keyed by the bean name
 	 */
@@ -187,13 +187,13 @@ public final class ConfigurationPropertiesBean {
 	 * Return a {@link ConfigurationPropertiesBean @ConfigurationPropertiesBean} instance
 	 * for the given bean details or {@code null} if the bean is not a
 	 * {@link ConfigurationProperties @ConfigurationProperties} object. Annotations are
-	 * considered both on the bean itself, as well as any factory method (for example a
+	 * considered both on the bean itself, as well as any design.parttern.factory method (for example a
 	 * {@link Bean @Bean} method).
 	 * @param applicationContext the source application context
 	 * @param bean the bean to consider
 	 * @param beanName the bean name
 	 * @return a configuration properties bean or {@code null} if the neither the bean or
-	 * factory method are annotated with
+	 * design.parttern.factory method are annotated with
 	 * {@link ConfigurationProperties @ConfigurationProperties}
 	 */
 	public static ConfigurationPropertiesBean get(ApplicationContext applicationContext, Object bean, String beanName) {

@@ -1,4 +1,4 @@
-package factory.pojo;
+package design.parttern.pojo;
 
 public class Tesla extends Car{
     public Tesla(Integer price) {

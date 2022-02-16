@@ -42,3 +42,21 @@
 # UML 
 note :对uml的注释
 
+
+# 设计模式
+1. 工厂模式     
+2. 原型模式     
+    design.pattern.factory
+3. 构造器模式
+    design.pattern.build
+4. 适配器模式
+    design.pattern.build
+    1. 类的适配器    VoltageAdapter
+    2. 对象适配器    VoltageAdapter2
+    3. 接口适配器    DefaultAdapterPattern
+    4. 源码分析： spring-mvc中adapter个controller的映射关系的适配，在DispatcherServlet#doDispatch 方法 
+5. 桥接器模式
+    design.pattern.bridge
+6. 装饰着模式
+    decorator
+    和桥接有相似之处，都是为了增强拓展性，被装饰者可以被装饰器不断的进行装饰叠加。

@@ -40,7 +40,7 @@ import com.sun.tools.javac.util.Names;
 import com.sun.tools.javac.util.Options;
 
 /**
- * A factory for creating parsers.
+ * A design.parttern.factory for creating parsers.
  *
  * <p><b>This is NOT part of any supported API.
  * If you write code that depends on this, you do so at your own risk.
@@ -49,7 +49,7 @@ import com.sun.tools.javac.util.Options;
  */
 public class ParserFactory {
 
-    /** The context key for the parser factory. */
+    /** The context key for the parser design.parttern.factory. */
     protected static final Context.Key<ParserFactory> parserFactoryKey = new Context.Key<ParserFactory>();
 
     public static ParserFactory instance(Context context) {

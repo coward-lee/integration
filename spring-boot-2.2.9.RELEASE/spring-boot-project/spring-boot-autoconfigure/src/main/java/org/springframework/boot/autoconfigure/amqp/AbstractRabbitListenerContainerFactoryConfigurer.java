@@ -32,7 +32,7 @@ import org.springframework.util.Assert;
 /**
  * Configure {@link RabbitListenerContainerFactory} with sensible defaults.
  *
- * @param <T> the container factory type.
+ * @param <T> the container design.parttern.factory type.
  * @author Gary Russell
  * @author Stephane Nicoll
  * @since 2.0.0
@@ -85,7 +85,7 @@ public abstract class AbstractRabbitListenerContainerFactoryConfigurer<T extends
 	}
 
 	/**
-	 * Configure the specified rabbit listener container factory. The factory can be
+	 * Configure the specified rabbit listener container design.parttern.factory. The design.parttern.factory can be
 	 * further tuned and default settings can be overridden.
 	 * @param factory the {@link AbstractRabbitListenerContainerFactory} instance to
 	 * configure

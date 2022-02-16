@@ -444,21 +444,21 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			// Prepare this context for refreshing.
 			prepareRefresh();
 
-			// Tell the subclass to refresh the internal bean factory.
+			// Tell the subclass to refresh the internal bean design.parttern.factory.
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
-			// Prepare the bean factory for use in this context.
+			// Prepare the bean design.parttern.factory for use in this context.
             // 准备 bean 工厂
 			prepareBeanFactory(beanFactory);
 
 			try {
-				// Allows post-processing of the bean factory in context subclasses.
+				// Allows post-processing of the bean design.parttern.factory in context subclasses.
                 // 注册  RequestScope、SessionScope到IOC容中的scopes中
                 // 注册 RequestObjectFactory、ResponseObjectFactory、SessionObjectFactory、WebRequestObjectFactory
                 //      到IOC容中的 resolvableDependencies 
 				postProcessBeanFactory(beanFactory);
 
-				// Invoke factory processors registered as beans in the context.
+				// Invoke design.parttern.factory processors registered as beans in the context.
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
@@ -541,7 +541,7 @@ final class PostProcessorRegistrationDelegate {
 			}
 
 			// Do not initialize FactoryBeans here: We need to leave all regular beans
-			// uninitialized to let the bean factory post-processors apply to them!
+			// uninitialized to let the bean design.parttern.factory post-processors apply to them!
 			// Separate between BeanDefinitionRegistryPostProcessors that implement
 			// PriorityOrdered, Ordered, and the rest.
 			List<BeanDefinitionRegistryPostProcessor> currentRegistryProcessors = new ArrayList<>();
@@ -597,12 +597,12 @@ final class PostProcessorRegistrationDelegate {
 		}
 
 		else {
-			// Invoke factory processors registered with the context instance.
+			// Invoke design.parttern.factory processors registered with the context instance.
 			invokeBeanFactoryPostProcessors(beanFactoryPostProcessors, beanFactory);
 		}
 
 		// Do not initialize FactoryBeans here: We need to leave all regular beans
-		// uninitialized to let the bean factory post-processors apply to them!
+		// uninitialized to let the bean design.parttern.factory post-processors apply to them!
 		String[] postProcessorNames =
 				beanFactory.getBeanNamesForType(BeanFactoryPostProcessor.class, true, false);
 

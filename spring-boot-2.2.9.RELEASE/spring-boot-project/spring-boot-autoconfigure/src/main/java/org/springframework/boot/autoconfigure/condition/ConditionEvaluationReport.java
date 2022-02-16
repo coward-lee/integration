@@ -162,8 +162,8 @@ public final class ConditionEvaluationReport {
 
 	/**
 	 * Attempt to find the {@link ConditionEvaluationReport} for the specified bean
-	 * factory.
-	 * @param beanFactory the bean factory (may be {@code null})
+	 * design.parttern.factory.
+	 * @param beanFactory the bean design.parttern.factory (may be {@code null})
 	 * @return the {@link ConditionEvaluationReport} or {@code null}
 	 */
 	public static ConditionEvaluationReport find(BeanFactory beanFactory) {
@@ -174,8 +174,8 @@ public final class ConditionEvaluationReport {
 	}
 
 	/**
-	 * Obtain a {@link ConditionEvaluationReport} for the specified bean factory.
-	 * @param beanFactory the bean factory
+	 * Obtain a {@link ConditionEvaluationReport} for the specified bean design.parttern.factory.
+	 * @param beanFactory the bean design.parttern.factory
 	 * @return an existing or new {@link ConditionEvaluationReport}
 	 */
 	public static ConditionEvaluationReport get(ConfigurableListableBeanFactory beanFactory) {

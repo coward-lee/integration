@@ -1,4 +1,4 @@
-package factory.pojo;
+package design.parttern.pojo;
 
 public class Car {
     String name;

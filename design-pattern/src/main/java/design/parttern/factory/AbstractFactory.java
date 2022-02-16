@@ -1,6 +1,6 @@
-package factory.factory;
+package design.parttern.factory;
 
-import factory.pojo.Car;
+import design.parttern.pojo.Car;
 
 /**
  * 抽象工厂模式

@@ -148,7 +148,7 @@ public class RepackageMojo extends AbstractDependencyFilterMojo {
 	private LayoutType layout;
 
 	/**
-	 * The layout factory that will be used to create the executable archive if no
+	 * The layout design.parttern.factory that will be used to create the executable archive if no
 	 * explicit layout is set. Alternative layouts implementations can be provided by 3rd
 	 * parties.
 	 * @since 1.5.0

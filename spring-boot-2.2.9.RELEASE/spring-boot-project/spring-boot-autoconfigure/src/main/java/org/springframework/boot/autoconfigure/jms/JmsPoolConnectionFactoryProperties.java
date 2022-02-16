@@ -19,7 +19,7 @@ package org.springframework.boot.autoconfigure.jms;
 import java.time.Duration;
 
 /**
- * Configuration properties for connection factory pooling.
+ * Configuration properties for connection design.parttern.factory pooling.
  *
  * @author Stephane Nicoll
  * @since 2.1.0
