@@ -1,6 +1,5 @@
 package design.parttern.facade;
 
-import com.sun.org.apache.bcel.internal.generic.POP;
 
 public class HomeTheaterFacade {
     // 定义各个子系统
@@ -11,13 +10,7 @@ public class HomeTheaterFacade {
     private Screen screen;
     private Stereo stereo;
 
-    public HomeTheaterFacade(TheaterLight theaterLight,
-                             DVDPlayer dvdPlayer,
-                             PopCorn popCorn,
-                             Projector projector,
-                             Screen screen,
-                             Stereo stereo
-    ) {
+    public HomeTheaterFacade() {
         super();
         this.theaterLight = TheaterLight.getInstance();
         this.dvdPlayer =    DVDPlayer.getInstance();
@@ -26,7 +19,7 @@ public class HomeTheaterFacade {
         this.screen =       Screen.getInstance();
         this.stereo =       Stereo.getInstance();
     }
-    public void read(){
+    public void open(){
         popCorn.on();
         popCorn.pop();
         projector.on();
