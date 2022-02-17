@@ -30,8 +30,7 @@ public class ProxyFactory implements MethodInterceptor {
      * @param method    需要执行的方法
      * @param args      参数
      * @param proxy     used to invoke super (non-intercepted method); may be called as many times as needed
-     * @return
-     * @throws Throwable
+     * @return 返回方法执行后放回的对象
      */
     @Override
     public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
