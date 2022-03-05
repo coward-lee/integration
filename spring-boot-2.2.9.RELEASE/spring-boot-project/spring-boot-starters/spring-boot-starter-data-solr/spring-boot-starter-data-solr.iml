@@ -45,6 +45,7 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty.http2:http2-common:9.4.30.v20200611" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty.http2:http2-hpack:9.4.30.v20200611" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty.http2:http2-http-client-transport:9.4.30.v20200611" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-alpn-openjdk8-client:9.4.30.v20200611" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.30" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-solr:4.1.9.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:5.2.8.RELEASE" level="project" />

@@ -15,4 +15,5 @@ include 'spring-boot'
 include 'design-pattern'
 include 'socketio'
 include 'sharding-jdbc'
+include 'akka'
 
