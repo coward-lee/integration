@@ -1,0 +1,8 @@
+SPACE=1
+HELLO=2
+HEY=3
+COMMA=4
+NAME=5
+'hello'=2
+'hey'=3
+','=4

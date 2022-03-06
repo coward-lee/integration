@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+}
+apply plugin: 'antlr'
+
+
+version '1.0'
+
+repositories {
+
+    maven{
+        allowInsecureProtocol = true
+        url 'http://maven.aliyun.com/nexus/content/groups/public/'
+    }
+    mavenCentral()
+}
+
+apply plugin: 'antlr'
+
+generateGrammarSource {
+    maxHeapSize = "64m"
+    source("src/main/antlr/Letter.g4")
+    outputDirectory = file("src/main/java/org/lee/study/letter")
+    arguments += ['-visitor', '-no-listener', '-long-messages']
+
+}
+
+dependencies {
+
+    antlr "org.antlr:antlr4:4.7.1"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -64,3 +64,9 @@
    1. 在增强类的上面添加注解@Order(数字)， 数值越小优先级越高
    2. 高优先级回复覆盖低优先级而是在高优先级前面。
 ## AOP
+   
+
+
+## spring 整合 akka
+使用spring初始化actor的原对象
+org.lee.akka
