@@ -45,18 +45,63 @@ note :对uml的注释
 
 # 设计模式
 1. 工厂模式     
-2. 原型模式     
-    design.pattern.factory
-3. 构造器模式
-    design.pattern.build
-4. 适配器模式
-    design.pattern.build
-    1. 类的适配器    VoltageAdapter
-    2. 对象适配器    VoltageAdapter2
-    3. 接口适配器    DefaultAdapterPattern
+2. 原型模式         
+    包：design.pattern.factory
+3. 构造器模式        
+    包：design.pattern.build
+4. 适配器模式        
+    包：design.pattern.build      
+    1. 类的适配器    VoltageAdapter      
+    2. 对象适配器    VoltageAdapter2     
+    3. 接口适配器    DefaultAdapterPattern       
     4. 源码分析： spring-mvc中adapter个controller的映射关系的适配，在DispatcherServlet#doDispatch 方法 
-5. 桥接器模式
-    design.pattern.bridge
-6. 装饰着模式
-    decorator
-    和桥接有相似之处，都是为了增强拓展性，被装饰者可以被装饰器不断的进行装饰叠加。
+5. 桥接器模式        
+    包：design.pattern.bridge     
+6. 装饰着模式        
+    包：design.pattern.decorator      
+    和桥接有相似之处，都是为了增强拓展性，被装饰者可以被装饰器不断的进行装饰叠加。     
+7. 组合模式             
+    包：design.pattern.composite      
+    Map 组合的父级节点（这里他是接口）,AbstractMap（这里是抽象类）     
+    HashMap  这个是中间的节点，实现了接口，继承了抽象类      
+    Node为叶子节点       
+    Map下面的体系使用的就是组合模式       
+8. 外观模式             
+    包：design.pattern.facade     
+    外观类：去整合所有需要调用的子系统/模块，并为之提供调用端统一地调用接口        
+    调用者：外观调用者       
+    子系统结合： 之模块或者子系统，处理Facade对象指派的任务，他是实际功能的提供者          
+ 9. 享元模式（flyweight Pattern, 也称之为蝇量模式）       
+    包：design.pattern.       
+    当需求相似度很高的时候可以使用这个模式     
+    享元模式使用的时候需要分析出来内部状态（相对稳定）和外部状态（变化相对较多）。     
+    就是将共用的内容缓存起来，供大家一起使用，使用的时候不用再去创建了       
+    如：Integer类的-127 —— 128之间的数就使用了缓存存起来，使用的时候就如果在范围类就直接取出来缓存。
+10. 模板模式        
+    包：design.pattern.template           
+    就是将基本流程写出来，然后将需要定制化的抽象出来就行了。        
+11. 命令模式                
+    包：design.pattern.template           
+    将发起请求的对象与执行请求的对象解耦      
+12. 访问者模式       
+    应用场景需要对一个对象结构中的对象进行很多不同操作（这些操作彼此没有关联），同时需要避免这些操作”污染“这些对象的类.     
+    增强拓展性       
+    这个有一个双分派的问题     
+    这里使用了一个双分派，首先在客户端中吗，将具体状态作为参数传递Woman中（第一次分派）                
+    然后将woman 类作为参数的具体方法中方法getWomanResult,同时将自己（this）作为参数传入，完成第二次分派
+13. 观察者模式
+
+14. 中介模式
+    就是再调用的是时候交给一个中介来发送消息（或者执行调用）。
+    使用中介着模式只需要调用对应的中介，就行了  
+15. 备忘录模式       
+    xxx
+16. 解释器模式       
+17. 状态模式        
+    xxx
+18. 策略模式        
+    参数作为接口，调用统一的一个方法，       
+    如果你想要实现某种策略，那你就传入某种策略就行了。
+19. 职责链模式       
+    就是将职责按照链表的形式进行调用即可。
+    spring mvc的 HandlerExecutionChain 类使用的就是责任链模式

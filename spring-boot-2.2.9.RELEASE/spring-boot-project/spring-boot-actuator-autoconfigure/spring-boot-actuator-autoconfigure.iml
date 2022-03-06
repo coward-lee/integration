@@ -276,6 +276,7 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty.http2:http2-common:9.4.30.v20200611" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty.http2:http2-hpack:9.4.30.v20200611" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty.http2:http2-http-client-transport:9.4.30.v20200611" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-alpn-openjdk8-client:9.4.30.v20200611" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.integration:spring-integration-core:5.2.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.retry:spring-retry:1.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:5.2.5.RELEASE" level="project" />
