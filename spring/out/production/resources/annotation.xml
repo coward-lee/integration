@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd  ">
+<!--
+扫描包
+-->
+    <!--开启组件扫描-->
+<!--    <context:component-scan base-package="org.lee.study.spring.annotation.injection"></context:component-scan>-->
+<!--实例1：扫描指定注解的类-->
+<!--    &lt;!&ndash;use-default-filters : 使用过默认的过滤方式&ndash;&gt;-->
+<!--    <context:component-scan base-package="org.lee.study.spring.annotation.injection"  use-default-filters="false">-->
+<!--        &lt;!&ndash;        这个是表示 扫描 @Controller 注解的类&ndash;&gt;-->
+<!--        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+<!--    </context:component-scan>-->
+
+<!--实例2：不扫描指定的那些注解的类-->
+    <!--use-default-filters : 使用过默认的过滤方式-->
+    <context:component-scan base-package="org.lee.study.spring.annotation.injection">
+        <!--        这个是表示 扫描 @Controller 注解的类-->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+</beans>

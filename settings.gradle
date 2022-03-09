@@ -18,4 +18,5 @@ include 'sharding-jdbc'
 include 'antlr'
 include 'antlr-study'
 include 'akka'
+include 'module-development'
 
