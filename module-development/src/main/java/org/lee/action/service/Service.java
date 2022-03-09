@@ -1,2 +1,7 @@
-package org.lee.action.service;public class Service {
+package org.lee.action.service;
+
+public class Service {
+    public static void doSome(){
+        System.out.println("sssssssss");
+    }
 }
