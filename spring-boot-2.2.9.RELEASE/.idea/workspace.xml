@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="355613d6-0f95-4890-b296-a8be0b3a6cfd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../akka/src/main/java/org/lee/study/akka/stream/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../img/img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sendgrid_java_http_client_4_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_alpn_openjdk8_client_9_4_30_v20200611.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sendgrid_java_http_client_4_3_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot-actuator-autoconfigure/spring-boot-actuator-autoconfigure.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot-actuator-autoconfigure/spring-boot-actuator-autoconfigure.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot-actuator/spring-boot-actuator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot-actuator/spring-boot-actuator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot-autoconfigure/spring-boot-autoconfigure.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot-autoconfigure/spring-boot-autoconfigure.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot-cli/spring-boot-cli.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot-cli/spring-boot-cli.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot-docs/spring-boot-docs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot-docs/spring-boot-docs.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot-starters/spring-boot-starter-data-solr/spring-boot-starter-data-solr.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot-starters/spring-boot-starter-data-solr/spring-boot-starter-data-solr.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot-starters/spring-boot-starter-jersey/spring-boot-starter-jersey.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot-starters/spring-boot-starter-jersey/spring-boot-starter-jersey.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot-test/spring-boot-test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot-test/spring-boot-test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot/spring-boot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot/spring-boot.iml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="AnnotationType" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectId" id="23e9koXHMU79USurrnPxRW3ibbt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../spring-framework" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="spring" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Lee\Desktop\spring-boot-2.2.9.RELEASE\img" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.demo.annotation" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Lee\Desktop\spring-boot-2.2.9.RELEASE" />
+      <recent name="C:\Users\Lee\Desktop\spring-boot-2.2.9.RELEASE\img" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.DemoApplication">
+    <configuration name="AnnotationDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.demo.AnnotationDemo" />
+      <module name="spring-boot-my-test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="spring-boot-my-test" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.demo.DemoApplication" />
+      <option name="ACTIVE_PROFILES" value="dev" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.AnnotationDemo" />
+      <item itemvalue="Spring Boot.DemoApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.AnnotationDemo" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpringGeneralSettings">
+    <option name="allowAutoConfigurationMode" value="true" />
+    <option name="showMultipleContextsPanel" value="false" />
+    <option name="showProfilesPanel" value="false" />
+  </component>
+  <component name="SshConsoleOptionsProvider">
+    <option name="myEncoding" value="UTF-8" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="355613d6-0f95-4890-b296-a8be0b3a6cfd" name="Default Changelist" comment="" />
+      <created>1642083832535</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1642083832535</updated>
+      <workItem from="1642083850765" duration="47485000" />
+      <workItem from="1642305095586" duration="6648000" />
+      <workItem from="1642317881460" duration="25748000" />
+      <workItem from="1642420962504" duration="511000" />
+      <workItem from="1642421538318" duration="1423000" />
+      <workItem from="1642519603032" duration="368000" />
+      <workItem from="1642866489374" duration="294000" />
+      <workItem from="1642867467105" duration="10903000" />
+      <workItem from="1642923290681" duration="6286000" />
+      <workItem from="1642935191502" duration="21000" />
+      <workItem from="1642935234465" duration="64000" />
+      <workItem from="1642935320308" duration="11000" />
+      <workItem from="1642935431489" duration="5078000" />
+      <workItem from="1645631036410" duration="1400000" />
+      <workItem from="1645860498851" duration="33000" />
+      <workItem from="1645860576647" duration="269000" />
+      <workItem from="1645865229830" duration="1172000" />
+      <workItem from="1645887911016" duration="1074000" />
+      <workItem from="1645892143418" duration="2567000" />
+      <workItem from="1646395181675" duration="593000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.2.8.RELEASE/spring-context-5.2.8.RELEASE-sources.jar!/org/springframework/context/support/PostProcessorRegistrationDelegate.java</url>
+          <line>99</line>
+          <option name="timeStamp" value="129" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spring-boot-project/spring-boot/src/main/java/org/springframework/boot/SpringApplication.java</url>
+          <line>334</line>
+          <option name="timeStamp" value="130" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spring-boot-project/spring-boot/src/main/java/org/springframework/boot/SpringApplication.java</url>
+          <line>305</line>
+          <option name="timeStamp" value="133" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spring-boot-project/spring-boot/src/main/java/org/springframework/boot/BeanDefinitionLoader.java</url>
+          <line>141</line>
+          <option name="timeStamp" value="141" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spring-boot-project/spring-boot/src/main/java/org/springframework/boot/SpringApplication.java</url>
+          <line>329</line>
+          <option name="timeStamp" value="142" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spring-boot-project/spring-boot/src/main/java/org/springframework/boot/BeanDefinitionLoader.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="143" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spring-boot-project/spring-boot/src/main/java/org/springframework/boot/SpringApplication.java</url>
+          <line>705</line>
+          <option name="timeStamp" value="144" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spring-boot-project/spring-boot/src/main/java/org/springframework/boot/SpringApplication.java</url>
+          <line>709</line>
+          <option name="timeStamp" value="145" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="getBeanFactoryPostProcessors()" language="JAVA" />
+        <watch expression="tf.match(metadataReader, getMetadataReaderFactory())" language="JAVA" />
+      </configuration>
+      <configuration name="Application">
+        <watch expression="annotationDemo.getAnnotations()" language="JAVA" />
+        <watch expression="annotationDemo.getAnnotation(Annotation1.class)" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
