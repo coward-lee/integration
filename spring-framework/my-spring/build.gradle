@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+}
+
+group 'org.springframework'
+version '6.0.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+dependencies {
+    implementation(project(":spring-beans"))
+    implementation(project(":spring-core"))
+    implementation(project(":spring-context"))
+}
