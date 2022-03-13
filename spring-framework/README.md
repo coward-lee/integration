@@ -436,12 +436,13 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 加载类上：这个类会在被获取的时候创建      
 加载构造方法上的Lazy处理：    
 1. ss 
-2. AbstractAutowireCapableBeanFactory # doCreateBean
-3. AbstractAutowireCapableBeanFactory # autowireConstructor
+2. AbstractAutowireCapableBeanFactory # doCreateBean 创建Bean
+3. AbstractAutowireCapableBeanFactory # autowireConstructor    返回一个BeanWrapper对象
 4. ConstructorResolver # autowireConstructor
+   代码如下 return new ConstructorResolver(this).autowireConstructor(beanName, mbd, ctors, explicitArgs);
 5. ConstructorResolver # createArgumentArray    这个回去创建参数
-6. ConstructorResolver # resolveAutowiredArgument
-7. DefaultListableBeanFactory # resolveDependency
+6. ConstructorResolver # resolveAutowiredArgument  解析单个参数
+7. DefaultListableBeanFactory # resolveDependency  真正的执行参数实例化
     <pre>
    这一句话的意思就是，如果是Lazy注解过了的参数，就是产生一个代理的对象返回,但是为什么不会产生循环依赖了，这是一个问题：（代理对象是怎么实例化的，需要调用父类的构造器嘛）
    如果是被@Lazy注释了的构造方法参数，这里返回的result就是我们要类的一个代理子类（由spring代理生成，他并不会直接取调用我们的目标类的任何构造方法）
@@ -472,3 +473,37 @@ Object result = getAutowireCandidateResolver().getLazyResolutionProxyIfNecessary
     </pre>
 12. 如下图，没有@Lazy的构造方法参数里面的成员变量被初始化了
 ![eager_annotation](img/eager_annotation.png)
+
+### 7. 如果是接口怎么注入
+从beanDefinitionNames里面去找一下是否又自己的实现了的子类，是就注入
+具体的调用如如下
+![eager_annotation](img/inject_interface_frame.png)
+
+    /**
+     * Determines if the class or interface represented by this
+     * {@code Class} object is either the same as, or is a superclass or
+     * superinterface of, the class or interface represented by the specified
+     * {@code Class} parameter. It returns {@code true} if so;
+     * otherwise it returns {@code false}. If this {@code Class}
+     * object represents a primitive type, this method returns
+     * {@code true} if the specified {@code Class} parameter is
+     * exactly this {@code Class} object; otherwise it returns
+     * {@code false}.
+     *
+     * <p> Specifically, this method tests whether the type represented by the
+     * specified {@code Class} parameter can be converted to the type
+     * represented by this {@code Class} object via an identity conversion
+     * or via a widening reference conversion. See <cite>The Java Language
+     * Specification</cite>, sections {@jls 5.1.1} and {@jls 5.1.4},
+     * for details.
+     *
+     * @param     cls the {@code Class} object to be checked
+     * @return    the {@code boolean} value indicating whether objects of the
+     *            type {@code cls} can be assigned to objects of this class
+     * @throws    NullPointerException if the specified Class parameter is
+     *            null.
+     * @since     1.1
+     */
+    @IntrinsicCandidate
+    public native boolean isAssignableFrom(Class<?> cls);
+

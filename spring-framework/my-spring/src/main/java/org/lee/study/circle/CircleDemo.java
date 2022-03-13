@@ -2,6 +2,7 @@ package org.lee.study.circle;
 
 import org.lee.study.Config;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 public class CircleDemo {
@@ -45,7 +46,7 @@ class A{
 class B{
 	C c;
 
-	public B(C c) {
+	public B(@Lazy C c) {
 		this.c = c;
 	}
 }

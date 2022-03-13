@@ -571,15 +571,20 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				initMessageSource();
 
 				// Initialize event multicaster for this context.
+				// 初始化事件广播器，
+				// 1. 如果用户定义了自定义事件广播器
+				// 2. 没有定义子使用默认的 SimpleApplicationEventMulticaster
 				initApplicationEventMulticaster();
 
 				// Initialize other special beans in specific context subclasses.
 				onRefresh();
 
 				// Check for listener beans and register them.
+				// 注册监听器
 				registerListeners();
 
 				// Instantiate all remaining (non-lazy-init) singletons. // 这里会对bean单例的bean进行初始化
+				// 初始化非 Lazy 的
 				finishBeanFactoryInitialization(beanFactory);
 
 				// Last step: publish corresponding event.
