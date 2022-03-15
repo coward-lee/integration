@@ -438,11 +438,12 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 1. ss 
 2. AbstractAutowireCapableBeanFactory # doCreateBean 创建Bean
 3. AbstractAutowireCapableBeanFactory # autowireConstructor    返回一个BeanWrapper对象
-4. ConstructorResolver # autowireConstructor
-   代码如下 return new ConstructorResolver(this).autowireConstructor(beanName, mbd, ctors, explicitArgs);
-5. ConstructorResolver # createArgumentArray    这个回去创建参数
-6. ConstructorResolver # resolveAutowiredArgument  解析单个参数
-7. DefaultListableBeanFactory # resolveDependency  真正的执行参数实例化
+4. ConstructorResolver # autowireConstructor   
+   代码如下 return new ConstructorResolver(this).autowireConstructor(beanName, mbd, ctors, explicitArgs);    
+   通过根据构造器解析器创建一个对象，
+6. ConstructorResolver # createArgumentArray    这个回去创建参数
+7. ConstructorResolver # resolveAutowiredArgument  解析单个参数
+8. DefaultListableBeanFactory # resolveDependency  真正的执行参数实例化
     <pre>
    这一句话的意思就是，如果是Lazy注解过了的参数，就是产生一个代理的对象返回,但是为什么不会产生循环依赖了，这是一个问题：（代理对象是怎么实例化的，需要调用父类的构造器嘛）
    如果是被@Lazy注释了的构造方法参数，这里返回的result就是我们要类的一个代理子类（由spring代理生成，他并不会直接取调用我们的目标类的任何构造方法）
@@ -454,15 +455,15 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
    }
    return result;
     </pre>
-8. ContextAnnotationAutowireCandidateResolver#buildLazyResolutionProxy
+9. ContextAnnotationAutowireCandidateResolver#buildLazyResolutionProxy
 Object result = getAutowireCandidateResolver().getLazyResolutionProxyIfNecessary(descriptor, requestingBeanName);
 上一句话返回的代理类（他是构造体上的参数，被我们加上了@Lazy注解的结果）：   LazyDemo$$EnhancerBySpringCGLIB 
-9. 展示图片如下，这个就是由于lazyDemo参数有@Lazy所以它里面的lazy2Demo 压根没有初始化，这个也是证明LazyDemo构造方法没有调用的证明
+10. 展示图片如下，这个就是由于lazyDemo参数有@Lazy所以它里面的lazy2Demo 压根没有初始化，这个也是证明LazyDemo构造方法没有调用的证明
 ![lazy_annotation](img/lazy_annotation.png)
-10. DefaultAopProxyFactory#createAopProxy 几经调用，最终来到了这个方法 
+11. DefaultAopProxyFactory#createAopProxy 几经调用，最终来到了这个方法 
      而这个方法最重要的就是返回一些代理对象  return new ObjenesisCglibAopProxy(config);       
      我们的案例总调用的说就是这个类，他是会回去调用目标类（被代理的类）构造器
-11. 如果没有注释@Lazy的话 正常的参数会调用这个方法，DependencyDescriptor#resolveCandidate
+12. 如果没有注释@Lazy的话 正常的参数会调用这个方法，DependencyDescriptor#resolveCandidate
     而这个方法的代码如下，他又是去调用的IOC容器的getBean，这个时候就会创建我们为创建的Bean， 
     走正常的流程，如果构造器有参数，再去解析参数就会产生循环依赖
     <pre>
@@ -471,7 +472,7 @@ Object result = getAutowireCandidateResolver().getLazyResolutionProxyIfNecessary
         return beanFactory.getBean(beanName);
     }
     </pre>
-12. 如下图，没有@Lazy的构造方法参数里面的成员变量被初始化了
+13. 如下图，没有@Lazy的构造方法参数里面的成员变量被初始化了
 ![eager_annotation](img/eager_annotation.png)
 
 ### 7. 如果是接口怎么注入
@@ -506,4 +507,128 @@ Object result = getAutowireCandidateResolver().getLazyResolutionProxyIfNecessary
      */
     @IntrinsicCandidate
     public native boolean isAssignableFrom(Class<?> cls);
+
+# AOP
+
+
+## AOP的执行流程
+```java
+public class AopMain {
+    public static void main(String[] args) {
+        var context = new AnnotationConfigApplicationContext(AopMain.class);
+        Target target = context.getBean("target", Target.class);
+        target.print();
+	}
+}
+```
+执行过程被CglibAopProxy#intercept所拦截这个方法会将我们的原方法和切点都进行执行(如果需要)
+intercept的主流程
+1. List<Object> chain = this.advised.getInterceptorsAndDynamicInterceptionAdvice(method, targetClass);
+    获取我们之前扫描加入的拦截链，也就是获取我们的各个切面（或者说我们使用@Before，@After等注释的生成的Advice）
+2. retVal = new CglibMethodInvocation(proxy, target, method, args, targetClass, chain, methodProxy).proceed();
+    在这里我们假定一定会AOP的代理，因为没有aop代理的话，会直接调用原来的方法          
+    这里也比较简单，就是创建一个方法的invocation，让后执行他。    
+    真正复杂的在proceed();方法里面，里面有aop的状态流转
+
+```java
+
+// 调用 我们的 before 注解的方法
+public class MethodBeforeAdviceInterceptor implements MethodInterceptor, BeforeAdvice, Serializable {
+	private final MethodBeforeAdvice advice;
+	@Override
+	@Nullable
+	public Object invoke(MethodInvocation mi) throws Throwable {
+		this.advice.before(mi.getMethod(), mi.getArguments(), mi.getThis());
+        // 再此执行proceed
+		return mi.proceed();
+	}
+}
+
+
+// 调用 我们的 After 注解的方法
+public class AspectJAfterAdvice extends AbstractAspectJAdvice implements MethodInterceptor, AfterAdvice, Serializable {
+    public AspectJAfterAdvice(Method aspectJBeforeAdviceMethod, AspectJExpressionPointcut pointcut, AspectInstanceFactory aif) {
+        super(aspectJBeforeAdviceMethod, pointcut, aif);
+    }
+    @Override
+    public Object invoke(MethodInvocation mi){
+        try {
+            return mi.proceed();
+        }
+        finally {
+            invokeAdviceMethod(getJoinPointMatch(), null, null);
+        }
+    }
+}
+
+
+public class AspectJAfterReturningAdvice extends AbstractAspectJAdvice implements AfterReturningAdvice, AfterAdvice, Serializable {
+
+    @Override
+    public void afterReturning(@Nullable Object returnValue, Method method, Object[] args, @Nullable Object target) throws Throwable {
+        if (shouldInvokeOnReturnValueOf(method, returnValue)) {
+            invokeAdviceMethod(getJoinPointMatch(), returnValue, null);
+        }
+    }
+    // 父类方法
+    protected Object invokeAdviceMethod(
+            @Nullable JoinPointMatch jpMatch, @Nullable Object returnValue, @Nullable Throwable ex)
+            throws Throwable {
+
+        return invokeAdviceMethodWithGivenArgs(argBinding(getJoinPoint(), jpMatch, returnValue, ex));
+    }
+    // 父类方法
+    protected Object invokeAdviceMethodWithGivenArgs(Object[] args) throws Throwable {
+        Object[] actualArgs = args;
+        if (this.aspectJAdviceMethod.getParameterCount() == 0) {
+            actualArgs = null;
+        }
+        try {
+            ReflectionUtils.makeAccessible(this.aspectJAdviceMethod);
+            return this.aspectJAdviceMethod.invoke(this.aspectInstanceFactory.getAspectInstance(), actualArgs);
+        }
+        catch (IllegalArgumentException ex) {
+            throw new AopInvocationException("Mismatch on arguments to advice method [" +
+                    this.aspectJAdviceMethod + "]; pointcut expression [" +
+                    this.pointcut.getPointcutExpression() + "]", ex);
+        }
+        catch (InvocationTargetException ex) {
+            throw ex.getTargetException();
+        }
+    }
+}
+
+public class AspectJAroundAdvice extends AbstractAspectJAdvice implements MethodInterceptor, Serializable {
+    public AspectJAroundAdvice(Method aspectJAroundAdviceMethod, AspectJExpressionPointcut pointcut, AspectInstanceFactory aif) {
+        super(aspectJAroundAdviceMethod, pointcut, aif);
+    }
+    @Override  @Nullable
+    public Object invoke(MethodInvocation mi) {
+        ProceedingJoinPoint pjp = lazyGetProceedingJoinPoint(pmi);
+        JoinPointMatch jpm = getJoinPointMatch(pmi);
+        return invokeAdviceMethod(pjp, jpm, null, null);
+    }
+    protected ProceedingJoinPoint lazyGetProceedingJoinPoint(ProxyMethodInvocation rmi) {
+        return new MethodInvocationProceedingJoinPoint(rmi);
+    }
+    // 父类的方法  AbstractAspectJAdvice
+    protected Object invokeAdviceMethod(JoinPoint jp, @Nullable JoinPointMatch jpMatch, @Nullable Object returnValue, @Nullable Throwable t) throws Throwable {
+        return invokeAdviceMethodWithGivenArgs(argBinding(jp, jpMatch, returnValue, t));
+    }
+    // 父类的方法  AbstractAspectJAdvice
+    protected Object invokeAdviceMethodWithGivenArgs(Object[] args) {
+        Object[] actualArgs = args;
+        if (this.aspectJAdviceMethod.getParameterCount() == 0) {
+            actualArgs = null;
+        }
+        try {
+            ReflectionUtils.makeAccessible(this.aspectJAdviceMethod);
+            return this.aspectJAdviceMethod.invoke(this.aspectInstanceFactory.getAspectInstance(), actualArgs);
+        }
+        catch (Exception ex) {throw ex.getTargetException();}
+    }
+}
+
+
+```
 

@@ -14,19 +14,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="44e45437-1725-477b-b386-85871a31b2e3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../basic/src/main/java/org/lee/study/serial/SerializeDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../basic/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/inject_interface_frame.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/converter/ConverterDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/injection/InterfaceDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/listener/Config.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/listener/ListenerDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/listener/TestEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/listener/TestListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../spring/src/main/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../antlr-study/src/main/java/org/lee/study/letter/Letter.interp" beforeDir="false" afterPath="$PROJECT_DIR$/../antlr-study/src/main/java/org/lee/study/letter/Letter.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../antlr-study/src/main/java/org/lee/study/letter/LetterLexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/../antlr-study/src/main/java/org/lee/study/letter/LetterLexer.interp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/my-spring/spring.my-spring.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-spring/src/lib/spring-instrument-6.0.0-SNAPSHOT.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/aop/AopMain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/aop/Target.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/aop/TargetAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-boot-2.2.9.RELEASE/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-boot-2.2.9.RELEASE/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
@@ -37,18 +31,14 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/workspace-id.txt.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/workspace-id.txt.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buildSrc/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildSrc/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildSrc/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildSrc/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/circle/CircleDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/circle/CircleDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/injection/UserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/injection/UserDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-context/src/main/java/org/springframework/context/support/AbstractApplicationContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-context/src/main/java/org/springframework/context/support/AbstractApplicationContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-spring/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/my-spring/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-aop/src/main/java/org/springframework/aop/framework/CglibAopProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-aop/src/main/java/org/springframework/aop/framework/CglibAopProxy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,9 +136,9 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/my-spring/build/libs" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.24482758" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
@@ -156,22 +146,28 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\code\java\integration\spring-framework\my-spring\build\libs" />
+      <recent name="D:\code\java\integration\spring-framework\my-spring\src\main\resources" />
       <recent name="D:\code\java\integration\spring-framework\my-spring\src\main\java\org\lee\study" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\code\java\integration\spring-framework\my-spring\src\main\resources" />
+      <recent name="D:\code\java\integration\spring-framework\my-spring\src\lib" />
       <recent name="D:\code\java\integration\spring-framework\img" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.lee.study.aop" />
       <recent name="org.lee.study.listener" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ListenerDemo">
-    <configuration name="ListenerDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.lee.study.listener.ListenerDemo" />
+  <component name="RunManager" selected="Application.AopMain">
+    <configuration name="AopMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.lee.study.aop.AopMain" />
       <module name="spring.my-spring.main" />
+      <option name="PROGRAM_PARAMETERS" value="-javaagent:spring-instrument-6.0.0-SNAPSHOT.jar" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.lee.study.listener.*" />
+          <option name="PATTERN" value="org.lee.study.aop.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -179,12 +175,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.lee.study.aware.Test" />
+    <configuration name="ListenerDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.lee.study.listener.ListenerDemo" />
       <module name="spring.my-spring.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.lee.study.aware.*" />
+          <option name="PATTERN" value="org.lee.study.listener.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -248,19 +244,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.Test" />
       <item itemvalue="Application.TotalAnnotationDemo" />
+      <item itemvalue="Application.ListenerDemo" />
+      <item itemvalue="Application.AopMain" />
       <item itemvalue="Gradle.spring-framework [clean]" />
       <item itemvalue="Gradle.spring-framework [build]" />
-      <item itemvalue="Application.ListenerDemo" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.AopMain" />
         <item itemvalue="Application.ListenerDemo" />
         <item itemvalue="Application.TotalAnnotationDemo" />
         <item itemvalue="Gradle.spring-framework [build]" />
         <item itemvalue="Gradle.spring-framework [clean]" />
-        <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
   </component>
@@ -294,7 +290,9 @@
       <workItem from="1647069352837" duration="70000" />
       <workItem from="1647140226950" duration="969000" />
       <workItem from="1647141224913" duration="373000" />
-      <workItem from="1647141663041" duration="4217000" />
+      <workItem from="1647141663041" duration="10699000" />
+      <workItem from="1647182680755" duration="228000" />
+      <workItem from="1647187112888" duration="22977000" />
     </task>
     <servers />
   </component>
@@ -315,55 +313,100 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/injection/Lazy2Demo.java</url>
           <line>12</line>
           <option name="timeStamp" value="155" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/injection/EagerDemo.java</url>
           <line>9</line>
           <option name="timeStamp" value="156" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/injection/TotalAnnotationDemo.java</url>
           <line>11</line>
           <option name="timeStamp" value="157" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/spring-beans/src/main/java/org/springframework/beans/factory/support/ConstructorResolver.java</url>
           <line>127</line>
           <option name="timeStamp" value="159" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/spring-beans/src/main/java/org/springframework/beans/factory/support/DefaultListableBeanFactory.java</url>
           <line>1335</line>
           <option name="timeStamp" value="163" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/spring-beans/src/main/java/org/springframework/beans/factory/BeanFactoryUtils.java</url>
           <line>261</line>
           <option name="timeStamp" value="165" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/spring-beans/src/main/java/org/springframework/beans/factory/support/DefaultListableBeanFactory.java</url>
-          <line>551</line>
-          <option name="timeStamp" value="167" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/spring-beans/src/main/java/org/springframework/beans/factory/support/AbstractBeanFactory.java</url>
           <line>519</line>
           <option name="timeStamp" value="169" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/spring-core/src/main/java/org/springframework/core/ResolvableType.java</url>
           <line>262</line>
           <option name="timeStamp" value="170" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/spring-context/src/main/java/org/springframework/context/support/AbstractApplicationContext.java</url>
           <line>596</line>
           <option name="timeStamp" value="171" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/aop/AopMain.java</url>
+          <line>12</line>
+          <option name="timeStamp" value="172" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/injection/TotalAnnotationDemo.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="173" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/aop/AopMain.java</url>
+          <line>10</line>
+          <option name="timeStamp" value="175" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spring-aop/src/main/java/org/springframework/aop/framework/CglibAopProxy.java</url>
+          <line>392</line>
+          <option name="timeStamp" value="178" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spring-aop/src/main/java/org/springframework/aop/framework/CglibAopProxy.java</url>
+          <line>700</line>
+          <option name="timeStamp" value="182" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spring-aop/src/main/java/org/springframework/aop/framework/ReflectiveMethodInvocation.java</url>
+          <line>183</line>
+          <option name="timeStamp" value="185" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spring-aop/src/main/java/org/springframework/aop/framework/adapter/MethodBeforeAdviceInterceptor.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="188" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spring-aop/src/main/java/org/springframework/aop/framework/ReflectiveMethodInvocation.java</url>
+          <line>165</line>
+          <option name="timeStamp" value="190" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/aop/TargetAspect.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="192" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/my-spring/src/main/java/org/lee/study/aop/TargetAspect.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="193" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

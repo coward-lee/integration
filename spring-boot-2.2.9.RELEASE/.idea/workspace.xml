@@ -14,24 +14,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="355613d6-0f95-4890-b296-a8be0b3a6cfd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../akka/src/main/java/org/lee/study/akka/stream/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../img/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sendgrid_java_http_client_4_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_alpn_openjdk8_client_9_4_30_v20200611.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sendgrid_java_http_client_4_3_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot-actuator-autoconfigure/spring-boot-actuator-autoconfigure.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot-actuator-autoconfigure/spring-boot-actuator-autoconfigure.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot-actuator/spring-boot-actuator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot-actuator/spring-boot-actuator.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot-autoconfigure/spring-boot-autoconfigure.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot-autoconfigure/spring-boot-autoconfigure.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot-cli/spring-boot-cli.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot-cli/spring-boot-cli.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot-docs/spring-boot-docs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot-docs/spring-boot-docs.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot-starters/spring-boot-starter-data-solr/spring-boot-starter-data-solr.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot-starters/spring-boot-starter-data-solr/spring-boot-starter-data-solr.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot-starters/spring-boot-starter-jersey/spring-boot-starter-jersey.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot-starters/spring-boot-starter-jersey/spring-boot-starter-jersey.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot-test/spring-boot-test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot-test/spring-boot-test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-boot-project/spring-boot/spring-boot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-project/spring-boot/spring-boot.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spring-framework/.idea/modules/my-spring/spring.my-spring.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spring-framework/my-spring/src/main/java/org/lee/study/aop/AopMain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spring-framework/my-spring/src/main/java/org/lee/study/aop/Target.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spring-framework/my-spring/src/main/java/org/lee/study/aop/TargetAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-framework/.gradle/7.4/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-framework/.gradle/7.4/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-framework/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-framework/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-framework/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-framework/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-framework/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-framework/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-framework/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-framework/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-framework/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-framework/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-framework/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-framework/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-framework/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-framework/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-framework/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-framework/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-framework/.gradle/workspace-id.txt.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-framework/.gradle/workspace-id.txt.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-framework/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-framework/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-framework/buildSrc/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-framework/buildSrc/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-framework/buildSrc/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-framework/buildSrc/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-framework/buildSrc/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-framework/buildSrc/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-framework/my-spring/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-framework/my-spring/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-framework/my-spring/src/main/java/org/lee/study/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-framework/my-spring/src/main/java/org/lee/study/Config.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +54,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -73,7 +84,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../spring-framework" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -164,6 +175,8 @@
       <workItem from="1645887911016" duration="1074000" />
       <workItem from="1645892143418" duration="2567000" />
       <workItem from="1646395181675" duration="593000" />
+      <workItem from="1647163157577" duration="1380000" />
+      <workItem from="1647182673033" duration="2324000" />
     </task>
     <servers />
   </component>
