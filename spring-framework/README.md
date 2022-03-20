@@ -77,6 +77,12 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 				StartupStep beanPostProcess = this.applicationStartup.start("spring.context.beans.post-process");
 				// Invoke factory processors registered as beans in the context.
+                // 1.将class文件加载进来，并处理封装成为BeanDefinition
+                // 2.再此调用注册后置处理器
+                // 3.最后循坏调用注册后置处理器
+                // 4. 调用优先级后置处理器
+                // 5. Order注解的后置处理器
+                // 6. incoke BeanFactoryProcessors
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
@@ -128,6 +134,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	}
 }
 ```
+
 ### 3.1.invokeBeanFactoryPostProcessors(beanFactory);
 tip: 下文中的：后置工厂、工厂后置、后置工厂处理器、工厂后置处理器 是一个意思
  这个方法做的事情：
@@ -139,6 +146,7 @@ tip: 下文中的：后置工厂、工厂后置、后置工厂处理器、工厂
       2. 这里会组成 basePackage.\*\*/\*.class 的匹配符取加载资源文件（java类）   
       3. 遍历所有的类文件,从中获取被Component注解了的类文件，并注册到IOC工厂中    
       4. 也会去解析被@Bean注解的方法，并生成的BeanDefinition
+      5. 
 
 2. 再去工厂里面取获取一下注册了的后置工厂     
     这个大概应该是为了*我们自己实现的后置工厂处理器的后置工厂*处理器的调用    
@@ -292,10 +300,6 @@ final class PostProcessorRegistrationDelegate {
          postProcessBeanDefRegistry.end();
       }
    }
-
-   /**
-    * Invoke the given BeanFactoryPostProcessor beans.
-    */
    private static void invokeBeanFactoryPostProcessors(
            Collection<? extends BeanFactoryPostProcessor> postProcessors, ConfigurableListableBeanFactory beanFactory) {
 
@@ -308,14 +312,13 @@ final class PostProcessorRegistrationDelegate {
    }
 }
 ```
+### 3.2. 
 
 
 ## 4. 问题
 ### 问题1 ： 在 AbstractApplicationContext#refresh的时候，类文件是那个时候被解析成为BeanDefinition？
 AnnotationConfigApplicationContext#refresh 方法中的一句话invokeBeanFactoryPostProcessors(beanFactory);    
 而在 invokeBeanFactoryPostProcessors(beanFactory); 更为重要的一句话就是 PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, getBeanFactoryPostProcessors());
-
-
 1. ConfigurationClassParser 类是一个很关键的类，在这个问题里面，其中最主要的方法就是 doProcessConfigurationClass
 2. AnnotationConfigUtils 这个类是用来解析ComponentScan注解里面的内容的
 3. ComponentScanAnnotationParser# parse(AnnotationAttributes componentScan, String declaringClass)。 主要是配置扫描需要的准备，
@@ -374,34 +377,23 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
     }
     private Set<BeanDefinition> scanCandidateComponents(String basePackage) {
         Set<BeanDefinition> candidates = new LinkedHashSet<>();
-        try {
-            String packageSearchPath = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX +
-                    resolveBasePackage(basePackage) + '/' + this.resourcePattern;
-            // 这里实在是太重要了，这里就是在basePackage包下面的所有的class文件取出来（但是暂时无法判断是不是初次加载的问题）
-            Resource[] resources = getResourcePatternResolver().getResources(packageSearchPath);
-            for (Resource resource : resources) {
-                if (traceEnabled) {
-                    logger.trace("Scanning " + resource);
-                }
-                try {
-                    // 获取对应的属性，这里主要是要用到对应的注释，如后面判断所需要的Component注解
-                    MetadataReader metadataReader = getMetadataReaderFactory().getMetadataReader(resource);
-                    if (isCandidateComponent(metadataReader)) {
-                        // 这里将我们的资源文件解析成了对应的BeanDefinition
-                        ScannedGenericBeanDefinition sbd = new ScannedGenericBeanDefinition(metadataReader);
-                        sbd.setSource(resource);
-                        if (isCandidateComponent(sbd)) {
-                            candidates.add(sbd);
-                        }
-                    }
-                }
-                catch (Throwable ex) {
+        String packageSearchPath = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX +
+                resolveBasePackage(basePackage) + '/' + this.resourcePattern;
+        // 这里实在是太重要了，这里就是在basePackage包下面的所有的class文件取出来（但是暂时无法判断是不是初次加载的问题）
+        Resource[] resources = getResourcePatternResolver().getResources(packageSearchPath);
+        for (Resource resource : resources) {
+            // 获取对应的属性，这里主要是要用到对应的注释，如后面判断所需要的Component注解
+            MetadataReader metadataReader = getMetadataReaderFactory().getMetadataReader(resource);
+            if (isCandidateComponent(metadataReader)) {
+                // 这里将我们的资源文件解析成了对应的BeanDefinition
+                ScannedGenericBeanDefinition sbd = new ScannedGenericBeanDefinition(metadataReader);
+                sbd.setSource(resource);
+                if (isCandidateComponent(sbd)) {
+                    candidates.add(sbd);
                 }
             }
         }
-        catch (IOException ex) {
-            throw new BeanDefinitionStoreException("I/O failure during classpath scanning", ex);
-        }
+        //...
         return candidates;
     }
     // 这个方法里面会的调用链里面会出现@Conditional注解， 这个在ConditionEvaluator#shouldSkip(AnnotatedTypeMetadata,ConfigurationPhase)  这个方法里面
@@ -423,19 +415,21 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 	
 ```
 ### 2. 那个时候怎么判断是否需要初始化成为singleTon的Bean，那如果是prototype的Scope呢
-
+@Component注解 默认为Singleton，在BeanDefinition里面会有一个Scope字段用来存储范围。
 ### 3. bean的后置处理器，和工厂的后置处理器
-
+工厂的后置处理器      
+工厂的后置处理器，主要就是将我们的类转化成BeanDefinition，然后在后面的步骤使用       
+bean后置处理器，？？？？？？    
 
 ### 4. 几个Aware的时候的地方
 
 
 ### 5. 循环依赖的解
+使用@Lazy注解
 
 ### 6. @Lazy 注解的详细解释
 加载类上：这个类会在被获取的时候创建      
 加载构造方法上的Lazy处理：    
-1. ss 
 2. AbstractAutowireCapableBeanFactory # doCreateBean 创建Bean
 3. AbstractAutowireCapableBeanFactory # autowireConstructor    返回一个BeanWrapper对象
 4. ConstructorResolver # autowireConstructor   
@@ -531,7 +525,6 @@ intercept的主流程
     真正复杂的在proceed();方法里面，里面有aop的状态流转
 
 ```java
-
 // 调用 我们的 before 注解的方法
 public class MethodBeforeAdviceInterceptor implements MethodInterceptor, BeforeAdvice, Serializable {
 	private final MethodBeforeAdvice advice;
@@ -543,8 +536,6 @@ public class MethodBeforeAdviceInterceptor implements MethodInterceptor, BeforeA
 		return mi.proceed();
 	}
 }
-
-
 // 调用 我们的 After 注解的方法
 public class AspectJAfterAdvice extends AbstractAspectJAdvice implements MethodInterceptor, AfterAdvice, Serializable {
     public AspectJAfterAdvice(Method aspectJBeforeAdviceMethod, AspectJExpressionPointcut pointcut, AspectInstanceFactory aif) {
@@ -628,7 +619,88 @@ public class AspectJAroundAdvice extends AbstractAspectJAdvice implements Method
         catch (Exception ex) {throw ex.getTargetException();}
     }
 }
-
-
 ```
 
+一个Bean的过程
+### doGetBean方法
+1. 解析BeanName
+2. 从SingletonMap中获取一下单例Bean      
+    如果存在就直接返回，就通过获取到的Bean再去我们的真实Bean      
+    主要是去判断一下，返回的Bean是什么类型        
+不存在，继续
+3. 循环依赖检测
+4. 获取父类BeanFactory 
+    我们这次没有所以为空
+5. 标记Bean为创建的
+6. 实例化一个 DefaultApplicationStartup$DefaultStartupStep
+7. 获取需要实例化Bean的BeanDefinition
+8. 检查一个这个BeanDefinition 检查是不是抽象类型，如果是抽象类型就跑错
+9. 获取dependsOn
+   如果为非空， 将依赖dependentBeanMap写入到这个Map里面，并创建依赖的Bean，但是我们这次实例没有这个
+10. 获取或者创建Bean,
+    如果是创建Bean，或调用createBean(beanName, beanDefinition, args);
+    如果是单例Bean还会将创建好了的Bean放到SingletonBeans里面去
+### createBean
+1. 解析需要创建Bean的类型
+2. 准备方法的重写
+3. 用 Bean的后置处理器去创建一个Bean，如创建一个代理Bean返回回来
+   但是我们此次里面没有可以创建Bean的PostProcessor
+4. 调用真正创建的Bean的方法，doCreateBean(beanName, beanDefinition, args)
+
+### doCreateBean
+1. 声明BeanWrapper， 我们后面统称为：wrapper
+2. 如果是单例，移除factoryBeanInstanceCache中的BeanWrapper
+3. 如果wrapper为空，创建Bean，这里会利用反射去执行构造方法
+   执行：createBeanInstance(beanName, mbd, args); 这个我们后面讨论
+4. 执行BeanDefinition的后置处理器
+   1. findAutowiringMetadata
+   2. ApplicationListenerDetector 将
+5. 获取earlySingletonExposure
+6. 如果为true 添加单例工厂
+   this.singletonFactories.put(beanName, singletonFactory);
+   this.earlySingletonObjects.remove(beanName);
+   this.registeredSingletons.add(beanName);
+7. 又是一个比较重要的方法 ：populateBean(beanName, mbd, instanceWrapper);
+   注入成员属性    
+   注入的主要是：AutowiredAnnotationBeanPostProcessor#postProcessProperties 来完成注入
+   这个后置处理器主要是对所有的需要注入的属性进行注入，
+   而单个属性的解析和实例化（或者从ioc中获取），是交给AutowiredFieldElement#inject这个方法实现的
+
+### AbstractAutowireCapableBeanFactory # createBeanInstance
+1. 解析bean的类型，就是找出是那个类的bean
+2. 一些准备工作和判断
+3. AutowiredAnnotationBeanPostProcessor#determineCandidateConstructors 判断使用那个构造器，就是我们会在构造方法上面加上@Autowired来指定某个构造方法
+4. 调用：autowireConstructor
+### AbstractAutowireCapableBeanFactory # autowireConstructor
+return new ConstructorResolver(this).autowireConstructor(beanName, mbd, ctors, explicitArgs);
+### ConstructorResolver # autowireConstructor 
+1. 实例化一个BeanWrapperImpl对象 bw
+2. ioc容器初始化bw
+3. 构造方法，参数的持有者，参数的声明
+4. 给参数赋值
+5. 确定构造方法 
+   这个有一个小细节，这里的构造器如果有多个但是有没有指定用哪个构造器，会**默认调用无参构造器**
+   1. 餐、如果传入了构造方法对象（Constructord的对象，则无需重新去获取全部的构造方法）
+   2. 判断是否只有无参构造方法，如果是直接执行无参构造方法
+   3. 定义一个boolean autowiring变量并赋值
+   4. 定义并赋值 int minNrOfArgs; 
+   5. 排序构造方法
+   6. 声明 模糊构造器和一个延时的异常队列
+   7. 遍历构造方法
+      1. 获取构造方法的参数数量
+      2. 如果已经有了完整的构造方法了，直接结束遍历
+      3. 如果为参数数量小于最小的参数数量直接此次循环
+      4. 获取参数类型数组
+      5. createArgumentArray  实例化所有的参数
+      6. resolveAutowiredArgument  实例化单个构造方法的参数， 他是调用的this.beanFactory.resolveDependency,也就是IOC容易的方法来解决依赖
+         并赋值给ArgumentsHolder的对象
+      7. 判断权重，该用哪一个构造方法（这里有歧义）
+   8. 调用instantiate(beanName, mbd, constructorToUse, argsToUse)，这个就是最终使用反射去执行我们的构造方法，返回一个实例对象
+
+### ConstructorResolver # createArgumentArray
+总的来说就是一个一个的去实例化构造方法的参数
+他会调用这个方法  resolveAutowiredArgument()
+而这个方法会调用this.beanFactory.resolveDependency(new DependencyDescriptor(param, true), beanName, autowiredBeanNames, typeConverter);
+这么一句话，这一句话里面有一个重要的操作：new DependencyDescriptor(param, true)
+最终他会执行这么一个语句：descriptor.resolveCandidate(autowiredBeanName, type, beanFactory); 来实例化我们autowiredBeanName对应的Bean
+而上面的一句话调用的是  return beanFactory.getBean(beanName); 这个就又回到获取Bean的原点了。

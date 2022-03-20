@@ -14,9 +14,6 @@ plugins {
 	id "me.champeau.jmh" version "0.6.6" apply false
 }
 
-tasks.withType(JavaCompile) {
-	options.encoding = "UTF-8"
-}
 
 ext {
 	moduleProjects = subprojects.findAll { it.name.startsWith("spring-") }
@@ -29,6 +26,9 @@ ext {
 configure(allprojects) { project ->
 	apply plugin: "io.spring.dependency-management"
 
+	tasks.withType(JavaCompile) {
+		options.encoding = "UTF-8"
+	}
 	dependencyManagement {
 		imports {
 			mavenBom "com.fasterxml.jackson:jackson-bom:2.13.1"

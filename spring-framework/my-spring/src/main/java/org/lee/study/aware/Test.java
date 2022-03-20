@@ -1,18 +1,20 @@
 package org.lee.study.aware;
 
-import org.lee.study.Config;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+@Configuration
+@ComponentScan("org.lee.study.aware")
 public class Test implements BeanFactoryAware {
 	private BeanFactory beanFactory;
+	int i = 1;
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-		System.out.println("BeanFactoryAware Test 有内容注入进来了");
+		System.out.println("BeanFactoryAware Test 。。   "+i++);
 		this.beanFactory = beanFactory;
 	}
 
@@ -25,10 +27,9 @@ public class Test implements BeanFactoryAware {
 	}
 
 	public static void main(String[] args) {
-		var context = new AnnotationConfigApplicationContext(Config.class);
+		var context = new AnnotationConfigApplicationContext(Test.class);
 		Test test = (Test) context.getBean("test");
 		test.testAware();
-
 	}
 
 }
