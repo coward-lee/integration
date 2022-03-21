@@ -40,5 +40,32 @@ s commit3   // 时间11.13
 
 
 
-# AOP
+# 无法构建父类变量的解决方案
 
+@SuperBuilder 可以解决      
+但是build需要注意一下顺序：**先构建子类，再构建父类的变量。**     
+如果先构建父类，会无法构建子类    
+```java
+@Builder
+class Parent{
+    String parentId;
+}
+@SuperBuilder
+class Child extends Parent{
+    String childId;
+}
+class Demo{
+    public static void main(String[] args) {
+        // 出问题的构建方法
+        Child.builder()
+                .parentId("parent")
+                .childId("childId") // 这里会直接导致编译不过
+                .build();
+        // 正确的构建方式
+        Child.builder()
+                .childId("childId") // 应该先构建子类的变量
+                .parentId("parent")
+                .build();
+    }
+}
+```
