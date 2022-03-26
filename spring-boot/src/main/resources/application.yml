@@ -1,2 +1,9 @@
 org:
   demo: "yml"
+
+spring:
+  datasource:
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
+    username: "root"
+    password: "666666"
+    url: "jdbc:mysql://182.42.106.130:3306/sharding_jdbc_01"

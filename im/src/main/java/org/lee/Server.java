@@ -1,4 +1,4 @@
-package org.lee.server;
+package org.lee;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBufAllocator;
@@ -6,8 +6,9 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import org.lee.decoder.Print;
-import org.lee.decoder.SimpleDecoder;
+import org.lee.decoder.IMProtoDecoder;
+import org.lee.decoder.MessageInHandler;
+import org.lee.encoder.IMProtoEncoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,8 +40,10 @@ public class Server {
             server.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
-                    ch.pipeline().addLast(new SimpleDecoder());
-                    ch.pipeline().addLast(new Print());
+                    ch.pipeline().addLast(new IMProtoDecoder());
+                    ch.pipeline().addLast(new MessageInHandler());
+
+                    ch.pipeline().addLast(new IMProtoEncoder());
                 }
             });
 

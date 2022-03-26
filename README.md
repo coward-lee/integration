@@ -46,7 +46,7 @@ s commit3   // 时间11.13
 但是build需要注意一下顺序：**先构建子类，再构建父类的变量。**     
 如果先构建父类，会无法构建子类    
 ```java
-@Builder
+@SuperBuilder
 class Parent{
     String parentId;
 }

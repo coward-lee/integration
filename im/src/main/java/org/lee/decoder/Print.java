@@ -1,4 +1,4 @@
-package org.lee.client.decoder;
+package org.lee.decoder;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

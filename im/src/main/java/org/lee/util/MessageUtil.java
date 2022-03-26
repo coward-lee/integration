@@ -1,4 +1,4 @@
-package org.lee.client.util;
+package org.lee.util;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
@@ -21,7 +21,7 @@ public class MessageUtil {
                     if (ScannerUtil.quit(line)){
                         return;
                     }
-                    log.info("服务端发送了:【{}】", line);
+                    log.info("发送了消息:【{}】", line);
                     channel.writeAndFlush(Unpooled.copiedBuffer(line.getBytes()));
                 }
             }

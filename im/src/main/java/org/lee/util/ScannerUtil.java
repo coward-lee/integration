@@ -1,4 +1,4 @@
-package org.lee.client.util;
+package org.lee.util;
 
 import java.util.Scanner;
 

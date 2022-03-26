@@ -1,4 +1,4 @@
-package org.lee.client;
+package org.lee;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBufAllocator;
@@ -6,9 +6,11 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import org.lee.decoder.SimpleDecoder;
-import org.lee.encoder.SimpleEncoder;
+import org.lee.decoder.IMProtoDecoder;
+import org.lee.decoder.MessageInHandler;
+import org.lee.encoder.IMProtoEncoder;
 import org.lee.util.MessageUtil;
+import org.lee.util.SendMessageUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,8 +36,11 @@ public class Client {
             b.handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
-                    ch.pipeline().addLast(new SimpleDecoder());
-                    ch.pipeline().addLast(new SimpleEncoder());
+
+                    ch.pipeline().addLast(new IMProtoDecoder());
+                    ch.pipeline().addLast(new MessageInHandler());
+
+                    ch.pipeline().addLast(new IMProtoEncoder());
                 }
             });
             ChannelFuture connect = b.connect();
@@ -43,7 +48,7 @@ public class Client {
                 if (f.isSuccess()){
                     Channel channel = connect.channel();
                     channel.writeAndFlush("connect success");
-                    MessageUtil.startInputListening(channel);
+                    SendMessageUtil.startInputListening(channel);
                     log.info("连接成功");
                 }else{
                     log.info("连接失败");

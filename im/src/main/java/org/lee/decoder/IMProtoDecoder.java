@@ -1,15 +1,16 @@
-package org.lee.im.multi.im.coder;
+package org.lee.decoder;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 import lombok.extern.slf4j.Slf4j;
-import org.lee.im.multi.im.domain.MessageProto.Message;
-import org.lee.im.multi.im.domain.MessageProto;
+
+import org.lee.domain.MessageProto.Message;
 
 import java.util.List;
 
-import static org.lee.im.multi.im.coder.Coder.TYPE_BYTE_SIZE;
+import static org.lee.util.Coder.TYPE_BYTE_SIZE;
+
 
 @Slf4j
 public class IMProtoDecoder extends ByteToMessageDecoder {
@@ -44,7 +45,7 @@ public class IMProtoDecoder extends ByteToMessageDecoder {
             in.readBytes(bytes,0, length);
         }
 
-        Message message = MessageProto.Message.parseFrom(bytes);
+        Message message = Message.parseFrom(bytes);
         if (message!=null){
             out.add(message);
         }

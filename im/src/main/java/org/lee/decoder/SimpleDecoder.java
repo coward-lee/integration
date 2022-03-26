@@ -1,4 +1,4 @@
-package org.lee.client.decoder;
+package org.lee.decoder;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -14,13 +14,11 @@ public class SimpleDecoder extends ByteToMessageDecoder {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) {
-        System.out.println("有消息来了");
-        log.info("有消息来了");
         int len = in.readableBytes();
         byte[] buf = new byte[len];
         in.readBytes(buf, 0, len);
         String s = new String(buf, 0, len, CharsetUtil.UTF_8);
-        log.info("receive:{}", s);
+        log.info("收到了消息:【{}】", s);
         out.add(s);
     }
 
