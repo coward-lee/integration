@@ -84,9 +84,13 @@ public class Server {
 //        LoggerContextRule
         CustomConfigurationFactory customConfigurationFactory = new CustomConfigurationFactory();
 
-        Configuration configuration = customConfigurationFactory.getConfiguration(null,new ConfigurationSource(new FileInputStream(new File(""))));
-        Configurator.initialize(configuration);
+        Configuration configuration = customConfigurationFactory.getConfiguration(
+                null,
+                new ConfigurationSource(new FileInputStream(new File("D:\\code\\java\\integration\\im\\src\\main\\resources\\log4j2.xml")))
+        );
+        Configurator.initialize(customConfigurationFactory.getConfiguration());
         new Server(80).runServer();
+        System.out.println("启动成功了嘛...........");
 
     }
 

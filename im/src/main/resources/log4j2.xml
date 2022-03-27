@@ -12,7 +12,7 @@
         <!-- 定义输出到屏幕 -->
         <Console name="console" target="SYSTEM_OUT">
             <!-- 日志格式引用上面定义的log.pattern -->
-            <PatternLayout pattern="${log.pattern}" />
+            <PatternLayout charset="UTF-8" pattern="${log.pattern}" />
         </Console>
         <!-- 定义输出到文件,文件名引用上面定义的file.err.filename -->
         <RollingFile name="err" bufferedIO="true" fileName="${file.err.filename}" filePattern="${file.err.pattern}">
