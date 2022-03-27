@@ -7,13 +7,13 @@ group 'org.lee'
 version '1.0'
 
 repositories {
-    maven{
+    maven {
         allowInsecureProtocol = true
         url 'http://maven.aliyun.com/nexus/content/groups/public/'
     }
     mavenCentral()
 }
-tasks.withType(JavaCompile){
+tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 
@@ -21,12 +21,9 @@ dependencies {
 
     implementation 'io.netty:netty-all:4.1.67.Final'
     implementation 'com.google.protobuf:protobuf-java:3.18.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.1'
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
-    implementation 'ch.qos.logback:logback-classic:1.1.2'
-    implementation 'ch.qos.logback:logback-core:1.1.2'
-    implementation 'org.slf4j:slf4j-api:1.7.25'
-
     runtimeOnly 'com.google.protobuf:protobuf-gradle-plugin:0.8.17'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
@@ -36,14 +33,12 @@ test {
     useJUnitPlatform()
 }
 
-sourceSets{
-    main{
-        proto{
+sourceSets {
+    main {
+        proto {
             // 扫描的proto文件
             srcDir 'src/main/resources/proto'
             include '**/*.proto'
-
-//        outDir "src/main//java/org/lee"
         }
         test {
             proto {
@@ -55,9 +50,10 @@ sourceSets{
 }
 
 // 配置 protoc的生成exe文件可以使用远程的
-protobuf{
+protobuf {
     protoc {
-        path = '/Users/l/program/protoc-3.20.0-osx-aarch_64/bin/protoc'
+//        path = '/Users/l/program/protoc-3.20.0-osx-aarch_64/bin/protoc'
+        path = 'D:\\software\\protoc-3.19.1-win64\\bin\\protoc'
     }
     // 配置生成文件的开始路径$projectDir表示module的基本路径
     generatedFilesBaseDir = "$projectDir/src/"
