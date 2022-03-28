@@ -45,18 +45,4 @@ public class PrintUtil {
     }
 
 
-    public static void main(String[] args) throws Exception {
-        MessageProto.Message build = MessageProto.Message.newBuilder().build();
-//        System.out.println("????????");
-//        Demo demo = new Demo();
-//        demo.demo = "xxxx";
-//        PrintUtil.print(demo);
-//        System.out.println(build);
-        PrintUtil.printProtoObject(build);
-    }
-
-    static class Demo {
-        String demo;
-    }
-
 }

@@ -6,19 +6,22 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
 import org.lee.decoder.IMProtoDecoder;
 import org.lee.decoder.MessageInHandler;
 import org.lee.domain.MessageProto;
+import org.lee.domain.MessageType;
 import org.lee.encoder.IMProtoEncoder;
+import org.lee.util.CustomConfigurationFactory;
 import org.lee.util.SendMessageUtil;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
 
-import java.util.UUID;
-import java.util.logging.LogManager;
+import java.io.IOException;
+
 
 public class Client {
-//    private final Logger log = LoggerFactory.getLogger(Client.class);
+    private final Logger log = LogManager.getLogger(Client.class);
 
     private final Integer port;
     private final String addr;
@@ -30,8 +33,10 @@ public class Client {
         this.clientId = clientId;
     }
 
+    private Bootstrap b = new Bootstrap();
+    private Channel channel = null;
+
     public void runClient() {
-        Bootstrap b = new Bootstrap();
         try {
             EventLoopGroup loop = new NioEventLoopGroup();
             b.group(loop)
@@ -52,23 +57,34 @@ public class Client {
             connect.addListener(f->{
                 if (f.isSuccess()){
                     Channel channel = connect.channel();
+                    this.channel = channel;
                     channel.writeAndFlush("connect success");
                     // 注册自己的channel到服务器
                     register(channel);
                     // 开启输入监听
-                    SendMessageUtil.startInputListening(channel);
-//                    log.info("连接成功");
+                    SendMessageUtil.startInputListening(channel, clientId);
+                    log.info("连接成功");
                 }else{
-//                    log.info("连接失败");
+                    log.info("连接失败");
                 }
             });
-
             ChannelFuture close = connect.channel().closeFuture();
             close.sync();
-//            log.info("连接关闭   ==== === = = == = = = =");
+            log.info("连接关闭   ==== === = = == = = = =");
         } catch (Exception e) {
-//            log.error(" 客户端出现错误", e);
+            log.error(" 客户端出现错误", e);
             Thread.currentThread().interrupt();
+        }
+    }
+    public void sendMessage(MessageProto.Message message){
+        if (channel!=null){
+            channel.writeAndFlush(message);
+        }
+    }
+
+    public void close(){
+        if (channel != null) {
+            channel.close();
         }
     }
 
@@ -77,9 +93,20 @@ public class Client {
         channel.writeAndFlush(message);
     }
 
-    public static void main(String[] args) {
-        LogManager logManager = LogManager.getLogManager();
-//        logManager.
-        new Client(80,"127.0.0.1", args[0]).runClient();
+    public static void main(String[] args) throws IOException {
+        CustomConfigurationFactory customConfigurationFactory = new CustomConfigurationFactory();
+        Configurator.initialize(customConfigurationFactory.getConfiguration());
+        for (int i = 0; i < 100; i++) {
+            String from = "args[0]"+i;
+            Client client = new Client(80, "127.0.0.1", from);
+            client.runClient();
+            client.sendMessage(MessageProto.Message.newBuilder()
+                            .setTo("args[0]"+(i-1))
+                            .setFrom(from)
+                            .setHeader(MessageType.SEND.getVal())
+                            .setContent("发送一个消息"+i)
+                    .build());
+            client.close();
+        }
     }
 }

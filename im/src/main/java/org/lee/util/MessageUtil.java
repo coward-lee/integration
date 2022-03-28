@@ -2,31 +2,32 @@ package org.lee.util;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 public class MessageUtil {
     public static void startInputListening(Channel channel){
         new Thread(()->{
-//            final Logger log = LoggerFactory.getLogger(MessageUtil.class);
+            final Logger log = LogManager.getLogger(MessageUtil.class);
 
             try {
                 while (channel == null){
-//                    log.info("等待中， 连接中");
+                    log.info("等待中， 连接中");
                     Thread.sleep(1000);
                 }
-//                log.info("input q or quit exit the input listen");
+                log.info("input q or quit exit the input listen");
                 while (true) {
                     String line = ScannerUtil.getLine();
                     if (ScannerUtil.quit(line)){
                         return;
                     }
-//                    log.info("发送了消息:【{}】", line);
+                    log.info("发送了消息:【{}】", line);
                     channel.writeAndFlush(Unpooled.copiedBuffer(line.getBytes()));
                 }
             }
             catch (Exception e) {
-//                log.error("输入出现错误，",e);
+                log.error("输入出现错误，",e);
                 Thread.currentThread().interrupt();
             }
         }).start();
