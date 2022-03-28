@@ -93,12 +93,10 @@ public class Client {
         channel.writeAndFlush(message);
     }
 
-    public static void main(String[] args) throws IOException {
-        CustomConfigurationFactory customConfigurationFactory = new CustomConfigurationFactory();
-        Configurator.initialize(customConfigurationFactory.getConfiguration());
+    public static void run(String ip, Integer port, String clientId) throws IOException {
         for (int i = 0; i < 100; i++) {
             String from = "args[0]"+i;
-            Client client = new Client(80, "127.0.0.1", from);
+            Client client = new Client(port, ip, clientId);
             client.runClient();
             client.sendMessage(MessageProto.Message.newBuilder()
                             .setTo("args[0]"+(i-1))

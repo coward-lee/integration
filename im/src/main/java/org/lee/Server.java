@@ -74,10 +74,10 @@ public class Server {
     }
 
 
-    public static void main(String[] args) throws IOException {
+    public static void run(Integer port) {
         CustomConfigurationFactory customConfigurationFactory = new CustomConfigurationFactory();
         Configurator.initialize(customConfigurationFactory.getConfiguration());
-        new Server(80).runServer();
+        new Server(port).runServer();
     }
 
 
