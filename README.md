@@ -69,3 +69,24 @@ class Demo{
     }
 }
 ```
+
+## json 序列化注意点
+这里有一个小细节，在将jackson转化对象到数据库中的一个字段的时候，他会根据getXXX() 方法序列化成为对应的字段。
+    
+    public class AssetLeafCategoryFilter implements AssetFilterItemContent {
+        private String value;
+    
+        public AssetLeafCategoryFilter(String value) {
+            this.value = value;
+        }
+    
+        public String getValue() {
+            return value;
+        }
+        public String getFiled() {
+            return value;
+        }
+    }
+最终结果为：{value:"xxx",filed:"xxx"}     
+他会将 filed 也看作一个字段     
+
