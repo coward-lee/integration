@@ -57,16 +57,4 @@ class BeanMain {
         ((ClassPathXmlApplicationContext)context).close();
     }
 
-    @Test
-    void test_annotatedBeanFactory(){
-        ConfigurableApplicationContext context = new AnnotationConfigApplicationContext("bean3.xml");
-//        context.addBeanFactoryPostProcessor((BeanFactoryPostprocessorDemo)context.getBean("beanFactoryPostprocessorDemo"));
-        context.refresh();
-        Object beanCircle = context.getBean("myBean", Orders.class);
-        System.out.println("第四步：获取到bean实例对象");
-        System.out.println(beanCircle);
-        // 手动销毁创建的Bean实例
-        ((ClassPathXmlApplicationContext)context).close();
-    }
-
 }

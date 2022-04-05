@@ -43,4 +43,6 @@ public class PrintUtil {
         Method method = out.getClass().getMethod("get" + firstWord + name.substring(1, name.length() - 1));
         return name.substring(0, name.length() - 1) + " :" + method.invoke(out);
     }
+
+
 }

@@ -13,6 +13,7 @@ repositories {
     }
     mavenCentral()
 }
+
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
@@ -58,4 +59,21 @@ protobuf {
     // 配置生成文件的开始路径$projectDir表示module的基本路径
     generatedFilesBaseDir = "$projectDir/src/"
 
+}
+
+
+
+// 打包成为jar 的脚本配置
+jar {
+    // 解决 META-INF/DEPENDENCIES is a duplicate but no duplicate handling strategy has been set.
+    // 报错问题
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from {
+        configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}
+    }
+    // 指定jar的主类，也就是入口的Main类
+    manifest {
+        attributes 'Main-Class': 'org.lee.Main'
+    }
 }

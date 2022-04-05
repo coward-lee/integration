@@ -7,3 +7,10 @@
 1. 改fileencoding
 2. 添加idea64.exe.vmoptions
    中 -Dfile.encoding=UTF-8
+# 解决 META-INF/DEPENDENCIES is a duplicate but no duplicate handling strategy has been set.
+   // 报错问题    
+<pre>
+jar {    
+   duplicatesStrategy = DuplicatesStrategy.EXCLUDE    
+}    
+</pre>
