@@ -9,7 +9,7 @@ import akka.stream.javadsl.Source;
 public class MysqlSource {
     private static final SlickSession session = SlickSession.forConfig("slick-mysql");
     public static Source<StreamMysql.DemoPojo, NotUsed> toSource() {
-        return Slick.source(session, "select * from shading_table limit 0,100",
+        return Slick.source(session, "select * from shading_table",
                 (SlickRow slickRow) ->
                 {
                     StreamMysql.DemoPojo demoPojo = new StreamMysql.DemoPojo(slickRow.nextLong(), slickRow.nextString());

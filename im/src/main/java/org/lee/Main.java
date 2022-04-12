@@ -3,19 +3,18 @@ package org.lee;
 import org.apache.logging.log4j.core.config.Configurator;
 import org.lee.util.CustomConfigurationFactory;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static org.lee.Client.run;
 
 public class Main {
     private static final Set<String> env = new HashSet<>(10);
     private static final String[] client = {"c", "client"};
     private static final String[] server = {"s", "server"};
     private static final Map<String, String> commands = new HashMap<>(16);
+    public static final Integer port = 80;
 
     static {
         env.addAll(Set.of("e","env","enviroment"));
@@ -35,18 +34,16 @@ public class Main {
     }
 
     public static void parseArgs(String[] args) {
-        if (args.length == 0) {
-            System.out.println("需要指定一下启动的环境");
-        }
+//        if (args.length == 0) {
+//            System.out.println("需要指定一下启动的环境");
+//        }
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
             if ((arg.startsWith("-") || arg.startsWith("--")) && i < args.length - 1) {
                 commands.put(arg.substring(1), args[++i]);
             }
         }
-        commands.forEach((k,v)->{
-            System.out.println(k+":"+v);
-        });
+        commands.forEach((k,v)-> System.out.println(k+":"+v));
     }
     public static void run(){
         String enviroment = null;
@@ -95,6 +92,9 @@ public class Main {
         }catch (Exception ex){
             System.out.println("出现错了");
         }
+    }
+    public static String getArg(String key){
+        return commands.get(key);
     }
 
 }

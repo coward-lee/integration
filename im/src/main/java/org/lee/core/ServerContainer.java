@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ServerContainer {
     public final static Map<String, Channel> clientMap = new ConcurrentHashMap<>(16);
+    public final static Map<String, Channel> serverMap = new ConcurrentHashMap<>(16);
     private final static Logger log = LogManager.getLogger(ServerContainer.class);
 
     public static Channel queryClient(MessageProto.Message message) {

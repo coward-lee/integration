@@ -23,4 +23,5 @@ include 'module-development01'
 include 'cglib'
 include 'leetcode'
 include 'im'
+include 'scala'
 

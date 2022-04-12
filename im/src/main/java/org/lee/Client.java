@@ -107,4 +107,30 @@ public class Client {
             client.close();
         }
     }
+
+    public static void main(String[] args) throws IOException {
+        Main.parseArgs(args);
+
+        CustomConfigurationFactory customConfigurationFactory = new CustomConfigurationFactory();
+        Configurator.initialize(customConfigurationFactory.getConfiguration());
+
+        Integer port = Integer.valueOf(Main.port);
+        String ip = "localhost";
+        for (int i = 0; i < 100; i++) {
+            String from = "args[0]"+i;
+            int finalI = i;
+            new Thread(()->{
+
+                Client client = new Client(port, ip, from);
+                client.runClient();
+                client.sendMessage(MessageProto.Message.newBuilder()
+                        .setTo("args[0]"+(finalI -1))
+                        .setFrom(from)
+                        .setHeader(MessageType.SEND.getVal())
+                        .setContent("发送一个消息"+ finalI)
+                        .build());
+                client.close();
+            }, "线程【"+i+"】").start();
+        }
+    }
 }

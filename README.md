@@ -88,5 +88,32 @@ class Demo{
         }
     }
 最终结果为：{value:"xxx",filed:"xxx"}     
-他会将 filed 也看作一个字段     
+他会将 filed 也看作一个字段    
+
+
+
+
+## gradle 编译scala错误
+下面的 java.scrDirs = ['src/main/java'] 或者 ['src/main/scala'] 就会导致scala的类无法在编译的时候被找到，为什么，          
+我的出现这个情况的上下文是，我的其中一个java类引用了scala的文件，不知道是不是因为配置了java.srcDirs就导致无法识别倒入的scala类了
+```groovy
+sourceSets {
+    main() {
+        scala{
+            srcDirs = ['src/main/scala', 'src/main/java']
+        }
+        java {
+            srcDirs = []
+        }
+    }
+    test {
+        scala{
+            srcDirs = ['src/test/java', 'src/test/scala']
+        }
+        java {
+            srcDirs = []
+        }
+    }
+}
+```
 

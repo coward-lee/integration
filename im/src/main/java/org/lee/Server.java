@@ -2,21 +2,16 @@ package org.lee;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBufAllocator;
-import io.netty.channel.*;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.Filter;
-import org.apache.logging.log4j.core.LoggerContext;
-import org.apache.logging.log4j.core.appender.ConsoleAppender;
-import org.apache.logging.log4j.core.config.*;
-import org.apache.logging.log4j.core.config.builder.api.AppenderComponentBuilder;
-import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilder;
-import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
-import org.apache.logging.log4j.core.config.plugins.Plugin;
+import org.apache.logging.log4j.core.config.Configurator;
 import org.lee.decoder.IMProtoDecoder;
 import org.lee.decoder.IMServerExchangeHandler;
 import org.lee.decoder.MessageInHandler;
@@ -24,8 +19,6 @@ import org.lee.decoder.RegisterHandler;
 import org.lee.encoder.IMProtoEncoder;
 import org.lee.util.CustomConfigurationFactory;
 
-import java.io.*;
-import java.net.URI;
 
 public class Server {
 
@@ -62,7 +55,6 @@ public class Server {
 
             ChannelFuture listen = server.bind().sync();
             log.info("启动成功，服务器端口为：{}", port);
-            System.out.println("启动成功");
 
             // 关闭监听回调
             ChannelFuture close = listen.channel().closeFuture();
@@ -70,6 +62,7 @@ public class Server {
             log.warn("服务器关闭");
         } catch (Exception e) {
             log.error(" 服务端出现错误", e);
+            Thread.currentThread().interrupt();
         }
     }
 
@@ -80,5 +73,13 @@ public class Server {
         new Server(port).runServer();
     }
 
+
+
+    public static void main(String[] args) {
+        Integer port = Main.port;
+        CustomConfigurationFactory customConfigurationFactory = new CustomConfigurationFactory();
+        Configurator.initialize(customConfigurationFactory.getConfiguration());
+        new Server(port).runServer();
+    }
 
 }
