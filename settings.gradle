@@ -24,4 +24,5 @@ include 'cglib'
 include 'leetcode'
 include 'im'
 include 'scala'
+include 'zookeeper'
 
