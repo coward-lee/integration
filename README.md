@@ -117,3 +117,27 @@ sourceSets {
 }
 ```
 
+
+## jmx 
+jmx 配置需要的包, 下面每一个都需要，这样才能通过http访问jmx
+<pre>
+    implementation "org.jolokia:jolokia-core:1.3.6"
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+
+===================================   yml  ===================================
+spring:
+  jmx:
+    enabled: true
+management:
+  server:
+    port: 9096
+  endpoints:
+    web:
+      base-path: /man
+      exposure:
+        include: jolokia
+  endpoint:
+    jolokia:
+      enabled: true
+</pre>

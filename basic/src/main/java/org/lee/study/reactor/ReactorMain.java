@@ -2,23 +2,19 @@ package org.lee.study.reactor;
 
 
 import org.junit.Test;
-import org.reactivestreams.Processor;
-import org.reactivestreams.Publisher;
-import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 import reactor.core.publisher.BaseSubscriber;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
+import reactor.util.annotation.NonNull;
 
 import java.time.Duration;
 import java.util.Arrays;
-import java.util.EventListenerProxy;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class ReactorMain {
@@ -284,15 +280,15 @@ public class ReactorMain {
             }
             return x;
         }).onErrorReturn(9999);
-        integerFlux.subscribe(x -> System.out.println(x));
+        integerFlux.subscribe(System.out::println);
     }
 
     /**
      * 异常处理方法
      * Flux.onErrorReturn
-     *  如果predicate 返回true 返回 fallbackValue的值
-     *  如果          返回为false 抛出错误
-     *  Flux<T> onErrorReturn(Predicate<? super Throwable> predicate, T fallbackValue)
+     * 如果predicate 返回true 返回 fallbackValue的值
+     * 如果          返回为false 抛出错误
+     * Flux<T> onErrorReturn(Predicate<? super Throwable> predicate, T fallbackValue)
      */
     @Test
     public void test_onErrorResume() {
@@ -335,12 +331,14 @@ public class ReactorMain {
 }
 
 class SampleSubscriber<T> extends BaseSubscriber<T> {
-    public void hookOnSubscribe(Subscription subscription) {
+    @Override
+    public void hookOnSubscribe(@NonNull Subscription subscription) {
         System.out.println("subscribed");
         request(10);
     }
 
-    public void hookOnNext(T value) {
+    @Override
+    public void hookOnNext(@NonNull T value) {
         System.out.println(value);
         request(10);
     }
