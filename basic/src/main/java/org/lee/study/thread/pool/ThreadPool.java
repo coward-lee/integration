@@ -1,7 +1,6 @@
 package org.lee.study.thread.pool;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.AbstractQueue;
 import java.util.LinkedList;
@@ -16,7 +15,7 @@ public class ThreadPool implements Executor {
     private final Lock lock = new ReentrantLock();
     private final ThreadFactory threadFactory = new ThreadFactory();
     private final AtomicInteger workerCount = new AtomicInteger(0);
-    private long completedNum = 0;
+    private long completedNum = 1;
     private long rejectNum = 0;
 
     private final List<Worker> workers = new LinkedList<>();
@@ -62,28 +61,43 @@ public class ThreadPool implements Executor {
     }
 
     private void doExecute(Runnable runnable) {
+        boolean shouldRun = false;
+        lock.lock();
         Worker worker = emptyTaskQueue.poll();
         if (worker != null) {
             worker.setActualTask(runnable);
+        } else {
+            worker = new Worker(runnable);
         }
-        worker = new Worker(runnable);
-        boolean shouldRun = true;
-        lock.lock();
-        if (workers.size() >= coreSize) {
-            shouldRun = false;
-            // todo 放入等待队列
-            if (idleQueue.size() >= queueSize) {
-                // todo 执行拒绝策略
-                System.out.println("执行了拒绝策略[" + (++rejectNum) + "]");
-            } else {
-                idleQueue.add(worker);
-            }
+
+        boolean addedWork = addWork(worker);
+        if (addedWork){
+            shouldRun = true;
+        }else{
+            runnable.run();
         }
-        workers.add(worker);
         lock.unlock();
+
         if (shouldRun) {
             worker.start();
         }
+    }
+
+    private boolean addWork(Worker worker) {
+        int count = workerCount.get();
+
+        if (workers.size() >= coreSize) {
+            return false;
+        }
+        int curCount;
+        while ((curCount = workerCount.incrementAndGet()) == count) {
+            count = workerCount.get();
+            if (curCount >= coreSize){
+                return false;
+            }
+        }
+        workers.add(worker);
+        return true;
     }
 
 
@@ -94,7 +108,7 @@ public class ThreadPool implements Executor {
 
         public Worker(Runnable actualTask) {
             this.actualTask = actualTask;
-            this.thread = threadFactory.newThread(this, ++completedNum);
+            this.thread = threadFactory.newThread(this, completedNum);
         }
 
         private void start() {
@@ -117,16 +131,16 @@ public class ThreadPool implements Executor {
             runAfter();
         }
 
-        private void runBefore() {
-            workerCount.incrementAndGet();
-            System.out.println("[" + Thread.currentThread().getName() + "  " + LocalDateTime.now() + "]:" + (workerCount.get() + 1) + "开始执行");
-        }
+        private void runBefore() {}
 
         private void runAfter() {
-            workerCount.decrementAndGet();
-            System.out.println("[" + Thread.currentThread().getName() + "  " + LocalDateTime.now()  + "]:" + (workerCount.get() + 1) + "执行完成");
-            emptyTaskQueue.add(this);
+            System.out.println("[" + Thread.currentThread().getName() + "  " + LocalDateTime.now() + "]:" + (workerCount.get() + 1) + "执行完成");
             workers.remove(this);
+            System.out.println("工作线程数量： " + workers.size());
+//            completedNum++;
+            System.out.println("执行完成的队列数量：[" + emptyTaskQueue.size() + "]");
+            thread.interrupt();
+            emptyTaskQueue.add(this);
         }
 
         public void setActualTask(Runnable actualTask) {
