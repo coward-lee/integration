@@ -2,8 +2,8 @@ package org.lee.study.thread.pool;
 
 
 public class ThreadFactory{
-
-    public Thread newThread(Runnable r, long size) {
-        return new Thread(r, "lee-thread-pool-"+size);
+    private static int count = 0;
+    public static Thread newThread(Runnable r) {
+        return new Thread(r, "lee-thread-pool-"+ ++count);
     }
 }

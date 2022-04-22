@@ -1,31 +1,35 @@
 package org.lee.study.thread.pool;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.AbstractQueue;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 
-public class ThreadPool implements Executor {
-    private final Lock lock = new ReentrantLock();
-    private final ThreadFactory threadFactory = new ThreadFactory();
-    private final AtomicInteger workerCount = new AtomicInteger(0);
-    private long completedNum = 1;
-    private long rejectNum = 0;
 
-    private final List<Worker> workers = new LinkedList<>();
+public class ThreadPool implements Executor {
+
+    private final Lock lock = new ReentrantLock();
+    private final AtomicInteger workerCount = new AtomicInteger(0);
+
+
+    private final AtomicInteger compeletedTaskCount = new AtomicInteger(0);
+
+
+    private List<Task> workers;
     // 核心线程
     private final Integer coreSize;
     // 线程队列数量
     private final Integer queueSize;
     // 线程队列
-    private final AbstractQueue<Worker> idleQueue = new LinkedBlockingQueue<>();
-    private final AbstractQueue<Worker> emptyTaskQueue = new LinkedBlockingQueue<>();
+    private final AbstractQueue<Task> idleWorkers = new LinkedBlockingQueue<>();
+
+    private final BlockingQueue<Runnable> newTasks = new ArrayBlockingQueue<>(32);
 
     public ThreadPool() {
         coreSize = 1;
@@ -43,10 +47,12 @@ public class ThreadPool implements Executor {
         this.coreSize = coreSize;
         this.queueSize = queueSize;
         init();
+
     }
 
     private void init() {
-
+        workers = new ArrayList<>(coreSize);
+        System.out.println("线程初始化完成，核心线程数量：" + coreSize + "  线程队列" + queueSize);
     }
 
 
@@ -62,28 +68,39 @@ public class ThreadPool implements Executor {
 
     private void doExecute(Runnable runnable) {
         boolean shouldRun = false;
-        lock.lock();
-        Worker worker = emptyTaskQueue.poll();
-        if (worker != null) {
-            worker.setActualTask(runnable);
-        } else {
-            worker = new Worker(runnable);
-        }
 
-        boolean addedWork = addWork(worker);
-        if (addedWork){
-            shouldRun = true;
-        }else{
-            runnable.run();
+        lock.lock();
+        Task worker = idleWorkers.poll();
+
+        try {
+            if (worker != null) {
+                newTasks.put(runnable);
+            } else {
+                worker = new Task(runnable, this);
+            }
+
+            boolean addedWork = addWork(worker);
+            if (addedWork) {
+                shouldRun = true;
+            } else {
+                System.out.println("被拒绝了嘛");
+                newTasks.put(runnable);
+            }
+            if (shouldRun) {
+                workers.add(worker);
+            }
+            lock.unlock();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Thread.currentThread().interrupt();
         }
-        lock.unlock();
 
         if (shouldRun) {
             worker.start();
         }
     }
 
-    private boolean addWork(Worker worker) {
+    private boolean addWork(Task worker) {
         int count = workerCount.get();
 
         if (workers.size() >= coreSize) {
@@ -92,7 +109,7 @@ public class ThreadPool implements Executor {
         int curCount;
         while ((curCount = workerCount.incrementAndGet()) == count) {
             count = workerCount.get();
-            if (curCount >= coreSize){
+            if (curCount >= coreSize) {
                 return false;
             }
         }
@@ -100,52 +117,27 @@ public class ThreadPool implements Executor {
         return true;
     }
 
-
-    class Worker implements Runnable, Serializable {
-
-        private Runnable actualTask;
-        private final Thread thread;
-
-        public Worker(Runnable actualTask) {
-            this.actualTask = actualTask;
-            this.thread = threadFactory.newThread(this, completedNum);
-        }
-
-        private void start() {
-            if (thread != null) {
-                thread.start();
-                return;
-            }
-            throw new RuntimeException("worker has not thread to use");
-        }
-
-
-        @Override
-        public void run() {
-            run(actualTask);
-        }
-
-        private void run(Runnable runnable) {
-            runBefore();
-            runnable.run();
-            runAfter();
-        }
-
-        private void runBefore() {}
-
-        private void runAfter() {
-            System.out.println("[" + Thread.currentThread().getName() + "  " + LocalDateTime.now() + "]:" + (workerCount.get() + 1) + "执行完成");
-            workers.remove(this);
-            System.out.println("工作线程数量： " + workers.size());
-//            completedNum++;
-            System.out.println("执行完成的队列数量：[" + emptyTaskQueue.size() + "]");
-            thread.interrupt();
-            emptyTaskQueue.add(this);
-        }
-
-        public void setActualTask(Runnable actualTask) {
-            this.actualTask = actualTask;
-        }
+    public Lock getLock() {
+        return lock;
     }
 
+    public AtomicInteger getWorkerCount() {
+        return workerCount;
+    }
+
+    public List<Task> getWorkers() {
+        return workers;
+    }
+
+    public AbstractQueue<Task> getIdleWorkers() {
+        return idleWorkers;
+    }
+
+    public BlockingQueue<Runnable> getNewTasks() {
+        return newTasks;
+    }
+
+    public AtomicInteger getCompeletedTaskCount() {
+        return compeletedTaskCount;
+    }
 }
