@@ -32,7 +32,7 @@ public class CustomConfigurationFactory extends ConfigurationFactory {
         builder.add(appenderBuilder)
                 .add(builder.newLogger("org.apache.logging.log4j", Level.INFO)
                         .add(builder.newAppenderRef("Stdout"))
-                        .addAttribute("additivity", false))
+                        .addAttribute("additivity", true))
                 .add(builder.newRootLogger(Level.INFO).add(builder.newAppenderRef("Stdout")));
         builder.add(appenderBuilder)
                 .add(builder.newLogger("org.lee",Level.INFO));

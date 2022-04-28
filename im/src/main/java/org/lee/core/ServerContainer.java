@@ -6,14 +6,21 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lee.domain.MessageProto;
 import org.lee.domain.MessageType;
+import org.lee.event.Node;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ServerContainer {
     public final static Map<String, Channel> clientMap = new ConcurrentHashMap<>(16);
     public final static Map<String, Channel> serverMap = new ConcurrentHashMap<>(16);
+
+
     private final static Logger log = LogManager.getLogger(ServerContainer.class);
+    private static int serverSeq = 0;
+
 
     public static Channel queryClient(MessageProto.Message message) {
         if (message == null || StringUtil.isNullOrEmpty(message.getTo())) {
@@ -30,4 +37,21 @@ public class ServerContainer {
         clientMap.put(message.getFrom(), channel);
         log.info("【{}】登录进来了",message.getFrom());
     }
+
+    public static Channel queryServerNode(String addr){
+        return serverMap.get(addr);
+    }
+
+    public static void setServerSeq(int serverSeq1) {
+        serverSeq = serverSeq1;
+    }
+
+    public static int getServerSeq() {
+        return serverSeq;
+    }
+
+    public static int getCode(String nodeName){
+        return nodeName.hashCode()%2;
+    }
+
 }

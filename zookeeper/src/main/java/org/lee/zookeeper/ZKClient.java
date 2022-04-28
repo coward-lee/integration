@@ -95,9 +95,9 @@ class ZKClient {
                 String root = "/servers/";
                 List<String> children = zkClient.getChildren(root, true);
                 System.out.println("================================================================================================");
-                children.forEach(server->{
+                children.forEach(server -> {
                     try {
-                        zkClient.getData(root+server, false, null);
+                        zkClient.getData(root + server, false, null);
                     } catch (KeeperException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {
@@ -110,6 +110,25 @@ class ZKClient {
                 e.printStackTrace();
             }
         });
+    }
+
+    /**
+     * 更新节点
+     */
+    @Test
+    void test_Set() throws InterruptedException, KeeperException {
+        connectSignal.await();
+//        zkClien
+        Stat stat = zkClient.setData("/lee/lee", "xxxx".getBytes(StandardCharsets.UTF_8), -1);
+        System.out.println("stat:" + stat.getAversion());
+        stat = zkClient.setData("/lee/lee", "asdx".getBytes(StandardCharsets.UTF_8), -1);
+
+        zkClient.getChildren("/lee/lee", false).forEach(System.out::println);
+    }
+
+    @Test
+    void test_set(){
+
     }
 
 }

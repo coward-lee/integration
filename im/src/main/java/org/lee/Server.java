@@ -12,6 +12,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
+import org.lee.core.Startup;
 import org.lee.decoder.IMProtoDecoder;
 import org.lee.decoder.IMServerExchangeHandler;
 import org.lee.decoder.MessageInHandler;
@@ -25,11 +26,12 @@ public class Server {
 
     private final Logger log = LogManager.getLogger(Server.class);
 
-    private final Integer port;
+    private Integer port;
 
     public Server(Integer port) {
         this.port = port;
     }
+
 
     public void runServer() {
         ServerBootstrap server = new ServerBootstrap();
@@ -65,6 +67,10 @@ public class Server {
             Thread.currentThread().interrupt();
         }
     }
+    public void  setPort(Integer port){
+        this.port = port;
+    }
+
 
 
     public static void run(Integer port) {
@@ -76,10 +82,19 @@ public class Server {
 
 
     public static void main(String[] args) {
-        Integer port = Main.port;
         CustomConfigurationFactory customConfigurationFactory = new CustomConfigurationFactory();
         Configurator.initialize(customConfigurationFactory.getConfiguration());
-        new Server(port).runServer();
+
+        Server server = new Server(0);
+        Integer port = server.parse(args);
+        server.setPort(port);
+
+        Startup.start(port+"", port);
+        server.runServer();
+    }
+
+    public  Integer parse(String[] args){
+        return Integer.valueOf(args[0]);
     }
 
 }

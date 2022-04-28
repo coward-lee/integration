@@ -5,14 +5,16 @@ import io.netty.handler.codec.MessageToMessageDecoder;
 import org.lee.core.ServerContainer;
 import org.lee.domain.MessageProto.Message;
 import org.lee.domain.MessageType;
+import org.lee.event.Register;
 
 import java.util.List;
 
 public class RegisterHandler extends MessageToMessageDecoder<Message> {
+    Register register = new Register();
     @Override
     protected void decode(ChannelHandlerContext ctx, Message msg, List<Object> out) throws Exception {
         if (MessageType.isRegister(msg.getHeader())){
-            ServerContainer.registerClient(msg, ctx.channel());
+            register.doRegister(msg,ctx.channel());
             return;
         }
         out.add(msg);
