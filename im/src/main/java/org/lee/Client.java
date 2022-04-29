@@ -53,7 +53,7 @@ public class Client {
                     ch.pipeline().addLast(new IMProtoEncoder());
                 }
             });
-            ChannelFuture connect = b.connect();
+            ChannelFuture connect = b.connect().sync();
             connect.addListener(f->{
                 if (f.isSuccess()){
                     Channel channel = connect.channel();

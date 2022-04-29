@@ -35,11 +35,15 @@ public class ServerContainer {
             throw new IllegalArgumentException("register error," + message.getHeader());
         }
         clientMap.put(message.getFrom(), channel);
-        log.info("【{}】登录进来了",message.getFrom());
+        log.info("【{}】登录进来了", message.getFrom());
     }
 
-    public static Channel queryServerNode(String addr){
+    public static Channel queryServerNode(String addr) {
         return serverMap.get(addr);
+    }
+
+    public static void registerServer(String addr, Channel channel) {
+        serverMap.put(addr, channel);
     }
 
     public static void setServerSeq(int serverSeq1) {
@@ -50,8 +54,8 @@ public class ServerContainer {
         return serverSeq;
     }
 
-    public static int getCode(String nodeName){
-        return nodeName.hashCode()%2;
+    public static int getCode(String nodeName) {
+        return Math.abs(nodeName.hashCode() % 2);
     }
 
 }

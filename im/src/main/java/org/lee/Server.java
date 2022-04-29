@@ -12,19 +12,21 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
+import org.lee.core.ServerContainer;
 import org.lee.core.Startup;
 import org.lee.decoder.IMProtoDecoder;
 import org.lee.decoder.IMServerExchangeHandler;
 import org.lee.decoder.MessageInHandler;
 import org.lee.decoder.RegisterHandler;
 import org.lee.encoder.IMProtoEncoder;
+import org.lee.event.RegisterToOtherServer;
 import org.lee.util.CustomConfigurationFactory;
 
 
 public class Server {
 
 
-    private final Logger log = LogManager.getLogger(Server.class);
+    private static final Logger log = LogManager.getLogger(Server.class);
 
     private Integer port;
 
@@ -90,6 +92,19 @@ public class Server {
         server.setPort(port);
 
         Startup.start(port+"", port);
+        new Thread(()->{
+            // 服务器注册到服务器
+            RegisterToOtherServer register = new RegisterToOtherServer("localhost", port == 80? 81:80);
+            try {
+                register.runClientForServer();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+
+
+        log.info("server seq:{}", ServerContainer.getServerSeq());
         server.runServer();
     }
 

@@ -10,5 +10,6 @@ public class Startup {
         zkClient.createBase();
         zkClient.createNode(nodeName);
         zkClient.setData(nodeName, data);
+        ServerContainer.setServerSeq(data == 80 ? 0 : 1);
     }
 }
