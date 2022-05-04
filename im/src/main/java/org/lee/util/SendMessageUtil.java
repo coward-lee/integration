@@ -48,6 +48,8 @@ public class SendMessageUtil {
 
     public static Message generateRegisterMessage(String client) {
         return Message.newBuilder()
+                .setContent("")
+                .setTo("server")
                 .setHeader(MessageType.REGISTER.getVal())
                 .setFrom(client)
                 .build();

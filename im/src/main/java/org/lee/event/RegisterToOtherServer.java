@@ -9,6 +9,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import org.lee.decoder.IMProtoDecoder;
+import org.lee.decoder.IMServerExchangeHandler;
 import org.lee.decoder.MessageInHandler;
 import org.lee.decoder.RegisterHandler;
 import org.lee.domain.MessageProto;
@@ -34,6 +35,7 @@ public class RegisterToOtherServer {
                 ch.pipeline().addLast(new IMProtoDecoder());
                 ch.pipeline().addLast(new MessageInHandler());
                 ch.pipeline().addLast(new RegisterHandler());
+                ch.pipeline().addLast(new IMServerExchangeHandler());
 
                 ch.pipeline().addLast(new IMProtoEncoder());
             }
@@ -54,7 +56,7 @@ public class RegisterToOtherServer {
                         .setTo("server")
                         .setContent("register to server")
                         .setHeader(MessageType.JOIN.getVal())
-                        .setFrom("server:"+port)
+                        .setFrom(port+"")
                         .build();
                 connect.channel().writeAndFlush(message);
 

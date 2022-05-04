@@ -21,7 +21,7 @@ import java.io.IOException;
 
 
 public class Client {
-    private final Logger log = LogManager.getLogger(Client.class);
+    private static final Logger log = LogManager.getLogger(Client.class);
 
     private final Integer port;
     private final String addr;
@@ -54,8 +54,8 @@ public class Client {
                 }
             });
             ChannelFuture connect = b.connect().sync();
-            connect.addListener(f->{
-                if (f.isSuccess()){
+            connect.addListener(f -> {
+                if (f.isSuccess()) {
                     Channel channel = connect.channel();
                     this.channel = channel;
                     channel.writeAndFlush("connect success");
@@ -64,7 +64,7 @@ public class Client {
                     // 开启输入监听
                     SendMessageUtil.startInputListening(channel, clientId);
                     log.info("连接成功");
-                }else{
+                } else {
                     log.info("连接失败");
                 }
             });
@@ -76,36 +76,36 @@ public class Client {
             Thread.currentThread().interrupt();
         }
     }
-    public void sendMessage(MessageProto.Message message){
-        if (channel!=null){
+
+    public void sendMessage(MessageProto.Message message) {
+        if (channel != null) {
             channel.writeAndFlush(message);
         }
     }
 
-    public void close(){
+    public void close() {
         if (channel != null) {
             channel.close();
         }
     }
 
-    public void register(Channel channel){
+    public void register(Channel channel) {
         MessageProto.Message message = SendMessageUtil.generateRegisterMessage(clientId);
         channel.writeAndFlush(message);
     }
 
     public static void run(String ip, Integer port, String clientId) throws IOException {
-        for (int i = 0; i < 100; i++) {
-            String from = "args[0]"+i;
-            Client client = new Client(port, ip, clientId);
-            client.runClient();
-            client.sendMessage(MessageProto.Message.newBuilder()
-                            .setTo("args[0]"+(i-1))
-                            .setFrom(from)
-                            .setHeader(MessageType.SEND.getVal())
-                            .setContent("发送一个消息"+i)
-                    .build());
-            client.close();
-        }
+        log.info("启动成功, clientId:{}", clientId);
+
+        Client client = new Client(port, ip, clientId);
+        client.runClient();
+//        client.sendMessage(MessageProto.Message.newBuilder()
+//                .setTo("server")
+//                .setFrom(clientId)
+//                .setHeader(MessageType.SEND.getVal())
+//                .setContent("发送一个消息" + i)
+//                .build());
+
     }
 
     public static void main(String[] args) throws IOException {
@@ -113,24 +113,32 @@ public class Client {
 
         CustomConfigurationFactory customConfigurationFactory = new CustomConfigurationFactory();
         Configurator.initialize(customConfigurationFactory.getConfiguration());
+        String clientId = args[0];
+        Integer port = Integer.valueOf(Main.port);
+        String ip = "localhost";
+
+        run(ip, port, clientId);
+    }
+
+    public static void testRegister() {
 
         Integer port = Integer.valueOf(Main.port);
         String ip = "localhost";
         for (int i = 0; i < 100; i++) {
-            String from = "args[0]"+i;
+            String from = "args[0]" + i;
             int finalI = i;
-            new Thread(()->{
+            new Thread(() -> {
 
                 Client client = new Client(port, ip, from);
                 client.runClient();
                 client.sendMessage(MessageProto.Message.newBuilder()
-                        .setTo("args[0]"+(finalI -1))
+                        .setTo("args[0]" + (finalI - 1))
                         .setFrom(from)
                         .setHeader(MessageType.SEND.getVal())
-                        .setContent("发送一个消息"+ finalI)
+                        .setContent("发送一个消息" + finalI)
                         .build());
                 client.close();
-            }, "线程【"+i+"】").start();
+            }, "线程【" + i + "】").start();
         }
     }
 }

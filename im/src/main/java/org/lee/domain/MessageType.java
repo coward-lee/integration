@@ -5,6 +5,7 @@ import org.lee.util.StringUtil;
 public enum MessageType {
     REGISTER("register"),
     SEND("send"),
+    EXCHANGE_SEND("exchange_send"),
     REPLAY("replay"),
     PROPOSE("propose"),
     ACCEPT("accept"),

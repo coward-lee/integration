@@ -1,42 +1,39 @@
 package org.lee.event;
 
 import io.netty.channel.Channel;
-import org.lee.core.NodesContainer;
 import org.lee.core.ServerContainer;
 import org.lee.domain.MessageProto.Message;
-import org.lee.zk.ZkClient;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import org.lee.domain.MessageType;
+import org.lee.util.PrintUtil;
 
 public class Exchanger {
-    ZkClient zkClient = ZkClient.getZkClient();
 
-    public void doExchange(Message msg){
-        String from = msg.getFrom();
-        int key = from.hashCode() % 4;
-        if (key == ServerContainer.getServerSeq()){
-            Channel channel = ServerContainer.queryClient(msg);
-            if (channel != null){
-                channel.writeAndFlush(msg);
-                return;
+    public void doExchange(Message msg) {
+        try {
+            String to = msg.getTo();
+            int key = ServerContainer.getCode(to);
+            if (key == ServerContainer.getServerSeq()) {
+                Channel channel = ServerContainer.queryClient(msg);
+                if (channel != null) {
+                    channel.writeAndFlush(msg);
+                    return;
+                }
+            } else {
+                System.out.print("消息转发:  ");
+                Channel otherServerChannel = ServerContainer.serverMap.values().stream().toList().get(0);
+                Message newMsg = Message.newBuilder()
+                        .setHeader(MessageType.EXCHANGE_SEND.getVal())
+                        .setFrom(msg.getFrom())
+                        .setContent(msg.getContent())
+                        .setId(msg.getId())
+                        .setTo(msg.getTo())
+                        .build();
+
+                PrintUtil.printProtoObject(newMsg);
+                otherServerChannel.writeAndFlush(newMsg);
             }
-        }else{
-            List<String> allNode = zkClient.getAllNode();
-            Map<Integer, Node> nodes = allNode.stream().map(node -> {
-                String data = zkClient.getData(node);
-                return new Node(node, Integer.valueOf(data));
-            }).collect(Collectors.toMap(Node::getNodeKey, Function.identity()));
-
-            NodesContainer.nodes.putAll(nodes);
-            Node node = NodesContainer.getNode(key);
-            Channel channel = ServerContainer.queryServerNode(node.getNodeName());
-            channel.writeAndFlush(msg);
+        }catch (Exception e){
+            e.printStackTrace();
         }
-
-
     }
 }

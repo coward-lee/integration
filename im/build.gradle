@@ -55,8 +55,8 @@ sourceSets {
 // 配置 protoc的生成exe文件可以使用远程的
 protobuf {
     protoc {
-//        path = '/Users/l/program/protoc-3.20.0-osx-aarch_64/bin/protoc'
-        path = 'D:\\software\\protoc-3.19.1-win64\\bin\\protoc'
+        path = '/Users/l/program/protoc-3.20.0-osx-aarch_64/bin/protoc'
+//        path = 'D:\\software\\protoc-3.19.1-win64\\bin\\protoc'
     }
     // 配置生成文件的开始路径$projectDir表示module的基本路径
     generatedFilesBaseDir = "$projectDir/src/"

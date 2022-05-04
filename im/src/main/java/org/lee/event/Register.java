@@ -20,7 +20,6 @@ public class Register {
             ServerContainer.registerClient(message, channel);
         }else{
             System.out.println("注册到了其他的服务器");
-//            String nodeName = NodesContainer.getNode(serverSeq).getNodeName();
             Channel otherChannel = ServerContainer.serverMap.values().stream().toList().get(0);
             otherChannel.writeAndFlush(message);
         }

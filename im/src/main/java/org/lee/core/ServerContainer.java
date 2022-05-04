@@ -38,12 +38,12 @@ public class ServerContainer {
         log.info("【{}】登录进来了", message.getFrom());
     }
 
-    public static Channel queryServerNode(String addr) {
-        return serverMap.get(addr);
+    public static Channel queryServerNode(String nodeName) {
+        return serverMap.get(nodeName);
     }
 
-    public static void registerServer(String addr, Channel channel) {
-        serverMap.put(addr, channel);
+    public static void registerServer(String nodeName, Channel channel) {
+        serverMap.put(nodeName, channel);
     }
 
     public static void setServerSeq(int serverSeq1) {
