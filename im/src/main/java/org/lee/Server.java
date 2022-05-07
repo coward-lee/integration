@@ -22,6 +22,9 @@ import org.lee.encoder.IMProtoEncoder;
 import org.lee.event.RegisterToOtherServer;
 import org.lee.util.CustomConfigurationFactory;
 
+import static org.lee.core.Config.port0;
+import static org.lee.core.Config.port1;
+
 
 public class Server {
 
@@ -69,10 +72,10 @@ public class Server {
             Thread.currentThread().interrupt();
         }
     }
-    public void  setPort(Integer port){
+
+    public void setPort(Integer port) {
         this.port = port;
     }
-
 
 
     public static void run(Integer port) {
@@ -80,7 +83,6 @@ public class Server {
         Configurator.initialize(customConfigurationFactory.getConfiguration());
         new Server(port).runServer();
     }
-
 
 
     public static void main(String[] args) {
@@ -91,10 +93,10 @@ public class Server {
         Integer port = server.parse(args);
         server.setPort(port);
 
-        Startup.start(port+"", port);
-        new Thread(()->{
+        Startup.start(port + "", port);
+        new Thread(() -> {
             // 服务器注册到服务器
-            RegisterToOtherServer register = new RegisterToOtherServer("localhost", port == 80? 81:80);
+            RegisterToOtherServer register = new RegisterToOtherServer("localhost", port.equals(port1) ? port0 : port1);
             try {
                 register.runClientForServer();
             } catch (InterruptedException e) {
@@ -103,12 +105,11 @@ public class Server {
         }).start();
 
 
-
         log.info("server seq:{}", ServerContainer.getServerSeq());
         server.runServer();
     }
 
-    public  Integer parse(String[] args){
+    public Integer parse(String[] args) {
         return Integer.valueOf(args[0]);
     }
 

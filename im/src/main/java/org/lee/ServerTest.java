@@ -13,6 +13,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static org.lee.core.Config.port1;
+
 public class ServerTest {
     private final Logger log = LogManager.getLogger(Server.class);
 
@@ -98,7 +100,7 @@ public class ServerTest {
 //            }
 //        }).start();
 
-        serverTest.runClient(81);
+        serverTest.runClient(port1);
 //        serverTest.runServer(port);
     }
 

@@ -18,10 +18,21 @@ import org.lee.util.CustomConfigurationFactory;
 import org.lee.util.SendMessageUtil;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.lee.core.Config.port0;
+import static org.lee.core.Config.port1;
 
 
 public class Client {
     private static final Logger log = LogManager.getLogger(Client.class);
+
+    private static final Map<String, Integer> name2ServerPort = new HashMap<>();
+    static {
+        name2ServerPort.put("c0", port0);
+        name2ServerPort.put("c1", port1);
+    }
 
     private final Integer port;
     private final String addr;
@@ -33,7 +44,7 @@ public class Client {
         this.clientId = clientId;
     }
 
-    private Bootstrap b = new Bootstrap();
+    private final Bootstrap b = new Bootstrap();
     private Channel channel = null;
 
     public void runClient() {
@@ -114,7 +125,7 @@ public class Client {
         CustomConfigurationFactory customConfigurationFactory = new CustomConfigurationFactory();
         Configurator.initialize(customConfigurationFactory.getConfiguration());
         String clientId = args[0];
-        Integer port = Integer.valueOf(Main.port);
+        Integer port = name2ServerPort.get(clientId);
         String ip = "localhost";
 
         run(ip, port, clientId);

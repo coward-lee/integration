@@ -55,6 +55,12 @@ public class ServerContainer {
     }
 
     public static int getCode(String nodeName) {
+        if (nodeName.equalsIgnoreCase("c1")){
+            return 1;
+        }
+        if (nodeName.equalsIgnoreCase("c0")){
+            return 0;
+        }
         return Math.abs(nodeName.hashCode() % 2);
     }
 
