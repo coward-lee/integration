@@ -37,11 +37,13 @@ public class Client {
     private final Integer port;
     private final String addr;
     private final String clientId;
+    private SendMessageUtil sendMessage;
 
     public Client(Integer port, String addr, String clientId) {
         this.port = port;
         this.addr = addr;
         this.clientId = clientId;
+        this.sendMessage = new SendMessageUtil(clientId);
     }
 
     private final Bootstrap b = new Bootstrap();
@@ -73,7 +75,8 @@ public class Client {
                     // 注册自己的channel到服务器
                     register(channel);
                     // 开启输入监听
-                    SendMessageUtil.startInputListening(channel, clientId);
+                    sendMessage.setChannel(channel);
+                    sendMessage.startInputListening();
                     log.info("连接成功");
                 } else {
                     log.info("连接失败");
@@ -107,16 +110,8 @@ public class Client {
 
     public static void run(String ip, Integer port, String clientId) throws IOException {
         log.info("启动成功, clientId:{}", clientId);
-
         Client client = new Client(port, ip, clientId);
         client.runClient();
-//        client.sendMessage(MessageProto.Message.newBuilder()
-//                .setTo("server")
-//                .setFrom(clientId)
-//                .setHeader(MessageType.SEND.getVal())
-//                .setContent("发送一个消息" + i)
-//                .build());
-
     }
 
     public static void main(String[] args) throws IOException {
@@ -127,7 +122,6 @@ public class Client {
         String clientId = args[0];
         Integer port = name2ServerPort.get(clientId);
         String ip = "localhost";
-
         run(ip, port, clientId);
     }
 

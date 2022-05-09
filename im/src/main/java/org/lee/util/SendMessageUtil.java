@@ -10,7 +10,19 @@ import java.util.UUID;
 
 public class SendMessageUtil {
 
-    public static void startInputListening(Channel channel, String from) {
+    Channel channel;
+    String from;
+
+    public SendMessageUtil(String from) {
+        this.from = from;
+    }
+
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+    }
+
+    public void startInputListening() {
+        this.channel = channel;
         new Thread(() -> {
             final Logger log = LogManager.getLogger(MessageUtil.class);
 
@@ -44,6 +56,18 @@ public class SendMessageUtil {
                 Thread.currentThread().interrupt();
             }
         }).start();
+    }
+
+    public void sendMessage(String to, String content){
+        channel.writeAndFlush(
+                Message.newBuilder()
+                        .setId(UUID.randomUUID().toString())
+                        .setTo(to)
+                        .setContent(content)
+                        .setFrom(from)
+                        .setHeader("message")
+                        .build()
+        );
     }
 
     public static Message generateRegisterMessage(String client) {

@@ -119,6 +119,7 @@ public class ReactorMain {
     }
 
     /**
+     *  同步地， 逐个地 产生值的方法，
      * generate of flux 方法测试
      * <T, S> Flux<T> generate(Callable<S> stateSupplier, BiFunction<S, SynchronousSink<T>, S> generator)
      * <T, S> Flux<T> generate(Callable<S> stateSupplier, BiFunction<S, SynchronousSink<T>, S> generator, Consumer<? super S> stateConsumer)
@@ -148,7 +149,7 @@ public class ReactorMain {
 
     /**
      * create of flux 方法测试
-     *
+     * create 没有实现出来效果
      * <T> Flux<T> create(Consumer<? super FluxSink<T>> emitter)
      */
     @Test
