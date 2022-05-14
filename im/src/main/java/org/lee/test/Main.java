@@ -1,6 +1,8 @@
-package org.lee;
+package org.lee.test;
 
 import org.apache.logging.log4j.core.config.Configurator;
+import org.lee.Client;
+import org.lee.Server;
 import org.lee.util.CustomConfigurationFactory;
 
 import java.util.HashMap;

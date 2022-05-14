@@ -115,7 +115,6 @@ public class Client {
     }
 
     public static void main(String[] args) throws IOException {
-        Main.parseArgs(args);
 
         CustomConfigurationFactory customConfigurationFactory = new CustomConfigurationFactory();
         Configurator.initialize(customConfigurationFactory.getConfiguration());
@@ -127,7 +126,7 @@ public class Client {
 
     public static void testRegister() {
 
-        Integer port = Integer.valueOf(Main.port);
+        Integer port = Integer.valueOf(80);
         String ip = "localhost";
         for (int i = 0; i < 100; i++) {
             String from = "args[0]" + i;
