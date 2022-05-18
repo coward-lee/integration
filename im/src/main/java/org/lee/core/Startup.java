@@ -9,8 +9,6 @@ import static org.lee.core.Config.port0;
 import static org.lee.core.Config.port1;
 
 public class Startup {
-    String name1 = "node1";
-    static ZkClient zkClient = ZkClient.getZkClient();
 
     static Map<Integer, Integer> portToSeq = new HashMap<>();
     static {
@@ -19,9 +17,6 @@ public class Startup {
     }
 
     public static void start(String nodeName, Integer port) {
-        zkClient.createBase();
-        zkClient.createNode(nodeName);
-        zkClient.setData(nodeName, port);
         ServerContainer.setServerSeq(portToSeq.get(port));
     }
 }
