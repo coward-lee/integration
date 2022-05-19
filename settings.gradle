@@ -31,4 +31,8 @@ include 'im:im-server'
 findProject(':im:im-server')?.name = 'im-server'
 include 'im:im-client'
 findProject(':im:im-client')?.name = 'im-client'
+include 'im:untitled'
+findProject(':im:untitled')?.name = 'untitled'
+include 'im:im-client'
+findProject(':im:im-client')?.name = 'im-client'
 
