@@ -35,4 +35,6 @@ include 'im:untitled'
 findProject(':im:untitled')?.name = 'untitled'
 include 'im:im-client'
 findProject(':im:im-client')?.name = 'im-client'
+include 'im:im-netty:im-netty'
+findProject(':im:im-netty:im-netty')?.name = 'im-netty'
 
