@@ -1,10 +1,11 @@
 package org.lee.study.thread.pool;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.CompletableFuture;
+import org.lee.study.thread.pool.async.Callable;
+import org.lee.study.thread.pool.async.Future;
+
 import java.util.function.Supplier;
 
 public interface Executor {
-    <T> Future<T> submit(Supplier<T> task);
+    <T> Future<T> submit(Callable<T> task);
     void execute(Runnable runnable);
 }
