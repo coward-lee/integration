@@ -177,6 +177,8 @@ jvm参数分为标准参数、扩展参数和不稳定参数。
  
 
 如果想查看具体的参数的含义，最好的方法就是看官方文档，或者直接man java一下，也可以参考这篇文章《Java 命令行运行参数》
+（4）spring boot 参数
+-- 开头，这个是 spring boot 使用的
 
  
 
@@ -190,3 +192,4 @@ java [-options] -jar jarfile [args...]
            (to execute a jar file)
 所以，我前面说的严格意义上全都是不对的，java中的命令行参数只有option 和 args两类。我说的第一类对应args，后面两类都是属于option的，那才是jvm的参数。
 </pre>
+

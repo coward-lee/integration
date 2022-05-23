@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'scala'
 }
 
 group 'org.lee.study'
@@ -11,7 +12,6 @@ repositories {
         url 'http://maven.aliyun.com/nexus/content/groups/public/'
     }
     mavenCentral()
-    mavenCentral()
 }
 
 dependencies {
@@ -21,8 +21,27 @@ dependencies {
     implementation 'com.typesafe.akka:akka-stream_2.13:2.6.18'
     implementation 'com.lightbend.akka:akka-stream-alpakka-slick_2.13:3.0.4'
 
+    implementation 'org.scala-lang:scala-library:2.13.8'
+}
 
 
+sourceSets {
+    main() {
+        scala{
+            srcDirs = ['src/main/scala', 'src/main/java']
+        }
+        java {
+            srcDirs = []
+        }
+    }
+//    test {
+//        scala{
+//            srcDirs = ['src/test/java', 'src/test/scala']
+//        }
+//        java {
+//            srcDirs = []
+//        }
+//    }
 }
 
 test {
