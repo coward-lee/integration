@@ -15,10 +15,10 @@
 SELECT * FROM tbl_name;
 SELECT * FROM tbl_name WHERE (col1 = ? or col2 = ?) and col3 = ?;
 SELECT * FROM tbl_name WHERE col1 = ? ORDER BY col2 DESC LIMIT ?;
-SELECT COUNT(*), SUM(col1), MIN(col1), MAX(col1), AVG(col1) FROM tbl_name;
+SELECT COUNT(*), SUM(col1), MIN(col1), MAX(col1), AVG(col1)
+FROM tbl_name
 WHERE col1 = ?;
-SELECT COUNT(col1) FROM tbl_name WHERE col2 = ? GROUP BY col1 ORDER;
-BY col3 DESC LIMIT ?, ?;
+SELECT COUNT(col1) FROM tbl_name WHERE col2 = ? GROUP BY col1 ORDER BY col3 DESC LIMIT ?, ?;
 INSERT INTO tbl_name (col1, col2,…) VALUES (?, ?, ….);
 INSERT INTO tbl_name VALUES (?, ?,….);
 INSERT INTO tbl_name (col1, col2, …) VALUES (?, ?, ….), (?, ?, ….);
@@ -34,6 +34,7 @@ DROP INDEX idx_name;
 SELECT DISTINCT * FROM tbl_name WHERE col1 = ?;
 SELECT COUNT(DISTINCT col1) FROM tbl_name;
 ```
+## 分布式事务从xa 和 seata 中选取一个
 
 
 

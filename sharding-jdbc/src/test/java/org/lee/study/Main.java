@@ -9,10 +9,13 @@ import org.apache.shardingsphere.api.sharding.standard.PreciseShardingAlgorithm;
 import org.apache.shardingsphere.api.sharding.standard.PreciseShardingValue;
 import org.apache.shardingsphere.shardingjdbc.api.ShardingDataSourceFactory;
 import org.apache.shardingsphere.shardingjdbc.jdbc.core.datasource.ShardingDataSource;
+import org.apache.shardingsphere.transaction.core.TransactionType;
+import org.apache.shardingsphere.transaction.core.TransactionTypeHolder;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;
@@ -75,16 +78,20 @@ class Main {
 
     @Test
     void test_sharding_user() throws SQLException {
+        TransactionTypeHolder.set(TransactionType.LOCAL);
 
-        PreparedStatement preparedStatement = getShardingDataSource().getConnection().prepareStatement(" insert into user(id, name)" +
+        Connection connection = getShardingDataSource().getConnection();
+        connection.setAutoCommit(false);
+        PreparedStatement preparedStatement = connection.prepareStatement(" insert into user(id, name)" +
                 " values(?,'lee01'),(?,'lee01')," +
                 "(?,'lee02'),(?,'lee02')");
-        preparedStatement.setLong(1, 1L);
-        preparedStatement.setLong(2, 2L);
-        preparedStatement.setLong(3, 3L);
-        preparedStatement.setLong(4, 4L);
+        preparedStatement.setLong(1, 5L);
+        preparedStatement.setLong(2, 6L);
+        preparedStatement.setLong(3, 7L);
+        preparedStatement.setLong(4, 8L);
         preparedStatement.execute();
         preparedStatement.close();
+        connection.commit();
     }
 
     @Test
