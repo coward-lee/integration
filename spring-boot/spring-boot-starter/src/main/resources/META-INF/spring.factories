@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.lee.autoconfigure.TestAutoConfiguration
+#org.lee.autoconfigure.TestBeanAutoConfiguration

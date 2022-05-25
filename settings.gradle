@@ -37,4 +37,8 @@ include 'im:im-client'
 findProject(':im:im-client')?.name = 'im-client'
 include 'im:im-netty:im-netty'
 findProject(':im:im-netty:im-netty')?.name = 'im-netty'
+include 'spring-boot:spring-boot-starter'
+findProject(':spring-boot:spring-boot-starter')?.name = 'spring-boot-starter'
+include 'spring-boot:lee-spring-boot-starter-test'
+findProject(':spring-boot:lee-spring-boot-starter-test')?.name = 'lee-spring-boot-starter-test'
 
