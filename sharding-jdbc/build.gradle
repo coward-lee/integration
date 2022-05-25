@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group 'org.lee.study'
@@ -8,9 +9,21 @@ version 'unspecified'
 repositories {
     mavenCentral()
 }
+applicationDefaultJvmArgs = [
+        '--add-opens=java.base/java.lang=ALL-UNNAMED'
+]
+//task(
+//        args [ '--add-opens=java.base/java.lang=ALL-UNNAMED']
+//)
 
 dependencies {
+    implementation 'mysql:mysql-connector-java:8.0.28'
+    // 这个是 5.x后的写法 shardingsphere
+//    implementation 'org.apache.shardingsphere:shardingsphere-jdbc-core:4.1.1'
     implementation 'org.apache.shardingsphere:sharding-jdbc-core:4.1.1'
+// data source 的使用
+    implementation 'org.springframework:spring-jdbc:5.3.20'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
