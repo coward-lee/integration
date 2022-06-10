@@ -25,7 +25,7 @@ public class NormalServer {
 
     int port;
     public static Map<String, Channel> clients = null;
-    private final Logger log = LoggerFactory.getLogger(NormalServer.class);
+    public static final Logger log = LoggerFactory.getLogger(NormalServer.class);
 
     public NormalServer(int port) {
         this.port = port;
@@ -81,7 +81,7 @@ public class NormalServer {
 
         @Override
         protected void encode(ChannelHandlerContext ctx, Message msg, List<Object> out){
-            System.out.println("exchange  from : "+  msg.getFrom()+"，to : {}"+ msg.getTo());
+           log.info("exchange  from : "+  msg.getFrom()+"，to : {}"+ msg.getTo());
             out.add(msg);
         }
     }
@@ -118,7 +118,7 @@ public class NormalServer {
         }
     }
     public static void printMessage(Message message){
-        System.out.println(
+       log.info(
                 "收到了消息：header:"+message.getHeader()
                         +",content:"+message.getContent()
                         +",from:"+message.getFrom()

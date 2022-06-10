@@ -8,6 +8,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import org.apache.log4j.Logger;
 import org.lee.decoder.IMProtoDecoder;
 import org.lee.decoder.IMServerExchangeHandler;
 import org.lee.decoder.MessageInHandler;
@@ -18,6 +19,7 @@ import org.lee.encoder.IMProtoEncoder;
 
 public class RegisterToOtherServer {
 
+    private final Logger log = Logger.getLogger(RegisterToOtherServer.class);
     Bootstrap b;
     String addr;
     Integer port;
@@ -50,7 +52,7 @@ public class RegisterToOtherServer {
     public void runClientForServer() throws InterruptedException {
         while (true) {
             try {
-                System.out.println("准备注册到服务器  " + addr + ":" + port);
+               log.info("准备注册到服务器  " + addr + ":" + port);
                 ChannelFuture connect = b.connect().sync();
                 MessageProto.Message message = MessageProto.Message.newBuilder()
                         .setTo("server")
@@ -60,11 +62,11 @@ public class RegisterToOtherServer {
                         .build();
                 connect.channel().writeAndFlush(message);
 
-                System.out.println("已经注册到服务器");
+               log.info("已经注册到服务器");
                 break;
             } catch (Throwable e) {
                 Thread.sleep(1000);
-                System.out.println("连接失败正在重连。。。  " + addr + ":" + port);
+               log.info("连接失败正在重连。。。  " + addr + ":" + port);
             }
         }
     }
