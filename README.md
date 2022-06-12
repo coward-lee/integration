@@ -141,3 +141,8 @@ management:
     jolokia:
       enabled: true
 </pre>
+
+#### jmx 4xx 报错
+1. 检查 @ManagedResource("bean:name=xxxx")  是否写错
+2. 检查 @ManagedOperation 方法的参数类型是否写对（尽量都使用String类型，非String 会报错）
+3. 检查 @ManagedOperation 方法是否是使用public 关键字修饰的

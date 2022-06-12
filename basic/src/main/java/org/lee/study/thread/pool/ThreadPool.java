@@ -1,5 +1,9 @@
 package org.lee.study.thread.pool;
 
+import org.lee.study.thread.pool.async.Callable;
+import org.lee.study.thread.pool.async.Future;
+import org.lee.study.thread.pool.async.FutureTask;
+
 import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +60,11 @@ public class ThreadPool implements Executor {
     }
 
 
-    public <T> Future<T> submit(Supplier<T> supplier) {
-        return null;
+    @Override
+    public <T> Future<T> submit(Callable<T> callable) {
+        FutureTask<T> tFutureTask = new FutureTask<>(callable);
+        execute(tFutureTask);
+        return tFutureTask;
     }
 
 
@@ -117,20 +124,9 @@ public class ThreadPool implements Executor {
         return true;
     }
 
-    public Lock getLock() {
-        return lock;
-    }
-
-    public AtomicInteger getWorkerCount() {
-        return workerCount;
-    }
 
     public List<Task> getWorkers() {
         return workers;
-    }
-
-    public AbstractQueue<Task> getIdleWorkers() {
-        return idleWorkers;
     }
 
     public BlockingQueue<Runnable> getNewTasks() {

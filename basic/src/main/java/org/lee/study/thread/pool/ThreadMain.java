@@ -1,22 +1,34 @@
 package org.lee.study.thread.pool;
 
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.time.LocalDateTime;
+import java.util.concurrent.*;
 
 public class ThreadMain {
     public static void main(String[] args) throws Exception {
         ThreadPool threadPool = new ThreadPool(10, 10);
 //
+//        for (int i = 0; i < 1000; i++) {
+//            threadPool.execute(() -> {
+//                try {
+//                    Thread.sleep(10);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                    Thread.currentThread().interrupt();
+//                }
+//            });
+//        }
+
         for (int i = 0; i < 1000; i++) {
-            threadPool.execute(() -> {
+            int finalI = i;
+            org.lee.study.thread.pool.async.Future<String> future = threadPool.submit(() -> {
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                     Thread.currentThread().interrupt();
                 }
+                return "回调：" + finalI;
             });
         }
 
@@ -33,7 +45,7 @@ public class ThreadMain {
         for (int i = 0; i < 100; i++) {
             int finalI = i;
             System.out.println("加入了任务：" + i);
-            threadPoolExecutor.submit(() -> {
+            Future<?> submit = threadPoolExecutor.submit(() -> {
                 try {
 
                     System.out.println(Thread.currentThread().getName() + ":执行开始" + finalI);
@@ -42,6 +54,7 @@ public class ThreadMain {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                return "";
             });
         }
     }
