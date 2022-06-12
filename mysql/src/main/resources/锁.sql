@@ -1,0 +1,39 @@
+show engine innodb mutex;
+
+show engine innodb status;
+
+show full processlist;
+
+-- 分析事务
+
+select * from information_schema.INNODB_TRX;
+show create table  information_schema.INNODB_TRX;
+
+CREATE TEMPORARY TABLE `INNODB_TRX` (
+                                        `trx_id` bigint unsigned NOT NULL DEFAULT '0' comment '存储引擎内部唯一id',
+                                        `trx_state` varchar(13) NOT NULL DEFAULT '' comment '事务的状态',
+                                        `trx_started` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' comment '事务开始时间',
+                                        `trx_requested_lock_id` varchar(105) DEFAULT NULL  comment '等待事务的锁ID',
+                                        `trx_wait_started` datetime DEFAULT NULL comment '等待事务的时间',
+                                        `trx_weight` bigint unsigned NOT NULL DEFAULT '0' comment '事务的权重',
+                                        `trx_mysql_thread_id` bigint unsigned NOT NULL DEFAULT '0' comment 'mysql中的线程id，show full processlist 的列表显示的内容',
+                                        `trx_query` varchar(1024) DEFAULT NULL comment '事务执行的sql',
+                                        `trx_operation_state` varchar(64) DEFAULT NULL,
+                                        `trx_tables_in_use` bigint unsigned NOT NULL DEFAULT '0',
+                                        `trx_tables_locked` bigint unsigned NOT NULL DEFAULT '0',
+                                        `trx_lock_structs` bigint unsigned NOT NULL DEFAULT '0',
+                                        `trx_lock_memory_bytes` bigint unsigned NOT NULL DEFAULT '0',
+                                        `trx_rows_locked` bigint unsigned NOT NULL DEFAULT '0',
+                                        `trx_rows_modified` bigint unsigned NOT NULL DEFAULT '0',
+                                        `trx_concurrency_tickets` bigint unsigned NOT NULL DEFAULT '0',
+                                        `trx_isolation_level` varchar(16) NOT NULL DEFAULT '',
+                                        `trx_unique_checks` int NOT NULL DEFAULT '0',
+                                        `trx_foreign_key_checks` int NOT NULL DEFAULT '0',
+                                        `trx_last_foreign_key_error` varchar(256) DEFAULT NULL,
+                                        `trx_adaptive_hash_latched` int NOT NULL DEFAULT '0',
+                                        `trx_adaptive_hash_timeout` bigint unsigned NOT NULL DEFAULT '0',
+                                        `trx_is_read_only` int NOT NULL DEFAULT '0',
+                                        `trx_autocommit_non_locking` int NOT NULL DEFAULT '0',
+                                        `trx_schedule_weight` bigint unsigned DEFAULT NULL
+) ENGINE=MEMORY DEFAULT CHARSET=utf8mb3
+
