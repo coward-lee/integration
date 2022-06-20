@@ -21,4 +21,15 @@ public class Config {
                 .build();
         return new JdbcTemplate(build);
     }
+
+
+    public static JdbcTemplate getJdbcTemplate(){
+        DataSource build = DataSourceBuilder.create().type(SimpleDriverDataSource.class)
+                .password("666666")
+                .username("root")
+                .url("jdbc:mysql://182.42.106.130:3306/test_db")
+                .driverClassName("com.mysql.cj.jdbc.Driver")
+                .build();
+        return new JdbcTemplate(build);
+    }
 }

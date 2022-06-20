@@ -4,7 +4,7 @@ plugins {
     id 'java'
 }
 
-version 'unspecified'
+version '1.0'
 repositories {
     maven{
         allowInsecureProtocol = true
@@ -23,7 +23,11 @@ dependencies {
     implementation 'mysql:mysql-connector-java:8.0.29'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
 }
+
 
 test {
     useJUnitPlatform()
