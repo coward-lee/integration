@@ -1,0 +1,18 @@
+<!--Hadoop 配置-->
+<configuration>
+    <!--    指定 NameNode 的地址 -->
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://159.138.145.155:8020</value>
+    </property>
+    <!--    指定hadoop数据的存储目录-->
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/opt/module/hadoop3.1.3/data</value>
+    </property>
+    <!--    设置hdfs的网页静态登录用户为 lee-->
+    <property>
+        <name>hadoop.http.staticuser.user</name>
+        <value>lee</value>
+    </property>
+</configuration>

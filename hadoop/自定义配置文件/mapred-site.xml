@@ -1,0 +1,12 @@
+
+
+<!--hdfs-site.xml-->
+<configuration>
+    <property>
+        <!--指定mapreduce 在yarn上面运行-->
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+
+    </property>
+</configuration>
+
