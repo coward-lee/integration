@@ -42,4 +42,5 @@ findProject(':spring-boot:spring-boot-starter')?.name = 'spring-boot-starter'
 include 'spring-boot:lee-spring-boot-starter-test'
 findProject(':spring-boot:lee-spring-boot-starter-test')?.name = 'lee-spring-boot-starter-test'
 include 'hadoop'
+include 'netty-deep'
 
