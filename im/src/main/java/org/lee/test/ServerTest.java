@@ -56,11 +56,11 @@ public class ServerTest {
         while (true){
             try {
                 channelFuture = b.connect().sync();
-                System.out.println("连接成功");
+               log.info("连接成功");
                 break;
             } catch (Throwable e) {
                 Thread.sleep(1000);
-                System.out.println("连接失败正在重连。。。  " + "localhost" + ":" + port);
+                log.info("连接失败正在重连。。。  " + "localhost" + ":" + port);
             }
         }
 
@@ -86,7 +86,7 @@ public class ServerTest {
     class ConnectionInHandler extends ChannelInboundHandlerAdapter {
         @Override
         public void channelActive(ChannelHandlerContext ctx) throws Exception {
-            System.out.println("有链接来了");
+           log.info("有链接来了");
         }
     }
 

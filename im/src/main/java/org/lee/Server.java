@@ -9,9 +9,11 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.core.config.xml.XmlConfiguration;
 import org.lee.core.ServerContainer;
 import org.lee.core.Startup;
 import org.lee.decoder.IMProtoDecoder;
@@ -21,6 +23,10 @@ import org.lee.decoder.RegisterHandler;
 import org.lee.encoder.IMProtoEncoder;
 import org.lee.event.RegisterToOtherServer;
 import org.lee.util.CustomConfigurationFactory;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Objects;
 
 import static org.lee.core.Config.port0;
 import static org.lee.core.Config.port1;
@@ -86,8 +92,6 @@ public class Server {
 
 
     public static void main(String[] args) {
-        CustomConfigurationFactory customConfigurationFactory = new CustomConfigurationFactory();
-        Configurator.initialize(customConfigurationFactory.getConfiguration());
 
         Server server = new Server(0);
         Integer port = server.parse(args);
@@ -112,5 +116,4 @@ public class Server {
     public Integer parse(String[] args) {
         return Integer.valueOf(args[0]);
     }
-
 }
