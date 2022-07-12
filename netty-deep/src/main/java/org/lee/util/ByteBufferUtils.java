@@ -9,7 +9,7 @@ public class ByteBufferUtils {
         int capacity = buffer.capacity();
         StringBuilder stringBuilder = new StringBuilder();
         String position = "pos :\t";
-        String bytes  = "byte:\t";
+        String bytes = "byte:\t";
         String word = "word：\t";
 
         int marginSize = capacity * 4 + 7 + position.length();
@@ -41,7 +41,9 @@ public class ByteBufferUtils {
         buffer.rewind();
         for (int i = 0; i < capacity; i++) {
             if (i < buffer.limit()) {
-                stringBuilder.append((char) buffer.get(i));
+                char c = (char) buffer.get(i);
+                c = c == '\n' ? '.' : c;
+                stringBuilder.append(c);
             } else {
                 stringBuilder.append(0x00);
             }
@@ -53,5 +55,21 @@ public class ByteBufferUtils {
             stringBuilder.append("-");
         }
         System.out.println(stringBuilder.toString());
+    }
+
+    public static void split(ByteBuffer buffer) {
+        buffer.flip();
+        for (int i = 0; i < buffer.limit(); i++) {
+            if (buffer.get(i) == '\n') {
+                int len = i + 1 - buffer.position();
+                // 复制 buffer
+                ByteBuffer target = ByteBuffer.allocate(len);
+                for (int j = 0; j < len; j++) {
+                    target.put(buffer.get());
+                }
+                print(target);
+            }
+        }
+        buffer.compact();
     }
 }
