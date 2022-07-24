@@ -1,3 +1,5 @@
+﻿<?xml version="1.0"?>
+
 <!--Hadoop 配置-->
 <configuration>
     <!--    指定 mr走shuffle -->
@@ -8,7 +10,7 @@
     <!--    指定resource manager 在天翼云上的地址-->
     <property>
         <name>yarn.resourcemanager.hostname</name>
-        <value>182.42.106.130</value>
+        <value>hadoop103</value>
     </property>
     <!--    环境变量继承-->
     <property>
@@ -17,6 +19,38 @@
 <!--        JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME-->
         <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
     </property>
+
+<!--开启日志聚合-->
+    <property>
+        <description>Whether to enable log aggregation. Log aggregation collects
+            each container's logs and moves these logs onto a file-system, for e.g.
+            HDFS, after the application completes. Users can configure the
+            "yarn.nodemanager.remote-app-log-dir" and
+            "yarn.nodemanager.remote-app-log-dir-suffix" properties to determine
+            where these logs are moved to. Users can access the logs via the
+            Application Timeline Server.
+        </description>
+        <name>yarn.log-aggregation-enable</name>
+        <value>true</value>
+    </property>
+<!--设置日志保留时间-->
+    <property>
+        <description>How long to keep aggregation logs before deleting them.  -1 disables.
+            Be careful set this too small and you will spam the name node.</description>
+        <name>yarn.log-aggregation.retain-seconds</name>
+        <value>604800</value>
+    </property>
+
+<!--    设置日志聚集服务器地址-->
+    <property>
+        <description>
+            URL for log aggregation server
+        </description>
+        <name>yarn.log.server.url</name>
+        <value>http://hadoop102:19888/jobhistory/logs</value>
+    </property>
+
+
 </configuration>
 
 

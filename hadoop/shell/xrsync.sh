@@ -8,7 +8,7 @@ if [ $# -lt 1 ]; then
 fi
 
 # 2, 遍历集群
-for host in 42.192.85.33 182.42.106.130 159.138.145.155
+for host in hadoop102 hadoop103 hadoop104
 do
   echo ===============  $host ================================
 
