@@ -1,6 +1,6 @@
 package org.lee.study.feature;
 
-import jdk.incubator.vector.IntVector;
+//import jdk.incubator.vector.IntVector;
 import org.junit.Test;
 
 import java.lang.reflect.InvocationHandler;
@@ -60,10 +60,10 @@ public class JDK16 {
 //            c[i] = a[i] * b[i];
 //        }
 
-        var vectorA = IntVector.fromArray(IntVector.SPECIES_128, a, 0);
-        var vectorB = IntVector.fromArray(IntVector.SPECIES_128, b, 0);
-        var vectorC = vectorA.mul(vectorB);
-        vectorC.intoArray(c, 0);
+//        var vectorA = IntVector.fromArray(IntVector.SPECIES_128, a, 0);
+//        var vectorB = IntVector.fromArray(IntVector.SPECIES_128, b, 0);
+//        var vectorC = vectorA.mul(vectorB);
+//        vectorC.intoArray(c, 0);
     }
 
 }
