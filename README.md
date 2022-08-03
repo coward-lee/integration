@@ -146,3 +146,14 @@ management:
 1. 检查 @ManagedResource("bean:name=xxxx")  是否写错
 2. 检查 @ManagedOperation 方法的参数类型是否写对（尽量都使用String类型，非String 会报错）
 3. 检查 @ManagedOperation 方法是否是使用public 关键字修饰的
+
+### jmx rmi  连接在k8s连接失败问题
+问题：在k8s环境中，jmx通过 jConsole 或者 visualvm 来进行jvm信息查看得到时候，工具连接不上。       
+原因：在服务端我们配置了两个参数 java.rmi.server.hostname='ip' 和 com.sun.management.jmxremote.port=port；
+    客户端在第一次连接jmx的时候回去获取这两个配置，获取到这两个配置后，利用这两个配置的进行jvm内存信息的访问。
+    但是由于本次的k8s的端口进行了映射（从内部端口9999映射到物理端口55555，pod的ip地址也从192.168.0.182->192.168.0.168）
+    这就导致了当客户端第一次请求拿到配置信息的时候，再次去获取配置信息的时候就会出现连接错误。
+如下图服务端配置信息和客户端报错如下
+真实的java服务时候部署在192.168.0.182 的k8s服务上面
+![jmx_server](img/jmx_server_config.jpg)
+![jmx_client](img/jmx_client.jpg)
