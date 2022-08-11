@@ -1,24 +1,30 @@
 # Shell
-### 1. Shell介绍  
+
+### 1. Shell介绍
+
 1. sh \
 2. bash \
 3. csh \
-我们主要是学习bash
+   我们主要是学习bash
 
 ### 2. 启动
+
 1. 直接使用路径访问\
-2. sh shell.sh(脚本路径)       普通文件、脚本文件   \
+2. sh shell.sh(脚本路径)       普通文件、脚本文件 \
 3. source shell.sh(脚本路径)   普通文件、脚本文件   \
- 1和2 会重新打开一个进程去执行脚本，这个进程是-bash进程的子进程，而-bash进程是该terminal的子进程
+   1和2 会重新打开一个进程去执行脚本，这个进程是-bash进程的子进程，而-bash进程是该terminal的子进程
 
 ### 3. export 命令
+
 首先从当前进程查询变量，如果当前进程没有这个变量，默认去父进程查询这个变量   \
 即如果我们使用export命令去修饰一个变量的话，那么这个变量就对子进程是可见的
 
 ### 4. Shell 变量
+
 4.1 变量定义不能加美元符号\
 4.2 一些其他原则
 4.3 变量类型 局部变量，环境变量，Shell变量（前面个连个的混合）
+
 ```shell script
 name='zhansan'
 
@@ -32,7 +38,9 @@ done
 url="xxxxx"
 readonly url
 ```
+
 ### 5. shell的字符串
+
 ```shell script
 // 字符串操作
 str1=zhansan
@@ -58,8 +66,11 @@ echo ${#str5}
 // ${#str5:start:end} 截取部分字符串
 echo ${#str5:2:3}
 ```
+
 ### 6. shell的数组
+
 支持一维数组，不支持多维数组
+
 ```shell script
 #数组的操作
 #定义数组
@@ -74,7 +85,9 @@ len1=${#arr[@]}  // 有问题
 len2=${#arr[*]}  // 有问题
 echo $len1 + $len2
 ```
+
 ### 7. 注释
+
 ```shell script
 # 单行注释
 # xxx
@@ -91,7 +104,9 @@ xxxx
 ```
 
 ### 8. 运算符
+
 `expr expression `
+
 ```shell script
 # 运算符
 # 注意还不能把“=”使用空白将两边给隔开
@@ -105,7 +120,9 @@ val3=`expr 10 + 20`
 echo $val3
 
 ```
+
 ### 9. 文件操作
+
 ```shell script
 # 将结果输出到文件，这个是覆盖
 echo "xxxx" > file
@@ -113,7 +130,9 @@ echo "xxxx" > file
 echo `command`
 
 ```
+
 ### 10. test 命令
+
 ```shell script
 if test $[a] -eq $[b];
 then
@@ -122,6 +141,7 @@ else
  echo "不相等"
 fi
 ```
+
 ### 11. 流程控制
 
 ```shell script
@@ -174,6 +194,7 @@ done
 ```
 
 ### 12. 函数
+
 ```shell script
 # 函数
 fundDemo(){
@@ -199,6 +220,36 @@ funParam() {
 # 参数传递 在函数后面追加每一个空格表示一个传参
 funParam 1 2 3
 ```
-     
-     
+
+## 输出操作 > >>
+
+写入文件： ">" 表示覆盖， ">>"  表示追加
+使用： source>> targetFile source>>targetFile
+使用： source> targetFile source>targetFile
+source 可是各种命令的输出结果
+
+## shell 内容输出
+
+当初在shell中, 看到”>&1″和”>&2″始终不明白什么意思.经过在网上的搜索得以解惑.其实这是两种输出.  
+在 shell 程式中，最常使用的 FD (file descriptor) 大概有三个, 分别是:
+
+| 命令  | 描述                          |
+|-----|-----------------------------|
+| &   | 是一个描述符，如果1或2前不加&，会被当成一个普通文件 |
+| 0   | 是一个文件描述符，表示标准输入(stdin)      |
+| 1   | 是一个文件描述符，表示标准输出(stdout)     |
+| 2   | 是一个文件描述符，表示标准错误(stderr)     |
+
+* 举例：   
+  ls . 1>file.log 2>file.err   
+  间正常内容输出到file.log， 错误内容输出到file.err  
+  ls a.txt b.txt 1>>file.log 2>&1  
+  这里的 2>&1 表示将通道2(标准错误)，重定位到标准输出中
+* 总结  
+& 是一个描述符，如果1或2前不加&，会被当成一个普通文件。             
+1>&2 意思是把标准输出重定向到标准错误。       
+2>&1 意思是把标准错误输出重定向到标准输出。       
+&>filename 意思是把标准输出和标准错误输出都重定向到文件filename中。       
+
+
      
