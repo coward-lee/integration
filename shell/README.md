@@ -221,7 +221,7 @@ funParam() {
 funParam 1 2 3
 ```
 
-## 输出操作 > >>
+## 输出操作 > 和 >>
 
 写入文件： ">" 表示覆盖， ">>"  表示追加
 使用： source>> targetFile source>>targetFile
