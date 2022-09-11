@@ -422,6 +422,51 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 bean后置处理器，？？？？？？    
 
 ### 4. 几个Aware的时候的地方
+概述：将spring中内部使用的对象暴露出来
+
+1. ApplicationEventPublisherAware (org.springframework.context)
+暴露ApplicationEventPublisher
+在普通 bean属性的复制，先于 初始化回调（如InitializingBean#afterPropertiesSet,或者自定义的initMethod） , 也在ApplicationContextAware 之前被调用
+   Invoked after population of normal bean properties but before an init callback like InitializingBean's afterPropertiesSet or a custom init-method. Invoked before ApplicationContextAware's setApplicationContext.
+2. ServletContextAware (org.springframework.web.context)
+servletContext 暴露
+3. MessageSourceAware (org.springframework.context)      
+不懂？
+4. ResourceLoaderAware (org.springframework.context)
+资源加载器的爆率
+5. ApplicationStartupAware (org.springframework.context)
+   ApplicationStartup 这个是标记某个步骤已经开始了的接口，如 创建bean的开始和bean/工厂开始的标记
+   在普通bean属性填充之后调用，但在init回调之前调用，如InitializingBean的AfterPropertieSet或自定义init方法。在ApplicationContextAware的setApplicationContext之前调用。
+6. SchedulerContextAware (org.springframework.scheduling.quartz)
+定时器上下文暴露 
+这里的就是一个定时调度
+Set the SchedulerContext of the current Quartz Scheduler.
+7. NotificationPublisherAware (org.springframework.jmx.export.notification)
+暴露通知发布发布者的bean 似乎用在jmx?
+8. BeanFactoryAware (org.springframework.beans.factory)
+暴露ioc容器
+9. EnvironmentAware (org.springframework.context)
+暴露 Environment 对象
+存储了如下
+spring环境外的对象，properties文件、JVM properties、system环境变量、JNDI、servlet context parameters上下文参数、专门的properties对象，Maps等等
+还有就是yml配置文件中的各种配置信息
+10. EmbeddedValueResolverAware (org.springframework.context)
+？？ 没懂
+11. ImportAware (org.springframework.context.annotation)
+可以获取：被@Configuration 注解的类的注解信息
+    Set the annotation metadata of the importing @Configuration class
+12. ServletConfigAware (org.springframework.web.context)
+初始化 servlet的servlet容器的信息
+   A servlet configuration object used by a servlet container to pass information to a servlet during initialization.
+13. LoadTimeWeaverAware (org.springframework.context.weaving)
+classloader的 类文件转换器？？
+Defines the contract for adding one or more ClassFileTransformers to a ClassLoader.
+14. BeanClassLoaderAware (org.springframework.beans.factory)
+  暴露bean的类加载器
+15. BeanNameAware (org.springframework.beans.factory)
+  暴露bean在ioc容器（beanFactory）中的key名称,就是beanFactory#getName("name") 中的name
+16. ApplicationContextAware (org.springframework.context)
+  比较常使用的 spring 上下文 这个可以将我们使用的springContext暴露出来，暴露出来直接获取定义了的bean
 
 
 ### 5. 循环依赖的解
