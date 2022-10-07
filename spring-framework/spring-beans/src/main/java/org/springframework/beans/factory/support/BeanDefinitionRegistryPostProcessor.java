@@ -18,6 +18,7 @@ package org.springframework.beans.factory.support;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
 /**
  * Extension to the standard {@link BeanFactoryPostProcessor} SPI, allowing for
@@ -42,4 +43,18 @@ public interface BeanDefinitionRegistryPostProcessor extends BeanFactoryPostProc
 	 */
 	void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException;
 
+}
+
+
+// BeanDefinitionRegistryPostProcessor 的postProcessBeanDefinitionRegistry 方法在 postProcessBeanFactory 之前执行
+class Demo implements BeanDefinitionRegistryPostProcessor{
+	@Override
+	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+
+	}
+
+	@Override
+	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+
+	}
 }
