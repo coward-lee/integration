@@ -1,7 +1,40 @@
 
-configure(allprojects) { project ->
+plugins{
+    id 'java'
+}
+allprojects {
 
+
+    sourceCompatibility = 17
+    targetCompatibility = 17
+// 业务代码字符集，这个是指定源码解析的字符集[编译器]
+    compileJava.options.encoding = "UTF-8"
+// 测试代码字符集，这个是指定源码解析的字符集[编译器]
+    compileTestJava.options.encoding = "UTF-8"
+// 编译java文件时采用的UTF-8， 注意这是指定源码编码的字符集【源文件】
     tasks.withType(JavaCompile) {
-        options.encoding = "UTF-8"
+        options.encoding = 'UTF-8'
+    }
+// 文档【源文件】
+    tasks.withType(Javadoc) {
+        options.encoding = 'UTF-8'
+    }
+
+    repositories {
+        maven {
+            allowInsecureProtocol = true
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        mavenCentral()
+
+    }
+
+
+
+}
+
+configurations.all(){
+    Configuration configuration ->{
+        configuration.resolutionStrategy.failOnVersionConflict()
     }
 }

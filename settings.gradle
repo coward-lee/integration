@@ -46,3 +46,5 @@ include 'netty-deep'
 include 'untitled'
 include 'grpc'
 include 'distribution'
+include 'gradle-demo'
+

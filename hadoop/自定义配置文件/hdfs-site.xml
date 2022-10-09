@@ -1,16 +1,21 @@
-﻿
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-~                                                                 
-<!--hdfs-site.xml-->
+        <!--hdfs-site.xml-->
 <configuration>
-<property>
     <!--hadoop 的web访问-->
-    <name>dfs.namenode.http-address</name>
-    <value>hadoop102:9870</value>
-<!--    二级 node 访问 -->
-    <name>dfs.namenode.secondary.http-address</name>
-    <value>hadoop104:9870</value>
-</property>
+    <property>
+        <name>dfs.namenode.http-address</name>
+        <value>hadoop102:9870</value>
+    </property>
+    <!--    二级 node 访问 -->
+    <property>
+        <name>dfs.namenode.secondary.http-address</name>
+        <value>hadoop104:9870</value>
+    </property>
+    <!--    配置文件块的备份数量-->
+    <property>
+        <name>dfs.replication</name>
+        <value>3</value>
+    </property>
 </configuration>
 

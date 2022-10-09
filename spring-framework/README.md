@@ -8,7 +8,8 @@
     userService.add();
 
 
-# new AnnotationConfigApplicationContext(SpringConfig.class); 的行为
+# spring 启动
+ new AnnotationConfigApplicationContext(SpringConfig.class); 的行为
 ## 1. this(); 
 初始化了 AnnotatedBeanDefinitionReader 和 ClassPathBeanDefinitionScanner     
 为后面的扫类和读取有效的被Component和Configuration注解过的类
@@ -53,6 +54,57 @@ definitionHolder = AnnotationConfigUtils.applyScopedProxyMode(scopeMetadata, def
 5. 注册我们传入类的BeanDefinition，同时注册它的Alias（别名）, 
    BeanDefinitionReaderUtils.registerBeanDefinition(definitionHolder, this.registry);
 ## 3. refresh();
+// 标记 refresh 动作开始
+StartupStep contextRefresh = this.applicationStartup.start("spring.context.refresh");
+
+// 初始化了一些基本属性，
+// 初始化资源， 验证必要的 property
+prepareRefresh();
+
+// 获取IOC容器
+// 获取序列化ID， 获取 DefaultListableBeanFactory的实例化对象，这个会在实例化 ApplicationContext 的时候实例化
+ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
+
+// 准备工厂，配置一些忽视的接口依赖，主要就是写一些类类型到到ioc容器中的属性中
+prepareBeanFactory(beanFactory);
+
+// 给子类用的IOC容器的的拓展
+postProcessBeanFactory(beanFactory);
+
+// 标记 IOC容器的后置处理开始了
+StartupStep beanPostProcess = this.applicationStartup.start("spring.context.beans.post-process");
+// Invoke factory processors registered as beans in the context.
+// 这个执行IOC容器的后置处理 过程比较复杂，也是拓展的关键点
+invokeBeanFactoryPostProcessors(beanFactory);
+
+// 注册拦截bean创建的BeanProcessors
+registerBeanPostProcessors(beanFactory);
+beanPostProcess.end();
+
+// Initialize message source for this context. 
+// 为这个上下文初始化消息源
+initMessageSource();
+
+// Initialize event multicaster for this context.
+// 初始化事件广播器，
+// 1. 如果用户定义了自定义事件广播器
+// 2. 没有定义子使用默认的 SimpleApplicationEventMulticaster
+initApplicationEventMulticaster();
+
+// Initialize other special beans in specific context subclasses.
+onRefresh();
+
+// Check for listener beans and register them.
+// 注册监听器
+registerListeners();
+
+
+// 完成IOC容器的初始化， 这里会对bean单例的bean进行初始化
+// 这里会调用 bean的后置处理器
+finishBeanFactoryInitialization(beanFactory);
+
+// Last step: publish corresponding event.
+finishRefresh();
 
 ```java
 public abstract class AbstractApplicationContext extends DefaultResourceLoader
@@ -136,7 +188,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 ```
 
 ### 3.1.invokeBeanFactoryPostProcessors(beanFactory);
-tip: 下文中的：后置工厂、工厂后置、后置工厂处理器、工厂后置处理器 是一个意思
+tip: 下文中的：后置工厂、工厂后置、后置工厂处理器、工厂后置处理器 是一个意思，这里的工厂都是代表IOC容器
  这个方法做的事情：
 1. 执行 BeanDefinitionRegistryPostProcessor 后置处理器，同时将普通的后置工厂处理器配置存储起来后面调用
    1. 执行 获取BeanDefinitionRegistryPostProcessor的处理器，排序后置处理器，      
@@ -146,7 +198,6 @@ tip: 下文中的：后置工厂、工厂后置、后置工厂处理器、工厂
       2. 这里会组成 basePackage.\*\*/\*.class 的匹配符取加载资源文件（java类）   
       3. 遍历所有的类文件,从中获取被Component注解了的类文件，并注册到IOC工厂中    
       4. 也会去解析被@Bean注解的方法，并生成的BeanDefinition
-      5. 
 
 2. 再去工厂里面取获取一下注册了的后置工厂     
     这个大概应该是为了*我们自己实现的后置工厂处理器的后置工厂*处理器的调用    
@@ -417,11 +468,54 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 ### 2. 那个时候怎么判断是否需要初始化成为singleTon的Bean，那如果是prototype的Scope呢
 @Component注解 默认为Singleton，在BeanDefinition里面会有一个Scope字段用来存储范围。
 ### 3. bean的后置处理器，和工厂的后置处理器
-工厂的后置处理器      
-工厂的后置处理器，主要就是将我们的类转化成BeanDefinition，然后在后面的步骤使用       
-bean后置处理器，？？？？？？    
-
+1. BeanPostProcessor 是用于拓展实例化bean的，如：AOP就是拓展了 postProcessAfterInitialization，方法来返回一个代理对象给最终的返回结果
+2. BeanFactoryPostProcessor IOC 容器，的后置处理器，这个的拓展暂时只知道了几个简单的操纵如
 ### 4. 几个Aware的时候的地方
+概述：将spring中内部使用的对象暴露出来
+
+1. ApplicationEventPublisherAware (org.springframework.context)
+暴露ApplicationEventPublisher
+在普通 bean属性的复制，先于 初始化回调（如InitializingBean#afterPropertiesSet,或者自定义的initMethod） , 也在ApplicationContextAware 之前被调用
+   Invoked after population of normal bean properties but before an init callback like InitializingBean's afterPropertiesSet or a custom init-method. Invoked before ApplicationContextAware's setApplicationContext.
+2. ServletContextAware (org.springframework.web.context)
+servletContext 暴露
+3. MessageSourceAware (org.springframework.context)      
+不懂？
+4. ResourceLoaderAware (org.springframework.context)
+资源加载器的爆率
+5. ApplicationStartupAware (org.springframework.context)
+   ApplicationStartup 这个是标记某个步骤已经开始了的接口，如 创建bean的开始和bean/工厂开始的标记
+   在普通bean属性填充之后调用，但在init回调之前调用，如InitializingBean的AfterPropertieSet或自定义init方法。在ApplicationContextAware的setApplicationContext之前调用。
+6. SchedulerContextAware (org.springframework.scheduling.quartz)
+定时器上下文暴露 
+这里的就是一个定时调度
+Set the SchedulerContext of the current Quartz Scheduler.
+7. NotificationPublisherAware (org.springframework.jmx.export.notification)
+暴露通知发布发布者的bean 似乎用在jmx?
+8. BeanFactoryAware (org.springframework.beans.factory)
+暴露ioc容器
+9. EnvironmentAware (org.springframework.context)
+暴露 Environment 对象
+存储了如下
+spring环境外的对象，properties文件、JVM properties、system环境变量、JNDI、servlet context parameters上下文参数、专门的properties对象，Maps等等
+还有就是yml配置文件中的各种配置信息
+10. EmbeddedValueResolverAware (org.springframework.context)
+？？ 没懂
+11. ImportAware (org.springframework.context.annotation)
+可以获取：被@Configuration 注解的类的注解信息
+    Set the annotation metadata of the importing @Configuration class
+12. ServletConfigAware (org.springframework.web.context)
+初始化 servlet的servlet容器的信息
+   A servlet configuration object used by a servlet container to pass information to a servlet during initialization.
+13. LoadTimeWeaverAware (org.springframework.context.weaving)
+classloader的 类文件转换器？？
+Defines the contract for adding one or more ClassFileTransformers to a ClassLoader.
+14. BeanClassLoaderAware (org.springframework.beans.factory)
+  暴露bean的类加载器
+15. BeanNameAware (org.springframework.beans.factory)
+  暴露bean在ioc容器（beanFactory）中的key名称,就是beanFactory#getName("name") 中的name
+16. ApplicationContextAware (org.springframework.context)
+  比较常使用的 spring 上下文 这个可以将我们使用的springContext暴露出来，暴露出来直接获取定义了的bean
 
 
 ### 5. 循环依赖的解
@@ -502,6 +596,33 @@ Object result = getAutowireCandidateResolver().getLazyResolutionProxyIfNecessary
     @IntrinsicCandidate
     public native boolean isAssignableFrom(Class<?> cls);
 
+# bean的生命周期
+![bean_cycle](../img/spring-bean-cycle.png)
+生命周期流程如上图所示，流程大致如下：
+
+1.首先容器启动后，会对scope为singleton且非懒加载的bean进行实例化，
+
+2.按照Bean定义信息配置信息，注入所有的属性，
+
+3.如果Bean实现了BeanNameAware接口，会回调该接口的setBeanName()方法，传入该Bean的id，此时该Bean就获得了自己在配置文件中的id，
+
+4.如果Bean实现了BeanFactoryAware接口,会回调该接口的setBeanFactory()方法，传入该Bean的BeanFactory，这样该Bean就获得了自己所在的BeanFactory，
+
+5.如果Bean实现了ApplicationContextAware接口,会回调该接口的setApplicationContext()方法，传入该Bean的ApplicationContext，这样该Bean就获得了自己所在的ApplicationContext，
+
+6.如果有Bean实现了BeanPostProcessor接口，则会回调该接口的postProcessBeforeInitialzation()方法，
+
+7.如果Bean实现了InitializingBean接口，则会回调该接口的afterPropertiesSet()方法，
+
+8.如果Bean配置了init-method方法，则会执行init-method配置的方法，
+
+9.如果有Bean实现了BeanPostProcessor接口，则会回调该接口的postProcessAfterInitialization()方法，
+
+10.经过流程9之后，就可以正式使用该Bean了,对于scope为singleton的Bean,Spring的ioc容器中会缓存一份该bean的实例，而对于scope为prototype的Bean,每次被调用都会new一个新的对象，期生命周期就交给调用方管理了，不再是Spring容器进行管理了
+
+11.容器关闭后，如果Bean实现了DisposableBean接口，则会回调该接口的destroy()方法，
+
+12.如果Bean配置了destroy-method方法，则会执行destroy-method配置的方法，至此，整个Bean的生命周期结束
 # AOP
 
 

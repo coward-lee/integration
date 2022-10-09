@@ -2,7 +2,17 @@
 <module version="4">
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset" name="AopMain" removed="false">
+          <file>file://$MODULE_DIR$/../../../my-spring/src/main/java/org/lee/study/aop/AopMain.java</file>
+          <file>file://$MODULE_DIR$/../../../my-spring/src/main/java/org/lee/study/Config.java</file>
+          <file>file://$MODULE_DIR$/../../../my-spring/src/main/java/org/lee/study/listener/Config.java</file>
+          <file>file://$MODULE_DIR$/../../../my-spring/src/main/java/org/lee/study/circle/ConfigDemo.java</file>
+          <file>file://$MODULE_DIR$/../../../my-spring/src/main/java/org/lee/study/jdbc/JDBCMain.java</file>
+          <file>file://$MODULE_DIR$/../../../my-spring/src/main/java/org/lee/study/injection/SpringConfig.java</file>
+          <file>file://$MODULE_DIR$/../../../my-spring/src/main/java/org/lee/study/aware/Test.java</file>
+        </fileset>
+      </configuration>
     </facet>
   </component>
 </module>
