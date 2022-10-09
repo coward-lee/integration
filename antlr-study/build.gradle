@@ -4,17 +4,6 @@ plugins {
 apply plugin: 'antlr'
 
 
-version '1.0'
-
-repositories {
-
-    maven{
-        allowInsecureProtocol = true
-        url 'http://maven.aliyun.com/nexus/content/groups/public/'
-    }
-    mavenCentral()
-}
-
 apply plugin: 'antlr'
 
 generateGrammarSource {

@@ -2,16 +2,6 @@ plugins {
     id 'java'
 }
 
-version 'unspecified'
-
-repositories {
-
-    maven{
-        allowInsecureProtocol = true
-        url 'http://maven.aliyun.com/nexus/content/groups/public/'
-    }
-    mavenCentral()
-}
 
 dependencies {
     implementation 'org.apache.zookeeper:zookeeper:3.7.0'

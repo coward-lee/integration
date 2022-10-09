@@ -2,12 +2,6 @@ plugins {
     id("java")
 }
 
-group = "org.lee"
-version = "unspecified"
-
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")

@@ -47,4 +47,5 @@ include 'untitled'
 include 'grpc'
 include 'distribution'
 include 'gradle-demo'
+include 'reactor'
 

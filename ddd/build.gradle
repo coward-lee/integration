@@ -3,15 +3,6 @@ plugins {
 }
 
 version 'unspecified'
-
-repositories {
-    maven{
-        allowInsecureProtocol = true
-        url 'http://maven.aliyun.com/nexus/content/groups/public/'
-    }
-    mavenCentral()
-}
-
 dependencies {
     implementation 'mysql:mysql-connector-java:8.0.28'
 }

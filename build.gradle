@@ -21,12 +21,8 @@ allprojects {
     }
 
     repositories {
-        maven {
-            allowInsecureProtocol = true
-            url 'http://maven.aliyun.com/nexus/content/groups/public/'
-        }
+        maven {url 'https://maven.aliyun.com/repository/public'}
         mavenCentral()
-
     }
 
 

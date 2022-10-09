@@ -3,19 +3,6 @@ plugins {
     id 'application'
 }
 
-group 'org.lee.study'
-version 'unspecified'
-
-repositories {
-    mavenCentral()
-}
-applicationDefaultJvmArgs = [
-        '--add-opens=java.base/java.lang=ALL-UNNAMED'
-]
-//task(
-//        args [ '--add-opens=java.base/java.lang=ALL-UNNAMED']
-//)
-
 dependencies {
     implementation 'mysql:mysql-connector-java:8.0.28'
     // 这个是 5.x后的写法 shardingsphere

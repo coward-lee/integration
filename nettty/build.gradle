@@ -6,17 +6,6 @@ plugins {
 
 }
 
-group 'org.lee.study'
-version '1.0-SNAPSHOT'
-
-repositories {
-    maven{
-        allowInsecureProtocol = true
-        url 'http://maven.aliyun.com/nexus/content/groups/public/'
-    }
-    mavenCentral()
-}
-
 tasks.withType(JavaCompile){
     options.encoding = "UTF-8"
 }

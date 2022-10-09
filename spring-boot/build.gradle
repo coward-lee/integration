@@ -4,15 +4,6 @@ plugins {
     id 'java'
 }
 
-version 'unspecified'
-repositories {
-    maven{
-        allowInsecureProtocol = true
-        url 'http://maven.aliyun.com/nexus/content/groups/public/'
-    }
-
-    mavenCentral()
-}
 
 dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-core:2.13.2'

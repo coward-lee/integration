@@ -2,11 +2,5 @@ plugins {
     id 'java'
 }
 
-version 'unspecified'
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
 }

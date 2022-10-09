@@ -2,16 +2,6 @@ plugins {
     id 'java'
 }
 
-version 'unspecified'
-
-repositories {
-    maven{
-        allowInsecureProtocol = true
-        url 'http://maven.aliyun.com/nexus/content/groups/public/'
-    }
-    mavenCentral()
-}
-
 dependencies {
     implementation 'org.projectlombok:lombok:1.18.10'
     implementation 'org.openjdk.jmh:jmh-core:1.23'

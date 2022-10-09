@@ -2,13 +2,6 @@ plugins {
     id 'java'
 }
 
-group 'org.lee'
-version 'unspecified'
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.24'
 
