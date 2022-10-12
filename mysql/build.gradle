@@ -6,15 +6,15 @@ plugins {
 
 dependencies {
 
-//    implementation 'org.springframework.boot:spring-boot-starter-web'
-//    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
     implementation 'dev.miku:r2dbc-mysql:0.8.2.RELEASE'
-//    implementation 'org.springframework.boot:spring-boot-starter-test'
-//    implementation 'mysql:mysql-connector-java:8.0.29'
-//    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-//
-//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
-//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    implementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'mysql:mysql-connector-java:8.0.29'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 
 }
 

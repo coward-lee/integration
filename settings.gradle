@@ -48,4 +48,5 @@ include 'grpc'
 include 'distribution'
 include 'gradle-demo'
 include 'reactor'
+include 'kotlin'
 

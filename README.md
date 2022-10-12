@@ -157,3 +157,7 @@ management:
 真实的java服务时候部署在192.168.0.182 的k8s服务上面
 ![jmx_server](img/jmx_server_config.jpg)
 ![jmx_client](img/jmx_client.jpg)
+
+
+### oom 排查
+-XX:+HeapDumpBeforeFullGC -XX:+HeapDumpAfterFullGC -XX:+HeapDumpOnOutOfMemoryError  -XX:HeapDumpPath=dump.jprof
