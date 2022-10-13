@@ -1,14 +1,14 @@
 package org.lee.serial.service;
 
-import com.gitlab.techschool.pcbook.pb.CreateLaptopRequest;
-import com.gitlab.techschool.pcbook.pb.CreateLaptopResponse;
-import com.gitlab.techschool.pcbook.pb.Laptop;
-import com.gitlab.techschool.pcbook.pb.LaptopServiceGrpc;
+import com.gitlab.techschool.pcbook.pb.*;
+import io.grpc.Context;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 
 import java.util.UUID;
 import java.util.logging.Logger;
+
+import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 public class LapTopService extends LaptopServiceGrpc.LaptopServiceImplBase {
     private final Logger log = Logger.getLogger(LapTopService.class.getName());
@@ -60,4 +60,41 @@ public class LapTopService extends LaptopServiceGrpc.LaptopServiceImplBase {
         log.info("save success" + response.getId());
     }
 
+    @Override
+    public void searchLaptop(SearchLaptopRequest request, StreamObserver<SearchLaptopResponse> responseObserver) {
+        Filter filter = request.getFilter();
+
+        laptopStore.searchLaptop(Context.current(), filter, laptop -> responseObserver.onNext(SearchLaptopResponse.newBuilder().setLaptop(laptop).build()));
+    }
+
+
+    @Override
+    public StreamObserver<RateLaptopRequest> rateLaptop(StreamObserver<RateLaptopResponse> responseObserver) {
+        return new StreamObserver<>() {
+            long startTime = System.nanoTime();
+
+            @Override
+            public void onNext(RateLaptopRequest value) {
+                print(value);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                log.warning(t.getMessage());
+            }
+
+            @Override
+            public void onCompleted() {
+                long seconds = NANOSECONDS.toSeconds(System.nanoTime() - startTime);
+                log.info("completed in " + seconds + "s");
+                responseObserver.onCompleted();
+            }
+
+
+        };
+    }
+
+    public void print(RateLaptopRequest laptop) {
+        log.info("rate laptop:" + laptop.getLaptopId() + " score " + laptop.getScore());
+    }
 }

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package org.lee.bistream;
+
+option java_package = "com.lee.bistream";
+option java_multiple_files = true;
+
+
+message BiStreamRequest{
+  string entityId = 1;
+  string content = 2;
+}
+
+message BiStreamResponse{
+  string entityId = 1;
+  string content = 2;
+  int32 index = 3;
+}
+
+service BiStreamService {
+  rpc biStreamDemo(stream BiStreamRequest) returns (stream BiStreamResponse) {
+
+  };
+}

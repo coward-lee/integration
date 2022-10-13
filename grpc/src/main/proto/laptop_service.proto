@@ -46,6 +46,12 @@ message RateLaptopResponse {
   double average_score = 3;
 }
 
+// service 关键词： 定义一个grpc service
+// rpc 关键词 定义 gpc service 的方法
+// returns
+// stream
+// option
+
 service LaptopService {
   rpc CreateLaptop(CreateLaptopRequest) returns (CreateLaptopResponse) {
     option (google.api.http) = {

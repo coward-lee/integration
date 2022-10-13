@@ -93,7 +93,7 @@ public class TestLaptop {
         });
         Thread.sleep(1000);
 
-        //        Laptop laptop = Generator.genNewLaptop();
+//        Laptop laptop = Generator.genNewLaptop();
 //
 //        CreateLaptopRequest request = CreateLaptopRequest.newBuilder().setLaptop(laptop).build();
 //        LaptopServiceGrpc.LaptopServiceBlockingStub stub = LaptopServiceGrpc.newBlockingStub(managedChannel);

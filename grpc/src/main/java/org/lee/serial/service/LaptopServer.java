@@ -21,7 +21,8 @@ public class LaptopServer {
     public LaptopServer(ServerBuilder serverBuilder, int port, LaptopStore laptopStore) {
         this.port = port;
         LapTopService lapTopService = new LapTopService(laptopStore);
-        server = serverBuilder.addService(lapTopService).build();
+        BiStreamService biStreamService = new BiStreamService();
+        server = serverBuilder.addService(lapTopService).addService(biStreamService).build();
     }
 
     public LaptopServer(InProcessServerBuilder inProcessServerBuilder, int port, LaptopStore laptopStore) {
