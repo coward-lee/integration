@@ -18,6 +18,7 @@ arrowMemoryCore             = { module = 'org.apache.arrow:arrow-memory-core', v
 arrowMemoryNetty            = { module = 'org.apache.arrow:arrow-memory-netty', version.ref = 'arrowVersion' }
 arrowFlight                 = { module = 'org.apache.arrow:arrow-flight', version.ref = 'arrowVersion' }
 arrowPlasma                 = { module = 'org.apache.arrow:arrow-plasma', version.ref = 'arrowVersion' }
+guava                       = { module = 'com.google.guava:guava', version='31.1-jre'}
 
 [bundles]
 #groovy = ["groovy-core", "groovy-json", "groovy-nio"]

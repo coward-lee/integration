@@ -1,4 +1,50 @@
 rootProject.name = 'integration'
+
+
+
+
+// 以来配置信息
+// 别名配置，
+//dependencyResolutionManagement {
+//    versionCatalogs {
+//        libs {
+//            library('groovy-core', 'org.codehaus.groovy:groovy:3.0.5')
+//            library('groovy-json', 'org.codehaus.groovy:groovy-json:3.0.5')
+//            library('groovy-nio', 'org.codehaus.groovy:groovy-nio:3.0.5')
+//            library('commons-lang3', 'org.apache.commons', 'commons-lang3').version {
+//                strictly '[3.8, 4.0['
+//                prefer '3.9'
+//            }
+//        }
+//    }
+//}
+// 配置 toml 文件路径
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            // 默认路径
+//            from(files("../gradle/libs.versions.toml"))
+            // 自定义路径
+            from(files("./libs.toml"))
+        }
+        // 测试用？
+        // declares an additional catalog, named 'testLibs', from the 'test-libs.versions.toml' file
+//        testLibs {
+//            from(files('gradle/test-libs.versions.toml'))
+//        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 include 'nettty'
 include 'spring'
 include 'juc'
@@ -50,37 +96,5 @@ include 'gradle-demo'
 include 'reactor'
 include 'kotlin'
 include 'arrow'
+include 'guava-demo'
 
-
-
-// 以来配置信息
-// 别名配置，
-//dependencyResolutionManagement {
-//    versionCatalogs {
-//        libs {
-//            library('groovy-core', 'org.codehaus.groovy:groovy:3.0.5')
-//            library('groovy-json', 'org.codehaus.groovy:groovy-json:3.0.5')
-//            library('groovy-nio', 'org.codehaus.groovy:groovy-nio:3.0.5')
-//            library('commons-lang3', 'org.apache.commons', 'commons-lang3').version {
-//                strictly '[3.8, 4.0['
-//                prefer '3.9'
-//            }
-//        }
-//    }
-//}
-// 配置 toml 文件路径
-dependencyResolutionManagement {
-    versionCatalogs {
-        libs {
-            // 默认路径
-//            from(files("../gradle/libs.versions.toml"))
-            // 自定义路径
-            from(files("./libs.toml"))
-        }
-        // 测试用？
-        // declares an additional catalog, named 'testLibs', from the 'test-libs.versions.toml' file
-//        testLibs {
-//            from(files('gradle/test-libs.versions.toml'))
-//        }
-    }
-}

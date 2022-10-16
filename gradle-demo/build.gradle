@@ -54,6 +54,8 @@ dependencies {
 
     // 项目依赖：
     implementation project(':ddd')
+
+    implementation(libs.arrowFlight)
 }
 
 test {

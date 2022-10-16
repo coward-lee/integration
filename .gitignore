@@ -4,3 +4,5 @@
 *.class
 /**/build/
 /**/out/
+*/tmp/
+/tmp/
