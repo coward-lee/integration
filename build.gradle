@@ -1,10 +1,10 @@
-
-plugins{
+plugins {
     id 'java'
 }
 allprojects {
 
-
+    group "org.lee"
+    version '1.0.0'
     sourceCompatibility = 17
     targetCompatibility = 17
 // 业务代码字符集，这个是指定源码解析的字符集[编译器]
@@ -21,16 +21,24 @@ allprojects {
     }
 
     repositories {
-        maven {url 'https://maven.aliyun.com/repository/public'}
+        maven { url 'https://maven.aliyun.com/repository/public' }
         mavenCentral()
     }
-
-
-
 }
 
-configurations.all(){
-    Configuration configuration ->{
-        configuration.resolutionStrategy.failOnVersionConflict()
-    }
+configurations.all() {
+    Configuration configuration ->
+        {
+            configuration.resolutionStrategy.failOnVersionConflict()
+        }
 }
+
+
+ext.libraries = [
+
+    arrow_verctor: dependencies.create("org.apache.arrow:arrow-vector:${arrowVersion}") ,
+    arrow_core: "org.apache.arrow:arrow-memory-core:${arrowVersion}" ,
+    arrow_memory_netty: "org.apache.arrow:arrow-memory-netty:${arrowVersion}" ,
+    arrow_flight: "org.apache.arrow:flight-core:${arrowVersion}" ,
+    arrow_plasma: "org.apache.arrow:arrow-plasma :${arrowVersion}"
+]
