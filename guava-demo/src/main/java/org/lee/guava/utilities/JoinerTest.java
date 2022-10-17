@@ -1,4 +1,4 @@
-package org.lee.guava.utilies;
+package org.lee.guava.utilities;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
