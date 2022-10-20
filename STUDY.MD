@@ -51,3 +51,11 @@ B api C
  或者 implementation("xxx:1.1.0"){version{strict("1.4.0")}
 
 查看依赖冲突
+
+
+# git 
+git commit 
+git commit --amend
+git checkout 
+git add 
+git fetch 
