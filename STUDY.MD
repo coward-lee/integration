@@ -53,9 +53,16 @@ B api C
 查看依赖冲突
 
 
-# git 
-git commit 
-git commit --amend
-git checkout 
-git add 
-git fetch 
+# git
+
+|命令| desc｜
+|---|-------|
+|git commit ||
+|git checkout ||
+|git add ||
+|git fetch ||
+git remote
+git tag 打标签  -d (删除)       git push origin --delete <tagname> 删除远程分支
+git
+
+[//]: # (git tag -a v1.2 9fceb02)
