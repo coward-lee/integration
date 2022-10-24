@@ -61,34 +61,35 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-task task1 {
-    println "这是一个简单任务 来自 task1"
-    doFirst {
-        println "task 1 do first"
-    }
-    doLast {
-        println "task 1 do last"
-    }
-}
-
-task1.doFirst {
-    println " task1 doFirst outer"
-}
-task1.doLast {
-    println " task1 doLast outer"
-}
-
-task A {
-    doLast {
-        println "taskA"
-    }
-}
-task B {
-    group "abc"
-    doLast {
-        println "taskB"
-    }
-}
+//
+//task task1 {
+//    println "这是一个简单任务 来自 task1"
+//    doFirst {
+//        println "task 1 do first"
+//    }
+//    doLast {
+//        println "task 1 do last"
+//    }
+//}
+//
+//task1.doFirst {
+//    println " task1 doFirst outer"
+//}
+//task1.doLast {
+//    println " task1 doLast outer"
+//}
+//
+//task A {
+//    doLast {
+//        println "taskA"
+//    }
+//}
+//task B {
+//    group "abc"
+//    doLast {
+//        println "taskB"
+//    }
+//}
 
 // 对当前工程和子工程一起设置
 allprojects {

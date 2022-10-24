@@ -1,12 +1,29 @@
 package org.lee
 
-
-
-fun main(args: Array<String>) {
-    println("Hello World!")
-
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+object Main{
+    fun main(args: Array<String>) {
+        println("Hello world!")
+    }
 }
-main(Array(1))
+
+/**
+ * when 表达式
+ */
+fun describe(obj: Any): String =
+    when (obj) {
+        1          -> "One"
+        "Hello"    -> "Greeting"
+        is Long    -> "Long"
+        !is String -> "Not a string"
+        else       -> "Unknown"
+    }
+
+println(describe("Hello"))
+println(describe(1))
+println(describe(0L))
+println(describe(0.0))
+val item = List("juicy")
+when {
+    "orange" in items -> println("juicy")
+    "apple" in items -> println("apple is fine too")
+}
