@@ -44,10 +44,10 @@ note :对uml的注释
 
 
 # 设计模式
-1. 工厂模式     
-2. 原型模式         
+### 1. 工厂模式     
+### 2. 原型模式         
     包：design.pattern.factory
-3. 构造器模式        
+### 3. 构造器模式        
     包：design.pattern.build
 4. 适配器模式        
     包：design.pattern.build      
