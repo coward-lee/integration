@@ -161,3 +161,9 @@ management:
 
 ### oom 排查
 -XX:+HeapDumpBeforeFullGC -XX:+HeapDumpAfterFullGC -XX:+HeapDumpOnOutOfMemoryError  -XX:HeapDumpPath=dump.jprof
+
+
+
+### docker
+mysql 启动失败，报权限错误的处理方式
+--privileged=true 

@@ -49,3 +49,12 @@ tips:
     
 
 
+# 日志
+- redo log 的单位是页
+- undo log 的单位是行
+
+
+优化策略
+innodb_undo_directory
+innodb_undo_logs
+innodb_undo_tablespaces
