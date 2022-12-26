@@ -55,14 +55,14 @@ B api C
 
 # git
 
-|命令| desc｜
-|---|-------|
+|命令| desc｜                                                        
+|---|--------------------------------------------------------------|
 |git commit ||
 |git checkout ||
 |git add ||
 |git fetch ||
-git remote
-git tag 打标签  -d (删除)       git push origin --delete <tagname> 删除远程分支
-git
+|git remote||
+|git tag| 打标签  -d (删除)       git push origin --delete <tagname> 删除远程分支 |
+|git stash| git stash 暂存工作空间       git stash apply 恢复工作空间 |
 
 [//]: # (git tag -a v1.2 9fceb02)
