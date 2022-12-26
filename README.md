@@ -161,3 +161,11 @@ management:
 
 ### oom 排查
 -XX:+HeapDumpBeforeFullGC -XX:+HeapDumpAfterFullGC -XX:+HeapDumpOnOutOfMemoryError  -XX:HeapDumpPath=dump.jprof
+
+
+# Java 9中--add-exports和--add-opens有什么区别？
+使用--add-exports包被导出，意味着所有的公共类型和成员都可以在编译和运行时访问。    
+随着--add-opens打开包，这意味着其中的所有类型和成员（不仅是公共的！）在运行时可以访问。    
+所以在运行时的主要区别是--add-opens允许“深度反射”，意思是非公共成员的访问。    
+您通常可以通过调用setAccessible(true)的反射代码来识别此类访问。       
+opens 开放所有的权限，exports 只有被public修饰的可以被访问
