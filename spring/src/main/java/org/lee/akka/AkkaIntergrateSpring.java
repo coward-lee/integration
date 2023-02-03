@@ -1,12 +1,13 @@
 package org.lee.akka;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.lang.reflect.Field;
 
 public class AkkaIntergrateSpring {
     public static void main(String[] args) {
-        var context = new AnnotationConfigApplicationContext(Config.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
         Actor actor = new Actor();
         Class<? extends Actor> clazz = actor.getClass();
         Field[] fields = clazz.getDeclaredFields();
