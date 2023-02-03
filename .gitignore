@@ -19,3 +19,5 @@
 #   doc/**/*.pdf
 */tmp/
 /tmp/
+
+.java-version
