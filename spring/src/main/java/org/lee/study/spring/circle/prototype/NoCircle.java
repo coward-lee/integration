@@ -1,10 +1,7 @@
-package org.lee.study.spring.recycle;
+package org.lee.study.spring.circle.prototype;
 
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.*;
 import org.springframework.stereotype.Component;
 
 /**
@@ -26,12 +23,13 @@ public class NoCircle {
 
 }
 @Configuration
-@ComponentScan(basePackages = "org.lee.study.spring.recycle")
+@ComponentScan(basePackages = "org.lee.study.spring.circle.prototype")
 class ConfigA{
 
 }
 
-@Component
+@Component()
+@Scope("prototype")
 class NoCircleA{
     private final NoCircleB b;
 
@@ -43,7 +41,9 @@ class NoCircleA{
         this.b = b;
     }
 }
-@Component
+
+@Component()
+@Scope("prototype")
 class NoCircleB{
 
     private final NoCircleA a;
