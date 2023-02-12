@@ -105,4 +105,6 @@ ReflectiveMethodInvocation有一个成员变量：interceptorsAndDynamicMethodMa
 3. 如果scope为prototype 同样可以解决，prototype是在获取bean的时候创建bean同时创建构造器参数，此时的构造器参数还是会被代理，   
 但是如果此时的构造器参数再去调用的时候对应的方法是不是去singletonObjects map中取对象而是new一个新的对象出来
 
+## spring 中 相同的beanName 但是类型不同
+会冲突，初始化spring环境的时候就会报错
 
