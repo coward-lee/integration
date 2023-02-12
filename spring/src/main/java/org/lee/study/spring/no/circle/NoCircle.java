@@ -30,7 +30,7 @@ class NoCircleA{
         return b;
     }
 
-    public NoCircleA(NoCircleB b) {
+    public NoCircleA(@Lazy NoCircleB b) {
         this.b = b;
     }
 }
@@ -39,7 +39,7 @@ class NoCircleB{
 
     private final NoCircleC c;
 
-    public NoCircleB( NoCircleC c) {
+    public NoCircleB(@Lazy  NoCircleC c) {
         this.c = c;
     }
 }
