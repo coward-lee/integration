@@ -29,14 +29,11 @@ public class ProxyFactory {
         return Proxy.newProxyInstance(
                 target.getClass().getClassLoader(),
                 target.getClass().getInterfaces(),
-                new InvocationHandler() {
-                    @Override
-                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                        System.out.println("jdk 动态代理开始");
-                        Object invoke = method.invoke(target, args);
-                        System.out.println("jdk 动态代理结束准备返回值了");
-                        return invoke;
-                    }
+                (proxy, method, args) -> {
+                    System.out.println("jdk 动态代理开始");
+                    Object invoke = method.invoke(target, args);
+                    System.out.println("jdk 动态代理结束准备返回值了");
+                    return invoke;
                 }
         );
     }
