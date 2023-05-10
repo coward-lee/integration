@@ -160,8 +160,13 @@ management:
 
 
 ### oom 排查
--XX:+HeapDumpBeforeFullGC -XX:+HeapDumpAfterFullGC -XX:+HeapDumpOnOutOfMemoryError  -XX:HeapDumpPath=dump.jprof
+-XX:+HeapDumpBeforeFullGC -XX:+HeapDumpAfterFullGC -XX:+HeapDumpOnOutOfMemoryError  -XX:HeapDumpPath=/opt/saas/data/dump/dump.jprof
 
+### thread dump
+jstack -l 1 >> /opt/saas/data/dump/thread-2023-04-21.thread_dump
+
+### memory dump
+jmap -dump:format=b,file=/opt/saas/data/dump/memory-2023-04-21.memory_dump 1
 
 # Java 9中--add-exports和--add-opens有什么区别？
 使用--add-exports包被导出，意味着所有的公共类型和成员都可以在编译和运行时访问。    
