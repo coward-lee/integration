@@ -8,5 +8,7 @@ public class DynamicMain {
         System.out.println(proxy);
         System.out.println(proxy.getClass());
         proxy.doSomething();
+        System.out.println("=================================");
+        ((OriginalClass) proxy).doSomething1();
     }
 }

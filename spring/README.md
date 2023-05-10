@@ -29,11 +29,12 @@
 
 
 # AOP 术语
-1. 连接点：类里面那些方法可以被增强、这些方法称之为连接点， （实际被执行的方法，还没有增强之前的方法）
-2. 切入点：实际被增强的方法，成为切入点
-3. 通知（增强）：实际增强的逻辑部分称之为通知（增强）      
+1. 连接点(join point)：类里面那些方法可以被增强、这些方法称之为连接点， （实际被执行的方法，还没有增强之前的方法）
+2. 切入点(join point)：实际被增强的方法，成为切入点
+3. 通知（增强）(advice)：实际增强的逻辑部分称之为通知（增强）      
    前置通知、后置通知、环绕通知、异常通知、最终通知
-4. 切面是动作：把通知应用到切入点的过程
+4. 切面是动作(aspect)：把通知应用到切入点的过程
+5. 引入/引介 ？
 ## 1. AOP的准备操作
 1. Spring是一款一般都是基于AspectJ实现AOP操作 
    1、 什么是AspectJ  
@@ -64,12 +65,14 @@
    1. 在增强类的上面添加注解@Order(数字)， 数值越小优先级越高
    2. 高优先级回复覆盖低优先级而是在高优先级前面。
 ## AOP
-   
+#### AOP对象的创建
 
-
-## spring 整合 akka
-使用spring初始化actor的原对象
-org.lee.akka
+#### AOP对象的调用
+aop 执行流程图解
+![](D:\code\java\integration\spring\img\aop.png)
+ReflectiveMethodInvocation有一个成员变量：interceptorsAndDynamicMethodMatchers
+这个就是advice的列表，在执行的时候就是去迭代这个列表中的成员并且invoke 相应的方法（如AspectJAroundAdvice#invoke）
+对象有一个成员变量
 
 ## spring 推荐使用构造体注入
 依赖不可变：其实说的就是final关键字，这里不再多解释了。不明白的园友可以回去看看Java语法。     
@@ -77,3 +80,31 @@ org.lee.akka
 &emsp;&emsp;1：有该类型的参数->传入，OK 。      
 &emsp;&emsp;2：无该类型的参数->报错。所以保证不会为空，Spring总不至于传一个null进去吧 😦         
 完全初始化的状态：这个可以跟上面的依赖不为空结合起来，向构造器传参之前，要确保注入的内容不为空，那么肯定要调用依赖组件的构造方法完成实例化。而在Java类加载实例化的过程中，构造方法是最后一步（之前如果有父类先初始化父类，然后自己的成员变量，最后才是构造方法，这里不详细展开。）。所以返回来的都是初始化之后的状态。     
+
+
+
+## 构造体注入 依赖循环解决
+1. 实例化对象的处理，核心调用方法  
+一些核心方法如下
+ - DefaultListableBeanFactory#resolveDependency
+ - ContextAnnotationAutowireCandidateResolver#getLazyResolutionProxyIfNecessary
+ - ContextAnnotationAutowireCandidateResolver#buildLazyResolutionProxy
+这一步会给代理对象set一个匿名的TargetSource对象，这个是实现可以换选调用的关键所在
+ - ObjenesisCglibAopProxy#createProxyClassAndInstance
+ - SpringObjenesis#newInstance  
+构造器参数的实例化过程，果构造参数是被lazy注解注释了，那么他会创建一个代理对象这个代理对象会调用的构造器方法传入参数（(Object[])null）来实例化参数，    
+这个被创建出来的bean是一个被cglib代理了的一个bean， 每次在执行的时候回去执行相应的代理动作
+
+2. 通过构造器参数赋值的成员变量(bean)的调用过程
+由于是被cglib 代理过了的对象，每次调用方法之前会想执行cglib的代理对象的代码，
+而最终调用道德java代码是DynamicAdvisedInterceptor#intercept(Object proxy, Method method, Object[] args, MethodProxy methodProxy)   
+参数逐个解释，proxy对象是就是发起调用的(成员变量)bean，method就是我们具体调用的方法，args参数，methodProxy 被cglib代理了的方法，  
+在执行过程中，会先去singleObjects的map中查出map中的和proxy对象一样的bean，实际的调用都是从map中的bean来进行调用的。  
+
+
+3. 如果scope为prototype 同样可以解决，prototype是在获取bean的时候创建bean同时创建构造器参数，此时的构造器参数还是会被代理，   
+但是如果此时的构造器参数再去调用的时候对应的方法是不是去singletonObjects map中取对象而是new一个新的对象出来
+
+## spring 中 相同的beanName 但是类型不同
+会冲突，初始化spring环境的时候就会报错
+

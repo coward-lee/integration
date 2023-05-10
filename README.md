@@ -174,3 +174,9 @@ jmap -dump:format=b,file=/opt/saas/data/dump/memory-2023-04-21.memory_dump 1
 所以在运行时的主要区别是--add-opens允许“深度反射”，意思是非公共成员的访问。    
 您通常可以通过调用setAccessible(true)的反射代码来识别此类访问。       
 opens 开放所有的权限，exports 只有被public修饰的可以被访问
+
+
+
+### docker
+mysql 启动失败，报权限错误的处理方式
+--privileged=true 

@@ -5,8 +5,8 @@ allprojects {
 
     group "org.lee"
     version '1.0.0'
-    sourceCompatibility = 17
-    targetCompatibility = 17
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 // 业务代码字符集，这个是指定源码解析的字符集[编译器]
     compileJava.options.encoding = "UTF-8"
 // 测试代码字符集，这个是指定源码解析的字符集[编译器]
