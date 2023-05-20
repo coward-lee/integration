@@ -159,14 +159,39 @@ management:
 ![jmx_client](img/jmx_client.jpg)
 
 
-### oom 排查
+# oom 排查
 -XX:+HeapDumpBeforeFullGC -XX:+HeapDumpAfterFullGC -XX:+HeapDumpOnOutOfMemoryError  -XX:HeapDumpPath=/opt/saas/data/dump/dump.jprof
+-XX:MaxDirectMemorySize=32G 直接内存配置
+###
+oom 原因
+1. java headspace oom
+2. java directory oom
+3. mmap 文件数量超过linux内核指定数量
+    这个错误不会有明显的oom提示回到处一个log文件 hs_err_pidxxx.log
+    这个需要去看一下 Dynamic libraries: 中的文件打开数量
+4. 
 
-### thread dump
+## thread dump
 jstack -l 1 >> /opt/saas/data/dump/thread-2023-04-21.thread_dump
 
 ### memory dump
-jmap -dump:format=b,file=/opt/saas/data/dump/memory-2023-04-21.memory_dump 1
+jmap -dump:format=b,file=/opt/saas/data/dump/memory-2023-05-17.memory_dump 1
+### mmap 超出系统限制
+1. 查看 mmap的进程最大打开数量,下面两个都可以   
+sysctl -a|grep vm.max_map_count   
+cat /proc/sys/vm/max_map_count   
+2. 临时修改
+sysctl -w vm.max_map_count=262144
+3. 永久修改
+编辑文件：
+vim /etc/sysctl.conf
+添加或者修改文件内容
+vm.max_map_count=262144
+4. 激活配置
+sysctl -p
+
+
+
 
 # Java 9中--add-exports和--add-opens有什么区别？
 使用--add-exports包被导出，意味着所有的公共类型和成员都可以在编译和运行时访问。    
@@ -175,6 +200,15 @@ jmap -dump:format=b,file=/opt/saas/data/dump/memory-2023-04-21.memory_dump 1
 您通常可以通过调用setAccessible(true)的反射代码来识别此类访问。       
 opens 开放所有的权限，exports 只有被public修饰的可以被访问
 
+# Java jconsole 监控堆内存
+java -Dcom.sun.management.jmxremote
+-Dcom.sun.management.jmxremote.port=9099
+-Dcom.sun.management.jmxremote.rmi.port=9099
+-Djava.rmi.server.hostname=122.112.202.161
+-Dcom.sun.management.jmxremote.ssl=false
+-Dcom.sun.management.jmxremote.authenticate=false
+-Dcom.sun.management.jmxremote.local.only=false
+-XX:MaxDirectMemorySize=64G
 
 
 ### docker
