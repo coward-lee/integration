@@ -58,3 +58,33 @@ tips:
 innodb_undo_directory
 innodb_undo_logs
 innodb_undo_tablespaces
+
+
+# 事务
+## 事务准备
+1. 事务基本概念
+acid
+2. undo 日志  
+将原来的操作进行逆操作的行为。       
+如：insert 对应 delete    
+delete 对应 insert  
+update：  
+   非主键修改，反向修改  
+   主键修改，delete insert  
+
+3. redo 日志
+   - 在系统崩溃之后更具checkpoint 进行redo操作  
+   - redo日志类型有  
+   - 基础sql 的 redo log  
+   - undo的redo log  
+    
+4. 事务隔离级别
+   1. 读未提交
+   2. 读已提交
+   3. 可重复读
+   4. 序列化
+5. mvcc 机制
+   多版本并发控制(multi version concurrent control)
+
+
+
