@@ -22,4 +22,14 @@ dependencies {
 
 test {
     useJUnitPlatform()
+
+    jvmArgs("-verbose:gc",
+            "-Xms20M",
+            "-Xmx20M",
+            "-Xmn10M",
+//            "-XX:+UseParalellGC",
+//            "-Xlog:gc*",
+            "-XX:+PrintGCDetails",
+            "-XX:SurvivorRatio=8"
+    )
 }
