@@ -17,6 +17,7 @@ class ReDemo {
     static int i = 200;
 
     static {
+        System.out.println("statuc load" + i);
         System.out.println("static load");
         i = 100;
     }
