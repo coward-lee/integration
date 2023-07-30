@@ -14,7 +14,7 @@ public class RefleactDemo {
 }
 
 class ReDemo {
-    static int i = 0;
+    static int i = 200;
 
     static {
         System.out.println("static load");
