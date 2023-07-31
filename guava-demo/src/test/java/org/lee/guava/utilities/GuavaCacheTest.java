@@ -13,15 +13,16 @@ public class GuavaCacheTest {
     }
     @Test
     void test() throws Throwable {
-        Cache<Object, Object> build = CacheBuilder.newBuilder().expireAfterAccess(Duration.ofSeconds(1000000))
+        Cache<Object, Object> build = CacheBuilder.newBuilder()
+                .expireAfterAccess(Duration.ofSeconds(1))
                 .maximumSize(2)
-//                .refreshAfterWrite(Duration.ofSeconds(1000))
+                .refreshAfterWrite(Duration.ofMillis(1))
                 .removalListener(notification -> System.out.println(notification.getKey()+":"+notification.getValue()+"was removed , calused by "+ notification.getCause().name()))
-//                .build(CacheLoader.from(() -> {
-//                    System.out.println("loader invoked");
-//                    return "";
-//                }));
-                .build();
+                .build(CacheLoader.from(() -> {
+                    System.out.println("loader invoked");
+                    return "";
+                }));
+//                .build();
         String k = "k";
         build.get(k, () -> load());
         build.get(k+"1", () -> load());

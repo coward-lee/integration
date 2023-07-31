@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutionException;
 public class CacheDemo {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         Cache<Object, Object> build = CacheBuilder.newBuilder()
-                .expireAfterAccess(Duration.ofHours(1L))
+                .expireAfterAccess(Duration.ofMillis(1L))
                 .refreshAfterWrite(Duration.ofMillis(1))
                 .build(CacheLoader.from(()->""));
         String k = "k";
