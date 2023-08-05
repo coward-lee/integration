@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+slf4j<?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
     <Properties>
         <!-- 定义日志格式 -->

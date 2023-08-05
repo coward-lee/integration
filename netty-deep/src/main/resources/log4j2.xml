@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+    <Properties>
+        <Property name="log-path">log/</Property>
+        <Property name="app-name">netty-deep</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%highlight{%-5p} | %d{yyyy-MM-dd HH:mm:ss:SSS} | %yellow{[%t]} %cyan{%C{2}} (%red{%F:%L}) - %m%n" />
+        </Console>
+
+        <RollingFile name="RollingFile" fileName="${log-path}/${app-name}.log"
+                     filePattern="${log-path}/${app-name}-%d{yyyy-MM-dd-HH}-%i.log">
+            <PatternLayout>
+                <pattern>%-5p | %d{yyyy-MM-dd HH:mm:ss:SSS} | [%t] %C{2} (%F:%L) - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+        <RollingFile name="RollingFileError" fileName="${log-path}/${app-name}-error.log"
+                     filePattern="${log-path}/${app-name}-error-%d{yyyy-MM-dd-HH}-%i.log">
+            <PatternLayout>
+                <pattern>%-5p | %d{yyyy-MM-dd HH:mm:ss:SSS} | [%t] %C{2} (%F:%L) - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+        <RollingFile name="RealtimeStock" fileName="${log-path}/${app-name}-realtime-stock.log"
+                     filePattern="${log-path}/${app-name}-realtime-stock-%d{yyyy-MM-dd-HH}-%i.log">
+            <PatternLayout>
+                <pattern>%-5p | %d{yyyy-MM-dd HH:mm:ss:SSS} | [%t] %C{2} (%F:%L) - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+        <RollingFile name="RealtimeBenchmark" fileName="${log-path}/${app-name}-realtime-benchmark.log"
+                     filePattern="${log-path}/${app-name}-realtime-benchmark-%d{yyyy-MM-dd-HH}-%i.log">
+            <PatternLayout>
+                <pattern>%-5p | %d{yyyy-MM-dd HH:mm:ss:SSS} | [%t] %C{2} (%F:%L) - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+
+        <Root level="INFO">
+            <AppenderRef ref="STDOUT" level="INFO"/>
+            <AppenderRef ref="RollingFile" level="INFO"/>
+            <AppenderRef ref="RollingFileError" level="ERROR"/>
+            <!--<AppenderRef ref="Sentry" level="WARN" />-->
+        </Root>
+    </Loggers>
+
+</Configuration>

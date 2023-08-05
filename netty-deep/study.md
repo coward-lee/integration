@@ -2,11 +2,13 @@
 1. selector  对应一个线程
 2. channel  一个selector 会有多个channel 注册到selector/程序，他是双向的可以用于输入也可以用于输出
 3. buffer  内存块，底层是一个数组，这个是程序操作的对象，
-<pre>
-         |————buffer —— channel |      
-程序      |————buffer —— channel |    selector
-         |————buffer —— channel |    
-</pre>
+   <pre>
+            |————buffer —— channel |      
+   程序      |————buffer —— channel |    selector
+            |————buffer —— channel |    
+   </pre>
+4. handler
+5. 
 
 # netty 基础组件
 1. netty 抽象出两组线程池，master group 专门负责收客户端链接，worker 专门负责网络读写
@@ -24,6 +26,20 @@
    3. 处理任务队列的任务，及runAllTasks
 8. 每个Worker NioEventLoop处理业务时会使用到pipeline，pipeline就是handler的双向链表
 
+Netty模型
+方案再说明
+1) Netty 抽象出两组线程池，MasterGroup专门负责接收客户端连接，WorkerGroup 专门负责网络读写操作。
+2) NioEventLoop表示一个不断循环执行处理任务的线程，每 NioEventLoop 都有一个selector，用于监听绑定在其上的 socket 网络通道。
+3) NioEventLoop内部采用串行化设计，从消息的读取->解码->处理->编码->发送，始终由I0 线程 NioEventLoop 负责
+   NioEventLoopGroup 下包含多个 NioEventLoop
+   每个 NioEventLoop 中包含有一个 Selector，一个 taskQueue
+   每个 NioEventLoop的 Selector 上可以注册监听多个 NioChannel每个 
+   NioChannel只会绑定在唯一的 NioEventLoop上每个 
+   NioChannel都绑定有一个自己的 ChannelPipeline
 
+# netty 线程池
 
+# netty i/o模型
 
+# handler
+handler 再请求过程中的情况，单个页面的请求多个资源，单个浏览器多个页面，单个浏览器多次刷新，多个浏览器
