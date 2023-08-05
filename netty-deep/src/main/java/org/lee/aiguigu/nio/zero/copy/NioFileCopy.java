@@ -1,4 +1,4 @@
-package org.lee.aiguigu.zero.copy;
+package org.lee.aiguigu.nio.zero.copy;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
