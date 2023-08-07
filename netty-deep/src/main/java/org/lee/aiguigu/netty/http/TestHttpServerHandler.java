@@ -20,6 +20,8 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
     // 读取客户端的消息
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) throws Exception {
+        log.info("channel:{} pipeline:{} pipeline.channel:{}",ctx.channel(), ctx.pipeline(),ctx.pipeline().channel());
+        log.info("current handler is {}",ctx.handler());
         if (msg instanceof HttpRequest){
             log.info("pipeline hash code :{}",ctx.pipeline().hashCode());
 

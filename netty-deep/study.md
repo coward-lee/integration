@@ -37,9 +37,19 @@ Netty模型
    NioChannel只会绑定在唯一的 NioEventLoop上每个 
    NioChannel都绑定有一个自己的 ChannelPipeline
 
-# netty 线程池
-
-# netty i/o模型
+# netty 线程池, EventLoopGroup/NioEventLoopGroup
 
 # handler
 handler 再请求过程中的情况，单个页面的请求多个资源，单个浏览器多个页面，单个浏览器多次刷新，多个浏览器
+## handler 继承关系图
+![](../img/handler_impl.png)
+
+# pipeline
+
+# channel
+
+## channel option
+ChannelOption.BACKLOG对应TCP/IP 协议 listen 函数中的 backlog 参数，用来初始化服务器可连接队列大小。服务端处理客户端连接请求是顺序处理的，所以同一时间只能处理一个客户端连接。多个客户端来的时候，服务端将不能外理的客户端连接请求放在队列中等待处理，backlog 参数指定了队列的大小。
+ChannelOption.KEEPALIVE直保持连接活动状态
+
+# protobuf 协议
