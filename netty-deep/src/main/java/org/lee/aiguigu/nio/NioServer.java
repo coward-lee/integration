@@ -47,7 +47,7 @@ public class NioServer {
                         System.out.println("accept event:" + accept + accept.hashCode());
                         // 将客户端连接生成的channel 绑定到selector
                         accept.configureBlocking(false);
-                        accept.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1024));
+                        SelectionKey register = accept.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1024));
                     }
                     if (key.isReadable()) {
                         // 通过key 获得channel

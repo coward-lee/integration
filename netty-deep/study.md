@@ -39,17 +39,55 @@ Netty模型
 
 # netty 线程池, EventLoopGroup/NioEventLoopGroup
 
-# handler
+# handler 源码
 handler 再请求过程中的情况，单个页面的请求多个资源，单个浏览器多个页面，单个浏览器多次刷新，多个浏览器
 ## handler 继承关系图
 ![](../img/handler_impl.png)
 
 # pipeline
+## 概览
+DefaultChannelPipeline#callHandlerAddedForAllHandlers 调用channelHandlerInitializer
+![](../img/nettty_defailtchannelpipiline.png)
 
+它支持热插拔的方法使用handler
+
+AbstractChannelHandlerContext#skipContext
+
+ pipeline 会根据 executionMask 这个的值进行pipeline 调用链进行优化
 # channel
 
 ## channel option
-ChannelOption.BACKLOG对应TCP/IP 协议 listen 函数中的 backlog 参数，用来初始化服务器可连接队列大小。服务端处理客户端连接请求是顺序处理的，所以同一时间只能处理一个客户端连接。多个客户端来的时候，服务端将不能外理的客户端连接请求放在队列中等待处理，backlog 参数指定了队列的大小。
-ChannelOption.KEEPALIVE直保持连接活动状态
+ChannelOption.BACKLOG 对应TCP/IP 协议 listen 函数中的 backlog 参数，用来初始化服务器可连接队列大小。服务端处理客户端连接请求是顺序处理的，所以同一时间只能处理一个客户端连接。多个客户端来的时候，服务端将不能外理的客户端连接请求放在队列中等待处理，backlog 参数指定了队列的大小。
+ChannelOption.KEEPALIVE 直保持连接活动状态
 
 # protobuf 协议
+
+# netty 服务端启动流程
+也就是服务端端口开启监听端口的流程     
+核心入口方法：AbstractBootstrap#bind 
+1. initAndRegister 初始化注册器
+   1. 实例化一个netty的Channel对象, 
+      1. 并且将readInterestOp成员变量赋值为ChannelSelectionKey.OP_ACCEPT，（这个时候还没有将感兴趣事件注册到selector上）
+      2. 配置为非阻塞i/o 
+      3. 实例化当前channel的pipeline，并且将默认的tail和head加入pipeline中
+      4. 实例化内存分配器
+   2. 初始化 netty的channel
+      1. 添加匿名的ChannelInitializer：这里值添加一些处理器，ServerBootstrapAcceptor、日志处理器等
+      2. 这里的处理器添加ServerBootstrapAcceptor这个处理器，是通过提交任务的方式加入任务的，目的可能是为了：为什么这么写呢？因为是单线程的，防止添加pipeline节点的操作导致反复添加节点问题
+   3. 将channel 添加到  EventLoopGroup 中
+      1. 注册将原生的channel注册到当前EventLoop的selector中，此时channel还没有被注册任何感兴趣事件
+      2. 执行 DefaultChannelPipeline#invokeHandlerAddedIfNeeded，ChannelInitializer#handlerAdded，这里的initializer，就是（2.1中实例化的ChannelInitializer）
+         1. 初始化channel ，这个时候回去调用我们自定义的ChannelInitializer#initChannel将我们的自定义handler添加到当前channel的pipeline上
+         2. 将ChannelInitializer 的handler当前pipeline 移除出去！！！！！！！！！！（注意，这里就体现了链式pipeline的好处，热插拔功能）
+      3. DefaultChannelPipeline#fireChannelRegistered
+         1. 会去尝试执行 DefaultChannelPipeline#invokeHandlerAddedIfNeeded 由于之前以及执行过一次，所以这里基本就是一个 nop操作， 从head开始
+      4. 尝试激活pipeline 但是由于此时还没有将进程绑定到端口上，所以无法激活    
+=========================== 此时我们的netty的server 版本就启动代码以及完成，并且将监听接口的异步结果返回， ===========================
+2. 将 ServerBootstrapAcceptor 加入到pipeline 中
+3. 执行绑定端口, 从tail 从未到头执行 bind操作
+4. 加入accept事件到当前channel的selectionKey ！！！！！！！！！！
+   1. DefaultChannelPipeline#fireChannelActive 执行 pipeline 中handler 的 channelActive方法
+   2. 执行完了 fireChannelActive 链 之后执行  ChannelOutboundHandler(HeadContext)#read
+# netty 接请求流程流程
+
+# channelHandlerContext 分析
