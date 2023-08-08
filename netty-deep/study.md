@@ -43,18 +43,22 @@ Netty模型
 handler 再请求过程中的情况，单个页面的请求多个资源，单个浏览器多个页面，单个浏览器多次刷新，多个浏览器
 ## handler 继承关系图
 ![](../img/handler_impl.png)
-
+handler 执行的hook方法执行顺序
+handleAdded
+registered
+active
+outBound#read
+readComplete
 # pipeline
 ## 概览
 DefaultChannelPipeline#callHandlerAddedForAllHandlers 调用channelHandlerInitializer
 ![](../img/nettty_defailtchannelpipiline.png)
 
-它支持热插拔的方法使用handler
-
-AbstractChannelHandlerContext#skipContext
-
- pipeline 会根据 executionMask 这个的值进行pipeline 调用链进行优化
+- 它支持热插拔的方法使用handler
+- AbstractChannelHandlerContext#skipContext pipeline 会根据 executionMask 这个的值进行pipeline 调用链进行优化
 # channel
+channel 继承关系图
+![](../img/nio_socket_channel.png)
 
 ## channel option
 ChannelOption.BACKLOG 对应TCP/IP 协议 listen 函数中的 backlog 参数，用来初始化服务器可连接队列大小。服务端处理客户端连接请求是顺序处理的，所以同一时间只能处理一个客户端连接。多个客户端来的时候，服务端将不能外理的客户端连接请求放在队列中等待处理，backlog 参数指定了队列的大小。
@@ -88,6 +92,28 @@ ChannelOption.KEEPALIVE 直保持连接活动状态
 4. 加入accept事件到当前channel的selectionKey ！！！！！！！！！！
    1. DefaultChannelPipeline#fireChannelActive 执行 pipeline 中handler 的 channelActive方法
    2. 执行完了 fireChannelActive 链 之后执行  ChannelOutboundHandler(HeadContext)#read
+
+
 # netty 接请求流程流程
+1. 死循环轮训selectionKey （再window上不存在空循环导致cpu %100问题，linux上存在空循环bug）
+   1. 不存在事件
+      1. 没有任务可以执行（也就是当前NioEventLoop线程池的taskQueues没有元素），再去select一把，如果再就阻塞
+      2. 存在任务执行，去执行taskQueue中的task 
+   2. 存在事件，处理selectionKey的对应事件
+2. 处理新连接请求过来    
+   通过 NioMessageUnsafe#doReadMessages 实现
+   1. 通过acceptChannel 接受新的请求，产生一个新的java的nio channel
+   2. 将java的channel封装到netty的channel中，并且将SelectionKey.OP_READ 作为 netty channel的readInterestOp成员变量
+   3. 将新的 channel 放到 AbstractNioMessageChannel$NioMessageUnsafe.readBuf 列表中   
+3. 调用ChannelPipeline#fireChannelRead，也就是调用 ChannelInboundHandler#channelRead方法，进站操作，同事此时的message是 accept产生的新的netty的channel
+   1. 这里最核心的逻辑就是去执行在 netty 启动阶段的ServerBootstrapAcceptor 这里处理器，
+   2. 组装我们的pipeline ，将我们的initializer 加入到新channel的pipeline中
+   3. 将新的channel注册到childGroup中，也就是就像新的连接注册到我们的workerGroup中，这个时候就与前文（1.3 的前三个步骤一样了），
+      1. 注册 channel到selector
+      2. 执行initializer中init方法
+   4. 其中第四个步骤不一样，因为此时channel已经是出于被激活状态，所以回去调用新channel的pipeline的fireChannelActive也就是ChannelInboundHandler#channelActive 链
+   5. 由于设置了autoRead，这里会触发channel的read，也就是pipeline的Read， ChannelOutboundHandler(HeadContext)#read
+   6. 回去调用 netty 的 Unsafe#beginRead 也就是将我们的感兴趣的事件注册到新channel上
+   
 
 # channelHandlerContext 分析
