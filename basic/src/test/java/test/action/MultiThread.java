@@ -10,13 +10,11 @@ class MultiThread {
 
     @Test
     void test_thread_pool() throws InterruptedException {
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 4, 10, TimeUnit.HOURS, new ArrayBlockingQueue<>(2), new ThreadPoolExecutor.CallerRunsPolicy());
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 4, 10, TimeUnit.HOURS, new ArrayBlockingQueue<>(2), new ThreadPoolExecutor.DiscardPolicy());
         for (int i = 0; i < 30; i++) {
-            executor.submit(() -> {
-                return len();
-            });
+            executor.submit(() -> len());
         }
-        Thread.sleep(Integer.MAX_VALUE);
+        Thread.sleep(1000);
     }
 
 
@@ -52,7 +50,7 @@ class MultiThread {
                 return len2();
             });
         }
-        Thread.sleep(Integer.MAX_VALUE);
+        Thread.sleep(1000);
     }
 
 
@@ -61,7 +59,7 @@ class MultiThread {
         try {
             int len = 0;
             System.out.println(Thread.currentThread().getName()+" executing");
-            Thread.sleep(5000);
+            Thread.sleep(500);
             System.out.println(Thread.currentThread().getName()+" finshed");
         } catch (Exception e) {
             throw new RuntimeException(e);

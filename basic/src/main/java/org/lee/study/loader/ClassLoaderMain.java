@@ -3,6 +3,7 @@ package org.lee.study.loader;
 public class ClassLoaderMain {
     public static void main(String[] args) throws Throwable {
         System.out.println("1 + 2 == " + fun());
+//        Thread.currentThread().getContextClassLoader()
     }
 
 

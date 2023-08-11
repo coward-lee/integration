@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
 }
 allprojects {
 
@@ -31,6 +32,7 @@ allprojects {
         maven { url 'https://maven.aliyun.com/repository/public' }
         mavenCentral()
     }
+    applicationDefaultJvmArgs = ["--add-opens java.base/java.lang=ALL-UNNAMED"]
 }
 
 configurations.all() {

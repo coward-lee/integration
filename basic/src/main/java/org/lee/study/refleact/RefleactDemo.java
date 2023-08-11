@@ -2,7 +2,6 @@ package org.lee.study.refleact;
 
 import reactor.core.publisher.Flux;
 
-import java.net.URL;
 import java.util.List;
 
 public class RefleactDemo {
@@ -43,8 +42,8 @@ class MyClassLoader extends ClassLoader {
     }
 
     @Override
-    protected URL findResource(String name) {
-        return super.findResource(name);
+    protected Class<?> findClass(String name) throws ClassNotFoundException {
+        return super.findClass(name);
     }
 }
 
