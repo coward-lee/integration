@@ -10,6 +10,7 @@ option java_outer_classname = "MessageProto";
 // 消息定义
 message Message{
   string id = 1;
+//  int32
   uint64 sendTime = 2;
   string content = 3;
   string header = 4;

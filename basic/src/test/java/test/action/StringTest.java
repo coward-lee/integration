@@ -3,8 +3,10 @@ package test.action;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.lee.study.util.FieldUtil;
+import org.lee.study.util.ThreadUtil;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 public class StringTest {
     @Test
@@ -16,6 +18,8 @@ public class StringTest {
 
     @Test
     void test_str_memory_loop() {
+        //        String s0 = "hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohelloxxxxxxxxxxxxxxxxxxxxxxxx";
+
         String s1 = "hello";
         String s2 = new String("hello");
         String s0 = "hel";
@@ -24,6 +28,9 @@ public class StringTest {
         String s31 = (s0 + "lo").intern();
         String s42 = (new String("hel") + "lo").intern();
 //        System.out.println("s1==s2 is " + ( == s2));
+        byte[] values = FieldUtil.getValue(String.class, "value", s1);
+        int i = Arrays.hashCode(values);
+
         System.out.println("s1 " + FieldUtil.getValue(String.class, "value", s1));
         System.out.println("s2 " + FieldUtil.getValue(String.class, "value", s2));
         System.out.println("s0 " + FieldUtil.getValue(String.class, "value", s0));
@@ -39,6 +46,7 @@ public class StringTest {
         Assertions.assertNotEquals((byte[])FieldUtil.getValue(String.class, "value", s1), FieldUtil.getValue(String.class, "value", s4));
         Assertions.assertEquals((byte[])FieldUtil.getValue(String.class, "value", s1), FieldUtil.getValue(String.class, "value", s31));
         Assertions.assertEquals((byte[])FieldUtil.getValue(String.class, "value", s1), FieldUtil.getValue(String.class, "value", s42));
+        ThreadUtil.sleep(100000000);
 
     }
 }
