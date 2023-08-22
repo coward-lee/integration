@@ -1,9 +1,14 @@
-package org.lee.study;
+package org.lee;
 
 import net.sf.cglib.proxy.Enhancer;
+import org.junit.jupiter.api.Test;
+import org.lee.study.cglib.TargetInterceptor;
+import org.lee.study.cglib.TargetObj;
 
-public class Main {
-    public static void main(String[] args) {
+public class MainCglibTest {
+    @Test
+    void test_cglib() {
+
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(TargetObj.class);
         enhancer.setCallback(new TargetInterceptor());

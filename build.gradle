@@ -33,6 +33,13 @@ allprojects {
         mavenCentral()
     }
     applicationDefaultJvmArgs = ["--add-opens java.base/java.lang=ALL-UNNAMED"]
+
+    test{
+        useJUnitPlatform()
+        jvmArgs(
+            "--add-opens=java.base/java.lang=ALL-UNNAMED"
+        )
+    }
 }
 
 configurations.all() {

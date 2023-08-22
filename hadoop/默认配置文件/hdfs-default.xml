@@ -146,10 +146,10 @@
 </property>
 
 <property>
-  <name>dfs.datanode.http.internal-proxy.port</name>
+  <name>dfs.datanode.http.internal-jdkProxy.port</name>
   <value>0</value>
   <description>
-    The datanode's internal web proxy port.
+    The datanode's internal web jdkProxy port.
     By default it selects a random port available in runtime.
   </description>
 </property>
@@ -3663,11 +3663,11 @@
 </property>
 
 <property>
-  <name>dfs.client.failover.proxy.provider</name>
+  <name>dfs.client.failover.jdkProxy.provider</name>
   <value></value>
   <description>
     The prefix (plus a required nameservice ID) for the class name of the
-    configured Failover proxy provider for the host.  For more detailed
+    configured Failover jdkProxy provider for the host.  For more detailed
     information, please consult the "Configuration Details" section of
     the HDFS High Availability documentation.
   </description>

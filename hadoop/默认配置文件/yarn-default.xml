@@ -699,7 +699,7 @@
     <description>When HA is enabled, the class to be used by Clients, AMs and
       NMs to failover to the Active RM. It should extend
       org.apache.hadoop.yarn.client.RMFailoverProxyProvider</description>
-    <name>yarn.client.failover-proxy-provider</name>
+    <name>yarn.client.failover-jdkProxy-provider</name>
     <value>org.apache.hadoop.yarn.client.ConfiguredRMFailoverProxyProvider</value>
   </property>
 
@@ -773,17 +773,17 @@
   </property>
 
   <property>
-  <description>If true, ResourceManager will have proxy-user privileges.
+  <description>If true, ResourceManager will have jdkProxy-user privileges.
     Use case: In a secure cluster, YARN requires the user hdfs delegation-tokens to
     do localization and log-aggregation on behalf of the user. If this is set to true,
     ResourceManager is able to request new hdfs delegation tokens on behalf of
     the user. This is needed by long-running-service, because the hdfs tokens
     will eventually expire and YARN requires new valid tokens to do localization
     and log-aggregation. Note that to enable this use case, the corresponding
-    HDFS NameNode has to configure ResourceManager as the proxy-user so that
+    HDFS NameNode has to configure ResourceManager as the jdkProxy-user so that
     ResourceManager can itself ask for new tokens on behalf of the user when
     tokens are past their max-life-time.</description>
-    <name>yarn.resourcemanager.proxy-user-privileges.enabled</name>
+    <name>yarn.resourcemanager.jdkProxy-user-privileges.enabled</name>
     <value>false</value>
   </property>
 
@@ -1950,7 +1950,7 @@
   <property>
     <description>
       Max time to wait for NM to connect to RM.
-      When not set, proxy will fall back to use value of
+      When not set, jdkProxy will fall back to use value of
       yarn.resourcemanager.connect.max-wait.ms.
     </description>
     <name>yarn.nodemanager.resourcemanager.connect.max-wait.ms</name>
@@ -1960,7 +1960,7 @@
   <property>
     <description>
       Time interval between each NM attempt to connect to RM.
-      When not set, proxy will fall back to use value of
+      When not set, jdkProxy will fall back to use value of
       yarn.resourcemanager.connect.retry-interval.ms.
     </description>
     <name>yarn.nodemanager.resourcemanager.connect.retry-interval.ms</name>
@@ -1969,10 +1969,10 @@
 
   <property>
     <description>
-      Maximum number of proxy connections to cache for node managers. If set
+      Maximum number of jdkProxy connections to cache for node managers. If set
       to a value greater than zero then the cache is enabled and the NMClient
       and MRAppMaster will cache the specified number of node manager proxies.
-      There will be at max one proxy per node manager. Ex. configuring it to a
+      There will be at max one jdkProxy per node manager. Ex. configuring it to a
       value of 5 will make sure that client will at max have 5 proxies cached
       with 5 different node managers. These connections for these proxies will
       be timed out if idle for more than the system wide idle timeout period.
@@ -2097,22 +2097,22 @@
   <!-- WebAppProxy Configuration -->
 
   <property>
-    <description>The kerberos principal for the proxy, if the proxy is not
+    <description>The kerberos principal for the jdkProxy, if the jdkProxy is not
     running as part of the RM.</description>
-    <name>yarn.web-proxy.principal</name>
+    <name>yarn.web-jdkProxy.principal</name>
     <value/>
   </property>
   
   <property>
-    <description>Keytab for WebAppProxy, if the proxy is not running as part of 
+    <description>Keytab for WebAppProxy, if the jdkProxy is not running as part of
     the RM.</description>
-    <name>yarn.web-proxy.keytab</name>
+    <name>yarn.web-jdkProxy.keytab</name>
   </property>
   
   <property>
-    <description>The address for the web proxy as HOST:PORT, if this is not
-     given then the proxy will run as part of the RM</description>
-     <name>yarn.web-proxy.address</name>
+    <description>The address for the web jdkProxy as HOST:PORT, if this is not
+     given then the jdkProxy will run as part of the RM</description>
+     <name>yarn.web-jdkProxy.address</name>
      <value/>
   </property>
 

@@ -1135,35 +1135,35 @@
 </property>
 
 <property>
-  <name>fs.s3a.proxy.host</name>
-  <description>Hostname of the (optional) proxy server for S3 connections.</description>
+  <name>fs.s3a.jdkProxy.host</name>
+  <description>Hostname of the (optional) jdkProxy server for S3 connections.</description>
 </property>
 
 <property>
-  <name>fs.s3a.proxy.port</name>
+  <name>fs.s3a.jdkProxy.port</name>
   <description>Proxy server port. If this property is not set
-    but fs.s3a.proxy.host is, port 80 or 443 is assumed (consistent with
+    but fs.s3a.jdkProxy.host is, port 80 or 443 is assumed (consistent with
     the value of fs.s3a.connection.ssl.enabled).</description>
 </property>
 
 <property>
-  <name>fs.s3a.proxy.username</name>
-  <description>Username for authenticating with proxy server.</description>
+  <name>fs.s3a.jdkProxy.username</name>
+  <description>Username for authenticating with jdkProxy server.</description>
 </property>
 
 <property>
-  <name>fs.s3a.proxy.password</name>
-  <description>Password for authenticating with proxy server.</description>
+  <name>fs.s3a.jdkProxy.password</name>
+  <description>Password for authenticating with jdkProxy server.</description>
 </property>
 
 <property>
-  <name>fs.s3a.proxy.domain</name>
-  <description>Domain for authenticating with proxy server.</description>
+  <name>fs.s3a.jdkProxy.domain</name>
+  <description>Domain for authenticating with jdkProxy server.</description>
 </property>
 
 <property>
-  <name>fs.s3a.proxy.workstation</name>
-  <description>Workstation for authenticating with proxy server.</description>
+  <name>fs.s3a.jdkProxy.workstation</name>
+  <description>Workstation for authenticating with jdkProxy server.</description>
 </property>
 
 <property>

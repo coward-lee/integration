@@ -1,4 +1,4 @@
-package org.lee.study;
+package org.lee.study.cglib;
 
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;

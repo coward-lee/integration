@@ -13,5 +13,8 @@ public class TotalAnnotationDemo {
         UserService userService = context.getBean("userService", UserService.class);
         System.out.println(userService);
         userService.add();
+        BasicInject basicInject = context.getBean("basicInject", BasicInject.class);
+        System.out.println(basicInject.demo);
+        System.out.println(basicInject.demoInt);
     }
 }

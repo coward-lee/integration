@@ -50,8 +50,8 @@
    2. 语法结构：execution(\[权限修饰副\] \[返回类型\].\[方法名称\](\[参数列表\]))        
 举例：
    * 星号（\*） 表示所有类型 第一个（\*）与后面之间有一个空格
-      1. execution(* org.lee.study.spring.aop.dynamic.proxy.aspectj.Demo.method(...))
-      1. execution(\* org.lee.study.spring.aop.dynamic.proxy.aspectj.\*.\*(...))  这个表示aspectj包下面的所有类和所有方法
+      1. execution(* org.lee.study.spring.aop.dynamic.jdkProxy.aspectj.Demo.method(...))
+      1. execution(\* org.lee.study.spring.aop.dynamic.jdkProxy.aspectj.\*.\*(...))  这个表示aspectj包下面的所有类和所有方法
 
 
 ## 2. 实操aspectJ
@@ -99,7 +99,7 @@ ReflectiveMethodInvocation有一个成员变量：interceptorsAndDynamicMethodMa
 
 2. 通过构造器参数赋值的成员变量(bean)的调用过程
 由于是被cglib 代理过了的对象，每次调用方法之前会想执行cglib的代理对象的代码，
-而最终调用道德java代码是DynamicAdvisedInterceptor#intercept(Object proxy, Method method, Object[] args, MethodProxy methodProxy)   
+而最终调用道德java代码是DynamicAdvisedInterceptor#intercept(Object jdkProxy, Method method, Object[] args, MethodProxy methodProxy)   
 参数逐个解释，proxy对象是就是发起调用的(成员变量)bean，method就是我们具体调用的方法，args参数，methodProxy 被cglib代理了的方法，  
 在执行过程中，会先去singleObjects的map中查出map中的和proxy对象一样的bean，实际的调用都是从map中的bean来进行调用的。  
 

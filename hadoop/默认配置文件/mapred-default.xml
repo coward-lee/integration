@@ -2079,7 +2079,7 @@
     configurations to renew tokens.
     For example the following regex expression indicates the minimum required
     configs for RM to connect to a remote hdfs cluster:
-    dfs.nameservices|^dfs.namenode.rpc-address.*$|^dfs.ha.namenodes.*$|^dfs.client.failover.proxy.provider.*$|dfs.namenode.kerberos.principal
+    dfs.nameservices|^dfs.namenode.rpc-address.*$|^dfs.ha.namenodes.*$|^dfs.client.failover.jdkProxy.provider.*$|dfs.namenode.kerberos.principal
   </description>
   <name>mapreduce.job.send-token-conf</name>
   <value></value>

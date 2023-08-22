@@ -1,4 +1,4 @@
-package org.lee.study;
+package org.lee.study.cglib;
 
 public class TargetObj {
 
