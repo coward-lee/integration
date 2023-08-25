@@ -385,6 +385,12 @@ public class Solution {
         return false;
     }
 
+
+
+    @Test
+    void test_movingCount() {
+        System.out.println(movingCount(16, 8, 4));
+    }
     class Pair {
         int count;
         int x;
@@ -395,6 +401,51 @@ public class Solution {
             this.x = x;
             this.y = y;
         }
+    }
+
+    public int movingCount(int m, int n, int k) {
+        Queue<Pair> queue = new LinkedList<>();
+        byte[][] visited = new byte[n][m];
+        queue.offer(new Pair(0, 0, 0));
+        int count = 0;
+        while (!queue.isEmpty()) {
+            Pair poll = queue.poll();
+            int x = poll.x, y = poll.y;
+            visited[y][x] = 1;
+            count++;
+            // instack
+            ArrayList<int[]> list = new ArrayList<>();
+            if (x + 1 < visited[0].length) {
+                list.add(new int[]{x + 1, y});
+            }
+            if (y + 1 < visited.length) {
+                list.add(new int[]{x, y + 1});
+            }
+            if (x - 1 >= 0) {
+                list.add(new int[]{x - 1, y});
+            }
+            if (y - 1 >= 0) {
+                list.add(new int[]{x, y - 1});
+            }
+            for (int[] ints : list) {
+                if (bitCount(ints[0]) + bitCount(ints[1]) <= k && visited[ints[1]][ints[0]] == 0) {
+                    queue.offer(new Pair(0, ints[0], ints[1]));
+                    visited[ints[1]][ints[0]] = 1;
+                }
+            }
+        }
+        return count;
+    }
+
+    public int bitCount(int i) {
+        int t = i;
+        int result = 0;
+        while (t > 10) {
+            result += t % 10;
+            t = t / 10;
+        }
+        result += t;
+        return result;
     }
 
 
