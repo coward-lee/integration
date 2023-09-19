@@ -11,6 +11,37 @@ public class GuavaCacheTest {
     public static void main(String[] args) throws Throwable {
         new GuavaCacheTest().test();
     }
+
+    @Test
+    void test_only_size() throws ExecutionException {
+        Cache<Object, Object> build = CacheBuilder.newBuilder()
+                .maximumSize(2)
+                .build();
+
+        String k = "k";
+        build.get(k, () -> load());
+        build.get(k+"1", () -> load());
+        build.get(k+"1", () -> load());
+        build.get(k+"1", () -> load());
+        build.get(k+"2", () -> load());
+        build.get(k+"1", () -> load());
+    }
+    @Test
+    void test_1() throws Throwable {
+        Cache<Object, Object> build = CacheBuilder.newBuilder()
+                .expireAfterAccess(Duration.ofSeconds(1))
+                .maximumSize(2)
+                .refreshAfterWrite(Duration.ofMillis(1))
+                .removalListener(notification -> System.out.println(notification.getKey()+":"+notification.getValue()+"was removed , calused by "+ notification.getCause().name()))
+                .build(CacheLoader.from(() -> {
+                    System.out.println("loader invoked");
+                    return "";
+                }));
+        String k = "k";
+        build.get(k, () -> load());
+        build.get(k+"1", () -> load());
+        build.get(k+"2", () -> load());
+    }
     @Test
     void test() throws Throwable {
         Cache<Object, Object> build = CacheBuilder.newBuilder()
