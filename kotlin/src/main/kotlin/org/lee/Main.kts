@@ -22,8 +22,8 @@ println(describe("Hello"))
 println(describe(1))
 println(describe(0L))
 println(describe(0.0))
-val item = List("juicy")
-when {
-    "orange" in items -> println("juicy")
-    "apple" in items -> println("apple is fine too")
-}
+//val item = List("juicy")
+//when {
+//    "orange" in items -> println("juicy")
+//    "apple" in items -> println("apple is fine too")
+//}

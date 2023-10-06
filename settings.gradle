@@ -93,4 +93,6 @@ include 'arrow'
 include 'guava-demo'
 include 'spring-boot:lib-boot'
 findProject(':spring-boot:lib-boot')?.name = 'lib-boot'
+include 'spring-boot:mvc'
+findProject(':spring-boot:mvc')?.name = 'mvc'
 
