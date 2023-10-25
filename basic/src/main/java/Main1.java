@@ -1,22 +1,36 @@
-import java.util.concurrent.locks.ReentrantLock;
-
 public class Main1 {
-
     public static void main(String[] args) {
-
-        String s3 = "world" + new String("hel");
-//        String s2 = new String("hel") + " world";
-//        String s1 = "hello";
-//        String s2 = "hello"+"hel";
-//        String s5 = new String("hello");
-//
-//        System.out.println(s1 == s2);
-//        LocalDate.now();
-//        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor();
-        ReentrantLock reentrantLock = new ReentrantLock();
-        reentrantLock.lock();
+        System.out.println(reverse("babad"));
     }
 
+    static String reverse(String input) {
+        int rStart = 0;
+        int rEnd = 0;
+        int len = 0;
+        char[] chars = input.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            for (int j = chars.length - 1; j > i; j--) {
+                if (isRe(chars, i, j) && (j - i) > len) {
+                    rStart = i;
+                    rEnd = j;
+                    len = j - i;
+                }
+            }
+        }
+        return new String(chars, rStart, rEnd-rStart+1);
+    }
+
+    static boolean isRe(char[] chars, int start, int end) {
+        for (int left = start, right = end; left < right; left++, right--) {
+            if (left == right) {
+                return true;
+            }
+            if (chars[left] != chars[right]) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
 

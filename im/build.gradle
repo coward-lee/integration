@@ -1,6 +1,7 @@
 plugins {
     id 'java'
-    id "com.google.protobuf" version "0.8.17"
+    id "com.google.protobuf" version "0.9.4"
+
 }
 
 dependencies {
@@ -36,19 +37,6 @@ sourceSets {
         }
     }
 }
-
-// 配置 protoc的生成exe文件可以使用远程的
-protobuf {
-    protoc {
-        path = '/Users/l/program/protoc-3.20.0-osx-aarch_64/bin/protoc'
-//        path = 'D:\\software\\protoc-3.19.1-win64\\bin\\protoc'
-    }
-    // 配置生成文件的开始路径$projectDir表示module的基本路径
-    generatedFilesBaseDir = "$projectDir/src/"
-
-}
-
-
 
 // 打包成为jar 的脚本配置
 jar {
