@@ -1,0 +1,21 @@
+FROM docker.io/adoptopenjdk/openjdk8:latest
+
+
+RUN sed -i "s@http://.*archive.ubuntu.com@http://mirrors.aliyun.com@g" /etc/apt/sources.list
+RUN sed -i "s@http://.*security.ubuntu.com@http://mirrors.aliyun.com@g" /etc/apt/sources.list
+
+RUN apt-get update \
+    && apt-get install -y procps
+
+RUN mkdir "/app"
+ADD . /app
+
+RUN  chmod +x  /app/bin/* \
+    && chmod 755  /app/lib/*
+
+#copy mycat /usr/local/mycat/
+VOLUME /app/conf
+VOLUME /app/logs
+
+EXPOSE 8066 1984
+CMD ["/app/bin/mycat", "start"]

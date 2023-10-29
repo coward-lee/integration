@@ -1,0 +1,11 @@
+
+
+
+# yaml 配置实例
+version: '3'
+services:
+  mycat:
+    build: ./mycat
+    dockerfile: Dockerfile
+    network_modoe: "host"
+    vol

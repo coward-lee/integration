@@ -6,3 +6,4 @@ docker run --net=host --name mysql1 -v  /home/lee/mysql1/conf/:/etc/mysql/ -v /h
 docker run --net=host --name mysql2 -v  /home/lee/mysql2/conf/:/etc/mysql/ -v /home/lee/mysql2/data:/var/lib/mysql  -e MYSQL_ROOT_PASSWORD=666666 -d mysql:8.0.34
 docker run --net=host --name mysql3 -v  /home/lee/mysql3/conf/:/etc/mysql/ -v /home/lee/mysql3/data:/var/lib/mysql  -e MYSQL_ROOT_PASSWORD=666666 -d mysql:8.0.34
 docker run --net=host --name mysql4 -v  /home/lee/mysql4/conf/:/etc/mysql/ -v /home/lee/mysql4/data:/var/lib/mysql  -e MYSQL_ROOT_PASSWORD=666666 -d mysql:8.0.34
+

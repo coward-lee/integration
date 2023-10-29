@@ -173,9 +173,9 @@ reset slave;
 - 一主一从
 ```mysql
   -- 配置源
-  /*+ mycat:createDataSource{ "name":"rwSepw","url":"jdbc:mysql://192.168.214.133:3306/mydb1","user":"root","password":"666666"}*/;
+  /*+ mycat:createDataSource{ "name":"rwSepw","url":"jdbc:mysql://192.168.214.132:3306/mydb1","user":"root","password":"666666"}*/;
   -- 配置源
-  /*+ mycat:createDataSource{ "name":"rwSepr","url":"jdbc:mysql://192.168.214.134:3306/mydb1","user":"root","password":"666666"}*/;
+  /*+ mycat:createDataSource{ "name":"rwSepr","url":"jdbc:mysql://192.168.214.132:3306/mydb1","user":"root","password":"666666"}*/;
   -- 展示源
   /*+ mycat:showDataSources{}*/;
   -- 创建集群
@@ -221,10 +221,10 @@ server-id=4
 ```mysql
   -- 基于注解的执行
   -- 配置源
-  /*+ mycat:createDataSource{ "name":"master1","url":"jdbc:mysql://192.168.214.134:3301/mydb1","user":"root","password":"666666"}*/;
-  /*+ mycat:createDataSource{ "name":"slave2","url":"jdbc:mysql://192.168.214.134:3302/mydb1","user":"root","password":"666666"}*/;
-  /*+ mycat:createDataSource{ "name":"master3","url":"jdbc:mysql://192.168.214.134:3303/mydb1","user":"root","password":"666666"}*/;
-  /*+ mycat:createDataSource{ "name":"slave4","url":"jdbc:mysql://192.168.214.134:3304/mydb1","user":"root","password":"666666"}*/;
+  /*+ mycat:createDataSource{ "name":"master1","url":"jdbc:mysql://192.168.214.132:3301/mydb1","user":"mycat","password":"666666"}*/;
+  /*+ mycat:createDataSource{ "name":"slave2","url":"jdbc:mysql://192.168.214.132:3302/mydb1","user":"mycat","password":"666666"}*/;
+  /*+ mycat:createDataSource{ "name":"master3","url":"jdbc:mysql://192.168.214.132:3303/mydb1","user":"mycat","password":"666666"}*/;
+  /*+ mycat:createDataSource{ "name":"slave4","url":"jdbc:mysql://192.168.214.132:3304/mydb1","user":"mycat","password":"666666"}*/;
   -- 展示源
   /*+ mycat:showDataSources{}*/;
   -- 创建集群
