@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -96,7 +97,10 @@ public class BatchTest {
     ThreadLocal<Connection> threadLocal = new ThreadLocal<>();
 
     public void pres_test_in_one_connection(String ipPort, String user, String password) {
+
         try {
+
+            Random random = new Random();
             ExecutorService executorService = Executors.newFixedThreadPool(12);
             Class.forName("com.mysql.cj.jdbc.Driver");
             printTime(() -> {
@@ -110,9 +114,14 @@ public class BatchTest {
                                         connection.setAutoCommit(false);
                                         threadLocal.set(connection);
                                     }
+                                    char c1 = (char) random.nextInt(128);
+                                    char c2 = (char) random.nextInt(128);
+                                    char c3 = (char) random.nextInt(128);
+                                    char c4 = (char) random.nextInt(128);
+                                    char c5 = (char) random.nextInt(128);
                                     PreparedStatement preparedStatement = connection.prepareStatement("insert into test2(name, content) values(?,?)");
-                                    preparedStatement.setString(1, "value");
-                                    preparedStatement.setString(2, "content");
+                                    preparedStatement.setString(1, "value" + c1 + c2 + c3 + c4);
+                                    preparedStatement.setString(2, "content" + c1 + c2 + c3 + c5);
                                     preparedStatement.execute();
                                     connection.commit();
                                     preparedStatement.close();
@@ -164,7 +173,7 @@ public class BatchTest {
 
 
     public static void main(String[] args) {
-        new BatchTest().pres_test_in_one_connection("192.168.214.134:3301", "root", "666666");
+        new BatchTest().pres_test_in_one_connection("192.168.214.132:8066", "root", "123456");
     }
 
     static void printTime(Runnable runnable) {
