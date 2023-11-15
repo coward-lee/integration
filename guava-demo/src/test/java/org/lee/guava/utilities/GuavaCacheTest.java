@@ -48,6 +48,7 @@ public class GuavaCacheTest {
                 .expireAfterAccess(Duration.ofSeconds(1))
                 .maximumSize(2)
                 .refreshAfterWrite(Duration.ofMillis(1))
+//                .expireAf
                 .removalListener(notification -> System.out.println(notification.getKey()+":"+notification.getValue()+"was removed , calused by "+ notification.getCause().name()))
                 .build(CacheLoader.from(() -> {
                     System.out.println("loader invoked");
