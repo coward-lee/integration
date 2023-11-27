@@ -1,7 +1,8 @@
 package org.lee.guava.utilities;
 
-import com.google.common.cache.*;
-import org.junit.jupiter.api.Test;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -12,7 +13,7 @@ public class GuavaCacheTest {
         new GuavaCacheTest().test();
     }
 
-    @Test
+//    @Test
     void test_only_size() throws ExecutionException {
         Cache<Object, Object> build = CacheBuilder.newBuilder()
                 .maximumSize(2)
@@ -26,7 +27,7 @@ public class GuavaCacheTest {
         build.get(k+"2", () -> load());
         build.get(k+"1", () -> load());
     }
-    @Test
+//    @Test
     void test_1() throws Throwable {
         Cache<Object, Object> build = CacheBuilder.newBuilder()
                 .expireAfterAccess(Duration.ofSeconds(1))
@@ -42,7 +43,7 @@ public class GuavaCacheTest {
         build.get(k+"1", () -> load());
         build.get(k+"2", () -> load());
     }
-    @Test
+//    @Test
     void test() throws Throwable {
         Cache<Object, Object> build = CacheBuilder.newBuilder()
                 .expireAfterAccess(Duration.ofSeconds(1))

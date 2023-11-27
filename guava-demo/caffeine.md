@@ -54,12 +54,15 @@ Caffeine Cache使用一种高效的数据结构来存储缓存数据。
 1. 用什么存储数据
    ConcurrentHashMap
 2. 用什么存储过期时间
-final Buffer<Node<K, V>> readBuffer;
+final Buffer<Node<K, V>> readBuffer; // 这似乎是一个错的
 3. 用什么存储读写信息
 final MpscGrowableArrayQueue<Runnable> writeBuffer;
 mpsc 这是一个重点
 4. 用什么存储访问频率
 5. 他的三个区域分别代表什么
+
+度缓冲区
+典型的缓存锁定每个操作，以安全地对 访问队列中的条目进行重新排序。
 
 # 2. 数据访问
 当你尝试访问缓存中的数据时，Caffeine Cache首先会查找数据是否已经缓存。

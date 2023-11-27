@@ -1,4 +1,4 @@
-package org.lee.guava.utilities;
+package org.lee.caffeine;
 
 import com.github.benmanes.caffeine.cache.*;
 import org.checkerframework.checker.index.qual.NonNegative;
@@ -9,9 +9,56 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
 
 public class CaffeineCacheTest {
+
+
+    /**
+     * 所有使用特性
+     */
+
+    @Test
+    void test_all() {
+        Cache<Object, Object> cache = Caffeine.newBuilder()
+                .weakKeys() // 弱引用key
+                .weakValues()// 弱引用 value
+                .executor(Executors.newCachedThreadPool()) // 自定义加载线程池 ForkJoinPool.commonPool()， 默认使用，the executor to use for asynchronous execution
+                .recordStats() // 数量统计
+                .maximumSize(10_000) // 根据数量淘汰策略
+                .expireAfter(new MyExpiry())
+                .scheduler(Scheduler.disabledScheduler()) // 定期清空数据的一个机制，可以不设置，如果不设置则不会主动的清空过期数据；
+                .build();
+
+        Policy<Object, Object> policy = cache.policy();// 策略????
+        cache.policy().eviction().ifPresent(c -> c.setMaximum(2 * c.getMaximum())); // 动态修改最大缓存数量阈值
+        cache.policy().expireAfterAccess().ifPresent(expiration -> {}); // 运行时动态修改过期的阈值
+        cache.policy().expireAfterWrite().ifPresent(expiration -> {}); // 运行时动态修改过期的阈值
+        cache.policy().expireVariably().ifPresent(expiration -> {}); // 运行时动态修改过期的阈值
+        cache.policy().refreshAfterWrite().ifPresent(expiration -> {}); // 运行时动态修改过期的阈值
+
+//        cache.f
+
+    }
+
+
+    class MyExpiry implements Expiry<Object,Object> {
+        @Override
+        public long expireAfterCreate(Object key, Object value, long currentTime) {
+            return 0;
+        }
+
+        @Override
+        public long expireAfterUpdate(Object key, Object value, long currentTime, @NonNegative long currentDuration) {
+            return 0;
+        }
+
+        @Override
+        public long expireAfterRead(Object key, Object value, long currentTime, @NonNegative long currentDuration) {
+            return 0;
+        }
+    };
 
     /**
      * 同步加载版本
@@ -66,9 +113,10 @@ public class CaffeineCacheTest {
     /**
      * TimerWheel ,用于在不同过期时间的key，不通过的key放到不同的 timer Wheel 之上，以减少timer wheel的step次数
      * 动态指定过期时间
+     *
      * @throws InterruptedException
      */
-    @Test
+//    @Test
     void demo_test_TimerWheel() throws InterruptedException {
         AsyncCache<Object, Object> build = Caffeine.newBuilder()
                 .expireAfterAccess(Duration.ofSeconds(1))
@@ -117,5 +165,17 @@ public class CaffeineCacheTest {
         map.putIfAbsent("1", "s");
         map.putIfAbsent("2", "s");
         map.computeIfPresent("1", (k, v) -> null);
+    }
+
+    @Test
+    void test_graph() {
+        Cache<Object, Object> build = Caffeine.newBuilder()
+                .weakKeys()
+                .weakValues()
+                .build();
+//        LoadingCache<Key, Graph> graphs = Caffeine.newBuilder()
+//                .weakKeys()
+//                .weakValues()
+//                .build(key -> createExpensiveGraph(key));
     }
 }
