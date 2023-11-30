@@ -67,21 +67,26 @@ public class CaffeineCacheTest {
      */
     @Test
     void demo_test() throws InterruptedException {
+        int size = 100000;
         Cache<Object, Object> build = Caffeine.newBuilder()
                 .executor(ForkJoinPool.commonPool())
-                .maximumSize(1)
+                .maximumSize(100000)
                 .removalListener((k, v, c) -> {
                     System.out.println(k + ":" + v + ":" + c);
                     System.out.println(k + ":" + v + ":" + c);
                 })
                 .build(key -> key + "value");
 
-        build.get("x", (a) -> "x");
-        build.get("x", (a) -> "x");
-        build.get("2x", (a) -> "x");
-        build.get("3x", (a) -> "x");
-        Thread.sleep(1000 * 2);
-        build.get("1x", (a) -> "x");
+        for (int i = 0; i <100000 ; i++) {
+            build.get("x"+i, (a) -> "x");
+            build.get("x"+i, (a) -> "x");
+            build.get("2x"+i, (a) -> "x");
+            build.get("3x"+i, (a) -> "x");
+            build.get("1x"+i, (a) -> "x");
+            build.get("x"+i, (a) -> "x");
+            build.get("1x"+i, (a) -> "x");
+            build.get("x"+i, (a) -> "x");
+        }
     }
 
 

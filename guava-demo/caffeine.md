@@ -64,6 +64,57 @@ mpsc 这是一个重点
 度缓冲区
 典型的缓存锁定每个操作，以安全地对 访问队列中的条目进行重新排序。
 
+
+# caffeine 降鲜机制
+解决LRU 在长期运行之后无法将频率过高，但是未来可能不会访问的元素问题
+逻辑如下
+1. 刚开始运行到一定次数（假定是n）后将所有元素的计数除以2
+2. 第二次运行到  n + n/2 （因为第一步是对所有计数除2，所以在这个时候所有的计数加起来就是n了）
+3. 第三次运行到  n + n/2 + n/2 
+4. 以此类   
+基于 caffeine 论文的证明来看当前次数越大那么真实的命中率期望（也就是缓存命中率）越接近不进行降鲜的命中率，当趋近于无穷的时候那么他们相等
+caffeine 代码如下(我们重点看reset方法)：
+```java
+final class FrequencySketch<E> {
+   @SuppressWarnings("ShortCircuitBoolean")
+   public void increment(E e) {
+      if (isNotInitialized()) {
+         return;
+      }
+
+      int[] index = new int[8];
+      int blockHash = spread(e.hashCode());
+      int counterHash = rehash(blockHash);
+      int block = (blockHash & blockMask) << 3;
+      for (int i = 0; i < 4; i++) {
+         int h = counterHash >>> (i << 3);
+         index[i] = (h >>> 1) & 15;
+         int offset = h & 1;
+         index[i + 4] = block + offset + (i << 1);
+      }
+      boolean added =
+              incrementAt(index[4], index[0])
+                      | incrementAt(index[5], index[1])
+                      | incrementAt(index[6], index[2])
+                      | incrementAt(index[7], index[3]);
+
+      if (added && (++size == sampleSize)) {
+         reset();
+      }
+   }
+
+   /** Reduces every counter by half of its original value. */
+   void reset() {
+      int count = 0;
+      for (int i = 0; i < table.length; i++) {
+         count += Long.bitCount(table[i] & ONE_MASK);
+         table[i] = (table[i] >>> 1) & RESET_MASK;
+      }
+      size = (size - (count >>> 2)) >>> 1;
+   }
+}
+```
+
 # 2. 数据访问
 当你尝试访问缓存中的数据时，Caffeine Cache首先会查找数据是否已经缓存。
 如果数据存在，它会更新数据项的访问顺序，以确保最常用的数据项位于链表的前部，以便快速访问。
