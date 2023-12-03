@@ -128,26 +128,32 @@ final class FrequencySketch<E> {
 优势
  访问频率统计所消耗的内存明显降低（理论上的89% 出资tinyLFU 论文）
 
-# 2. 数据访问
-当你尝试访问缓存中的数据时，Caffeine Cache首先会查找数据是否已经缓存。
-如果数据存在，它会更新数据项的访问顺序，以确保最常用的数据项位于链表的前部，以便快速访问。
-这有助于提高缓存的命中率。
+## ReadBuffer 读缓冲
+实现类 BoundedBuffer
+A striped, non-blocking, bounded buffer.
+<pre>
 
-# 3. 缓存清理
-Caffeine Cache实现了一种淘汰策略，
-以在内存不足时释放部分缓存项， 以腾出空间供新数据。
-这个策略基于缓存的大小和权重进行控制。
-权重是一个用于表示缓存项相对大小的值。
-当内存不足时，Caffeine Cache会尝试淘汰权重较大的缓存项，以腾出足够的内存空间。
+A circular ring buffer stores the elements being transferred by the producers to the consumer.
+The monotonically increasing count of reads and writes allow indexing sequentially to the next
+element location based upon a power-of-two sizing.
 
-# 4. 过期策略
-Caffeine Cache支持多种过期策略，
-可以根据需求进行配置。
-你可以定义数据项的过期时间，或者基于访问次数来设置数据项的过期。
-Caffeine Cache还支持手动触发数据项的过期。
-过期策略的目的是确保缓存中的数据始终保持新鲜和有效。
+The producers race to read the counts, check if there is available capacity, and if so then try
+once to CAS to the next write count. If the increment is successful then the producer lazily
+publishes the element. The producer does not retry or block when unsuccessful due to a failed
+CAS or the buffer being full.
 
-# 5. 并发控制：
-Caffeine Cache使用一些并发控制技术，如无锁操作，
-来确保多个线程可以安全地访问和操作缓存。
-这有助于提高Caffeine Cache的性能和可伸缩性。
+The consumer reads the counts and takes the available elements. The clearing of the elements
+and the next read count are lazily set.
+
+This implementation is striped to further increase concurrency by rehashing and dynamically
+adding new buffers when contention is detected, up to an internal maximum. When rehashing in
+order to discover an available buffer, the producer may retry adding its element to determine
+whether it found a satisfactory buffer or if resizing is necessary.
+
+一个用于在生产者和消费者之间传递元素的并发、无锁的循环环形缓冲区的实现.
+一种数据结构，呈环形，用于将元素从生产者传递到消费者。
+读取和写入的计数不断递增。这使得可以基于二的幂次方的大小进行顺序索引。?
+多个生产者争用读取计数，检查是否有可用容量，如果有，就尝试一次 CAS 操作来增加下一个写入计数。如果成功，生产者就会惰性地发布元素。如果 CAS 失败或缓冲区已满，生产者不会重试或阻塞。
+消费者读取计数并获取可用元素。元素的清除和下一个读取计数的更新是惰性进行的。
+增加并发性的分片: **该实现进行了分片以增加并发性**。这涉及在检测到争用时重新散列并动态添加新的缓冲区，最多添加到内部最大值。
+</pre>
