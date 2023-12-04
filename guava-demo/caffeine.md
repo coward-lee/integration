@@ -129,9 +129,22 @@ final class FrequencySketch<E> {
  访问频率统计所消耗的内存明显降低（理论上的89% 出资tinyLFU 论文）
 
 ## ReadBuffer 读缓冲
-实现类 BoundedBuffer
-A striped, non-blocking, bounded buffer.
+实现类 BoundedBuffer, 也是在 mpsc buffer的基础上进行实现和扩张出来，同时允许写入的丢失事务
+- A striped, non-blocking, bounded buffer.
+- A multiple-producer / single-consumer buffer.
+![](../img/caffeine_mpsc_buffer.png)
+- 作用以及优化点
+1. 这个其实也是一个典型削峰的行为，因为多个线程同时写入，势必会导致写入速度容易大于消费速度，所以使用这个来优化
+2. 由于是属于读buffer 的优化，没有必要保证一定写入，如果没有写入buffer，那么就马上对当前的node执行onAccess方式（更新节点过期时间访问频率等）
+3. 同时为了优化写入速度，实现类（BoundedBuffer），内部使用的stripedBuffer也就是将buffer 分成了好几个buffer 依次来增加并发性
 <pre>
+ A multiple-producer / single-consumer buffer that rejects new elements if it is full or
+ fails spuriously due to contention. Unlike a queue and stack, a buffer does not guarantee an
+ ordering of elements in either FIFO or LIFO order.
+ <p>
+ Beware that it is the responsibility of the caller to ensure that a consumer has exclusive read
+ access to the buffer. This implementation does <em>not</em> include fail-fast behavior to guard
+ against incorrect consumer usage.
 
 A circular ring buffer stores the elements being transferred by the producers to the consumer.
 The monotonically increasing count of reads and writes allow indexing sequentially to the next
@@ -157,3 +170,25 @@ whether it found a satisfactory buffer or if resizing is necessary.
 消费者读取计数并获取可用元素。元素的清除和下一个读取计数的更新是惰性进行的。
 增加并发性的分片: **该实现进行了分片以增加并发性**。这涉及在检测到争用时重新散列并动态添加新的缓冲区，最多添加到内部最大值。
 </pre>
+
+## write buffer
+
+回放操作，不允许写入丢失。
+- 概述解释   
+This is a shaded copy of MpscGrowableArrayQueue provided by JCTools  from version 2.0.   
+这个是从jctool 复制过来代码
+- 作用
+用于回放操作，他的队列存储的都是一个runnable ，这个是时候，在afterWrite之后被加入到buffer
+在 maintenance/clear 的时候（一个消费者执行）,将buffer里面task弹出来并run
+
+
+
+
+
+
+
+
+
+
+# 参考
+https://tig.red/caffeine.html
