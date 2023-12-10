@@ -180,13 +180,9 @@ This is a shaded copy of MpscGrowableArrayQueue provided by JCTools  from versio
 - 作用
 用于回放操作，他的队列存储的都是一个runnable ，这个是时候，在afterWrite之后被加入到buffer
 在 maintenance/clear 的时候（一个消费者执行）,将buffer里面task弹出来并run
-
-
-
-
-
-
-
+- 性能优化
+1. cache line buffer 填充
+2. 多级队列，再扩容的时候直接直接分配新的数组，并将新的数据通过链表的形式放到老数组的末尾，
 
 
 
