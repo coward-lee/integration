@@ -184,7 +184,15 @@ This is a shaded copy of MpscGrowableArrayQueue provided by JCTools  from versio
 1. cache line buffer 填充
 2. 多级队列，再扩容的时候直接直接分配新的数组，并将新的数据通过链表的形式放到老数组的末尾，
 
-
+## 动态过期时间配置（时间轮）
+- 触发的实际   
+在对节点进行update、access的时候会触发，每次出发会将自己放入到对应的时间轮中的末尾
+- 时间轮
+用于记录动态时间配置的过期策略的主动过期策略，schedule调度
+- 多级时间轮（用于优化不同过期时间范围，减少时间轮的出发次数）
+- caffeine 时间轮原理论文 https://dl.acm.org/doi/pdf/10.1145/41457.37504
+- 描述如下
 
 # 参考
 https://tig.red/caffeine.html
+https://dl.acm.org/doi/pdf/10.1145/41457.37504

@@ -7,10 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.util.HashMap;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.*;
+
+import static com.google.common.math.LongMath.ceilingPowerOfTwo;
 
 public class CaffeineCacheTest {
 
@@ -116,7 +115,7 @@ public class CaffeineCacheTest {
     }
 
     /**
-     * TimerWheel ,用于在不同过期时间的key，不通过的key放到不同的 timer Wheel 之上，以减少timer wheel的step次数
+     * TimerWheelTest ,用于在不同过期时间的key，不通过的key放到不同的 timer Wheel 之上，以减少timer wheel的step次数
      * 动态指定过期时间
      *
      * @throws InterruptedException
@@ -182,5 +181,29 @@ public class CaffeineCacheTest {
 //                .weakKeys()
 //                .weakValues()
 //                .build(key -> createExpensiveGraph(key));
+    }
+
+
+
+    static final int[] BUCKETS = { 64, 64, 32, 4, 1 };
+    static final long[] SPANS = {
+            ceilingPowerOfTwo(TimeUnit.SECONDS.toNanos(1)), // 1.07s
+            ceilingPowerOfTwo(TimeUnit.MINUTES.toNanos(1)), // 1.14m
+            ceilingPowerOfTwo(TimeUnit.HOURS.toNanos(1)),   // 1.22h
+            ceilingPowerOfTwo(TimeUnit.DAYS.toNanos(1)),    // 1.63d
+            BUCKETS[3] * ceilingPowerOfTwo(TimeUnit.DAYS.toNanos(1)), // 6.5d
+            BUCKETS[3] * ceilingPowerOfTwo(TimeUnit.DAYS.toNanos(1)), // 6.5d
+    };
+    static final long[] SHIFT = {
+            Long.numberOfTrailingZeros(SPANS[0]),
+            Long.numberOfTrailingZeros(SPANS[1]),
+            Long.numberOfTrailingZeros(SPANS[2]),
+            Long.numberOfTrailingZeros(SPANS[3]),
+            Long.numberOfTrailingZeros(SPANS[4]),
+    };
+
+    @Test
+    void test_timer_wheel(){
+        System.out.println("xxx");
     }
 }
