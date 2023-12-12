@@ -29,8 +29,8 @@ allprojects {
 
 
     repositories {
-        mavenLocal()
         maven { url 'https://maven.aliyun.com/repository/public' }
+        mavenLocal()
         mavenCentral()
     }
     applicationDefaultJvmArgs = ["--add-opens java.base/java.lang=ALL-UNNAMED"]
