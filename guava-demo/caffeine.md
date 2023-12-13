@@ -32,8 +32,7 @@
 # 整体类概述
 
 ![caffeine_archtect.png](..%2Fimg%2Fcaffeine_archtect.png)
-[//]: # (![]&#40;https://raw.githubusercontent.com/ben-manes/caffeine/master/wiki/design/design.png&#41;)
-<!-- TOC -->
+
 1. Read Buffer
 2. Write Buffer
 3. drainReadBuffer
@@ -194,8 +193,6 @@ final class FrequencySketch<E> {
 - A multiple-producer / single-consumer buffer.
 
 ![](../img/caffeine_mpsc_buffer.png)
-
-[//]: # (![]&#40;https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/da1ae3c513794bcab69b0d4833ace044~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1488&h=516&s=39907&e=png&b=ffffff&#41;)
 
 - 作用以及优化点
 1. 这个其实也是一个典型削峰的行为，因为多个线程同时写入，势必会导致写入速度容易大于消费速度，所以使用这个来优化
