@@ -232,7 +232,7 @@ whether it found a satisfactory buffer or if resizing is necessary.
 增加并发性的分片: **该实现进行了分片以增加并发性**。这涉及在检测到争用时重新散列并动态添加新的缓冲区，最多添加到内部最大值。
 </pre>
 
-<h2 id="write_buffer">write buffer</h2>
+
 # WriteBuffer
 
 回放操作，不允许写入丢失。
