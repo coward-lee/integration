@@ -1,4 +1,20 @@
-
+<!-- TOC -->
+* [问题（解决的需求）](#问题解决的需求)
+* [整体类概述](#整体类概述)
+  * [淘汰算法](#淘汰算法)
+* [FrequencySketch（频率草图）](#frequencysketch频率草图)
+  * [查看访问频率](#查看访问频率)
+  * [降鲜机制以及频率增加](#降鲜机制以及频率增加)
+    * [理论证明](#理论证明)
+    * [代码实现](#代码实现)
+* [ReadBuffer](#readbuffer-)
+* [WriteBuffer](#writebuffer)
+* [动态过期时间配置（时间轮）](#动态过期时间配置时间轮)
+* [使用](#使用)
+* [Cache类结构](#cache类结构)
+    * [AsyncCache](#asynccache)
+* [参考](#参考)
+<!-- TOC -->
 
 
 # 问题（解决的需求）
@@ -13,11 +29,12 @@
 
 
 
-# 整体类概览
+# 整体类概述
+
 ![caffeine_archtect.png](..%2Fimg%2Fcaffeine_archtect.png)
+![](https://raw.githubusercontent.com/ben-manes/caffeine/master/wiki/design/design.png)
 <!-- TOC -->
 1. Read Buffer
-   [1.Read Buffer](##write buffer)
 2. Write Buffer
 3. drainReadBuffer
 4. drainWriteBuffer
@@ -37,10 +54,10 @@
 
 
 
-## FrequencySketch（频率草图）
+# FrequencySketch（频率草图）
 整个caffeine的数据访问频率记录，不管是window、probation还是protection区域    
 我们暂时不用关心hash值的冲突问题，因为caffeine一共进行了四次hash以此来减少hash的冲突问题
-### 查看访问频率
+## 查看访问频率
 获取hash结果后index的四个位置上数字的最小值
 ```java
 final class FrequencySketch<E> {
@@ -80,17 +97,18 @@ final class FrequencySketch<E> {
    }
 }
 ```
-### 降鲜机制以及频率增加
+## 降鲜机制以及频率增加
 
-#### 解决LRU 在长期运行之后无法将频率过高，但是未来可能不会访问的元素问题
+### 理论证明
 逻辑如下
 1. 刚开始运行到一定次数（假定是n）后将所有元素的计数除以2
 2. 第二次运行到  n + n/2 （因为第一步是对所有计数除2，所以在这个时候所有的计数加起来就是n了）
 3. 第三次运行到  n + n/2 + n/2 
-4. 以此类推
-基于 caffeine 论文的证明来看当前次数越大那么真实的命中率期望（也就是缓存命中率）越接近不进行降鲜的命中率，当趋近于无穷的时候那么他们相等
+4. 以此类推 
 
-#### 我们来看具体代码实现逻辑
+总结：基于 caffeine 论文的证明来看当前次数越大那么真实的命中率期望（也就是缓存命中率）越接近不进行降鲜的命中率，当趋近于无穷的时候那么他们相等
+
+### 代码实现
 caffeine 代码如下(我们重点看reset方法)：
 ```java
 final class FrequencySketch<E> {
@@ -230,7 +248,7 @@ This is a shaded copy of MpscGrowableArrayQueue provided by JCTools  from versio
 1. cache line buffer 填充
 2. 多级队列，再扩容的时候直接直接分配新的数组，并将新的数据通过链表的形式放到老数组的末尾，
 
-## 动态过期时间配置（时间轮）
+# 动态过期时间配置（时间轮）
 - 触发的实际   
 在对节点进行update、access的时候会触发，每次出发会将自己放入到对应的时间轮中的末尾
 - 时间轮
@@ -240,13 +258,13 @@ This is a shaded copy of MpscGrowableArrayQueue provided by JCTools  from versio
 - 描述如下
 
 
-## 使用
+# 使用
 1. Caffeine
    主要的对话build类
 2. Cache/AsyncCache
 
-### Cache 顶级父类, 同步加载，这个会在同一个线程进行loading 数据
-
+# Cache类结构
+顶级父类, 同步加载，这个会在同一个线程进行loading 数据
 
 ![cache](../img/caffeine_cache_super_interface.png)
 
