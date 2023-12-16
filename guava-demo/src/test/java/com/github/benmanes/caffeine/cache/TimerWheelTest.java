@@ -38,6 +38,14 @@ public class TimerWheelTest {
     }
 
 
+    @Test
+    void test_scheduler(){
+        Cache<Object, Object> build = Caffeine.newBuilder()
+                .scheduler(Scheduler.systemScheduler())
+                .build();
+    }
+
+
     static final class Timer extends Node<Integer, Integer> {
         Node<Integer, Integer> prev;
         Node<Integer, Integer> next;
