@@ -34,21 +34,21 @@
 ![caffeine_archtect.png](..%2Fimg%2Fcaffeine_archtect.png)
 
 1. Read Buffer
+   1. drainReadBuffer
 2. Write Buffer
-3. drainReadBuffer
-4. drainWriteBuffer
-5. keyReferences/drain
-6. valueReferences/drain
-7. expireEntries/evictEntries
-8. data
+   1. drainWriteBuffer
+3. keyReferences/drain
+4. valueReferences/drain
+5. expireEntries/evictEntries
+6. data
    1. window - LRU
       1. widow dequeue
    2. probation
       1. probation dequeue
    3. protected
       1. protected dequeue
-9. TimerWheel
-10. countMinSketch
+7. TimerWheel
+8. countMinSketch
 ## 淘汰算法
 
 
@@ -254,6 +254,14 @@ This is a shaded copy of MpscGrowableArrayQueue provided by JCTools  from versio
 - 多级时间轮（用于优化不同过期时间范围，减少时间轮的出发次数）
 - caffeine 时间轮原理论文 https://dl.acm.org/doi/pdf/10.1145/41457.37504
 - 描述如下
+可以理解为现实生活中的圆形钟表看，将时间分为几个刻度（caffeine中分为 秒、分、时、天）；
+  - 放入规则：
+  将有过期时间进来之后会计算时间的过期时刻，根据时刻判断放入哪一级。
+  放入规则，如果当前时间为 11时，10分，20秒,有三个过期时间 A:20秒，B:50秒，C:1个小时10分钟，最终计算出来；
+  A放在秒级时间轮中，B会放在分级时间轮钟（因为计算出来时间已经超过当前分钟了），C会放在时级时间轮钟，
+  - 时间轮运行规则
+  在秒级的任务如果被扫描到了就直接执行，在分级的被扫描到了之后会将时间推向秒级，时级被扫描到会被推到分级依次类推
+  
 
 
 # 使用
