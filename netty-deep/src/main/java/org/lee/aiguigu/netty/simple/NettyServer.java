@@ -36,11 +36,12 @@ public class NettyServer {
                             ch.pipeline().addLast(new NettyServerHandler());
                         }
                     }); // 给我们的workerGroup的 event loop 对应的管道设置处理器
-            ChannelFuture future = bootstrap.bind(6668);
+            ChannelFuture future = bootstrap.bind(6668); // 会使用master 线程去绑定端口来进行连接的监听
             future.addListener(new ChannelFutureListener() {
                 @Override
                 public void operationComplete(ChannelFuture future) throws Exception {
                     if (future.isSuccess()){
+                        future.channel().writeAndFlush("xxx");
                         log.info("listen ok");
                     }else{
                         log.info("listen failed");

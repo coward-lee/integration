@@ -30,7 +30,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         });
         ctx.channel().eventLoop().schedule(() -> {
             try {
-                Thread.sleep(1000 * 10);
+                Thread.sleep(1000 * 1);
                 ctx.writeAndFlush(Unpooled.copiedBuffer("server message to client for scheduled task", CharsetUtil.UTF_8));
                 log.info("scheduled task executed finished");
             } catch (InterruptedException e) {

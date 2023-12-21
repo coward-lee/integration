@@ -1,3 +1,20 @@
+# reactor 模型
+Reactor 模型的一般工作流程：
+
+事件注册： 程序通过注册关注的事件（如网络连接、数据到达等），告诉 Reactor 哪些事件它关心。
+
+事件循环： Reactor 启动一个事件循环，不断等待事件的发生。
+
+事件分发： 当某个事件发生时，Reactor 负责调用事先注册的回调函数（事件处理器），处理特定的事件。
+
+非阻塞处理： Reactor 采用非阻塞的方式处理事件，使得系统能够同时处理多个事件，提高并发性能。
+
+## 1 主从reactor模型
+示例图
+![](../img/master_slave_reactor.png)
+这里在netty中在新的链接过来的时候，netty会将这个链接时间当作一个读取客户端消息的事件来进行处理（master thread event loop）。
+可以看 ServerBootstrapAcceptor 这个类来进行查看master reactor 的listener 处理read事件的处理方式，也就是将收到的channel 注册到sub reactor
+## 2. d
 # nio 基础概念
 1. selector  对应一个线程
 2. channel  一个selector 会有多个channel 注册到selector/程序，他是双向的可以用于输入也可以用于输出

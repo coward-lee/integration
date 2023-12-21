@@ -29,7 +29,7 @@ public class NettyClient {
             System.out.println("client started");
             // 链接服务端
             ChannelFuture future = bootstrap.connect(new InetSocketAddress("127.0.0.1", 6668)).sync();
-
+            future.channel().writeAndFlush("你好");
 
             // 对关闭通道进行监听
             future.channel().closeFuture().sync();
