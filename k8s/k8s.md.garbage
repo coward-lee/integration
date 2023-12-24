@@ -733,3 +733,135 @@ systemctl daemon-reload
 systemctl start kube-scheduler
 systemctl enable kube-scheduler
 ```
+
+## 部署 worker node
+## 1 创建工作目录并拷贝二进制文件
+在所有 **worker node** 创建工作目录：
+```shell
+mkdir -p /opt/kubernetes/{bin,cfg,ssl,logs}
+```
+从 **master** 节点拷贝：  
+```shell
+cd kubernetes/server/bin  
+cp kubelet kube-proxy /opt/kubernetes/bin # 本地拷贝
+```
+### 2 部署 kubelet
+
+**在 node 执行**
+```shell
+# 1. 创建配置文件
+cat > /opt/kubernetes/cfg/kubelet.conf << EOF
+KUBELET_OPTS="--logtostderr=false \\
+--v=2 \\
+--log-dir=/opt/kubernetes/logs \\
+--hostname-override=k8s-master \\
+--network-plugin=cni \\
+--kubeconfig=/opt/kubernetes/cfg/kubelet.kubeconfig \\
+--bootstrap-kubeconfig=/opt/kubernetes/cfg/bootstrap.kubeconfig \\
+--config=/opt/kubernetes/cfg/kubelet-config.yml \\
+--cert-dir=/opt/kubernetes/ssl \\
+--pod-infra-container-image=lizhenliang/pause-amd64:3.0"
+EOF
+# –hostname-override：显示名称，集群中唯一
+# –network-plugin：启用 CNI –kubeconfig：空路径，会自动生成，后面用于连接 apiserver –bootstrap-kubeconfig：首次启动向 apiserver 申请证书
+# –config：配置参数文件
+# –cert-dir：kubelet 证书生成目录
+# –pod-infra-container-image：管理 Pod 网络容器的镜像
+
+# 2. 配置参数文件
+cat > /opt/kubernetes/cfg/kubelet-config.yml << EOF
+kind: KubeletConfiguration
+apiVersion: kubelet.config.k8s.io/v1beta1
+address: 0.0.0.0
+port: 10250
+readOnlyPort: 10255
+cgroupDriver: cgroupfs
+clusterDNS:
+- 10.0.0.2
+clusterDomain: cluster.local
+failSwapOn: false
+authentication:
+anonymous:
+enabled: false
+webhook:
+cacheTTL: 2m0s
+enabled: true
+x509:
+clientCAFile: /opt/kubernetes/ssl/ca.pem
+authorization:
+mode: Webhook
+webhook:
+cacheAuthorizedTTL: 5m0s
+cacheUnauthorizedTTL: 30s
+evictionHard:
+imagefs.available: 15%
+memory.available: 100Mi
+nodefs.available: 10%
+nodefs.inodesFree: 5%
+maxOpenFiles: 1000000
+maxPods: 110
+EOF
+
+# 3. 生成 bootstrap.kubeconfig 文件
+KUBE_APISERVER="https://192.168.214.71:6443" # apiserver IP:PORT
+TOKEN="c47ffb939f5ca36231d9e3121a252940" # 与 token.csv 里保持一致
+# 生成 kubelet bootstrap kubeconfig 配置文件
+kubectl config set-cluster kubernetes \
+--certificate-authority=/opt/kubernetes/ssl/ca.pem \
+--embed-certs=true \
+--server=${KUBE_APISERVER} \
+--kubeconfig=bootstrap.kubeconfig
+kubectl config set-credentials "kubelet-bootstrap" \
+--token=${TOKEN} \
+--kubeconfig=bootstrap.kubeconfig
+kubectl config set-context default \
+--cluster=kubernetes \
+--user="kubelet-bootstrap" \
+--kubeconfig=bootstrap.kubeconfig
+kubectl config use-context default --kubeconfig=bootstrap.kubeconfig
+# 拷贝配置文件
+cp bootstrap.kubeconfig /opt/kubernetes/cfg
+# 4. systemd 管理 kubelet
+cat > /usr/lib/systemd/system/kubelet.service << EOF
+[Unit]
+Description=Kubernetes Kubelet
+After=docker.service
+[Service]
+EnvironmentFile=/opt/kubernetes/cfg/kubelet.conf
+ExecStart=/opt/kubernetes/bin/kubelet \$KUBELET_OPTS
+Restart=on-failure
+LimitNOFILE=65536
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# 5. 启动并设置开机启动
+systemctl daemon-reload
+systemctl start kubelet
+systemctl enable kubelet
+```
+
+
+### 3. 批准 kubelet 证书申请并加入集群
+
+```shell
+# 查看 kubelet 证书请求
+kubectl get csr
+NAME AGE SIGNERNAME
+REQUESTOR CONDITION
+node-csr-uCEGPOIiDdlLODKts8J658HrFq9CZ--K6M4G7bjhk8A 6m3s
+kubernetes.io/kube-apiserver-client-kubelet kubelet-bootstrap Pending
+# 批准申请
+kubectl certificate approve node-csr-uCEGPOIiDdlLODKts8J658HrFq9CZ--
+K6M4G7bjhk8A
+# 查看节点
+kubectl get node
+```
+
+
+
+
+
+
+
+
