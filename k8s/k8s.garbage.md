@@ -852,8 +852,7 @@ REQUESTOR CONDITION
 node-csr-uCEGPOIiDdlLODKts8J658HrFq9CZ--K6M4G7bjhk8A 6m3s
 kubernetes.io/kube-apiserver-client-kubelet kubelet-bootstrap Pending
 # 批准申请
-kubectl certificate approve node-csr-uCEGPOIiDdlLODKts8J658HrFq9CZ--
-K6M4G7bjhk8A
+kubectl certificate approve node-csr-uCEGPOIiDdlLODKts8J658HrFq9CZ--K6M4G7bjhk8A
 # 查看节点
 kubectl get node
 ```
