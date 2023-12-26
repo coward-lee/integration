@@ -448,5 +448,13 @@ public class Solution {
         return result;
     }
 
+    @Test
+    public void maxAreaTest(){
+        int i = new MaxArea().maxArea(new int[]{
+                1,3,2,5,25,24,5
+        });
+        System.out.println(i);
+    }
+
 
 }
