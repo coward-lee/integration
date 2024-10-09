@@ -321,9 +321,10 @@ typedef struct zset {
 
 ## 3. 持久化
 ### 3.1 rbd
-
+全量数据备份。
 ### 3.2 aof
 同上，不过里面有个命令缓冲区
+
 ## 4. 多机模式
 
 ### 4.1 主从
@@ -346,7 +347,17 @@ lua脚本
 慢查询日志
 监视器
 ## 6 bloom filter 
+
 ## 7 epoll 及其源码模型
+
+## 8 sharding的三种是实现方式
+1. 客户端实现分片  
+这里需要去看具体一致性hash的实现算法过程，
+2. 服务器实现分片   
+meta 管理？，这个也是曹勇一个crc16算法需要简单了解一下
+使用的hash算法也比较简单，就是CRC16后16384取模
+3. 通过代理服务器实现数据分片
+[twitter/twemproxy](https://github.com/twitter/twemproxy)
 
         
         
