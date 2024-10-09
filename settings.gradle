@@ -1,3 +1,15 @@
+pluginManagement {
+    repositories {
+        maven {
+            url "https://maven.aliyun.com/repository/gradle-plugin"
+        }
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+
+
 rootProject.name = 'integration'
 
 
@@ -34,7 +46,6 @@ dependencyResolutionManagement {
 //        }
     }
 }
-
 
 
 
@@ -95,4 +106,5 @@ include 'spring-boot:lib-boot'
 findProject(':spring-boot:lib-boot')?.name = 'lib-boot'
 include 'spring-boot:mvc'
 findProject(':spring-boot:mvc')?.name = 'mvc'
+include 'rocketmq'
 
