@@ -1,14 +1,11 @@
 package org.lee;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.persistence.AttributeConverter;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.Optional;
 
 public class JsonConverter<T>  implements AttributeConverter<T, String> {
     private static final ObjectMapper objectMapper = JsonUtil.getObjectMapper();
