@@ -20,37 +20,70 @@ tips:
 1. 当进行select、update、delete、insert
 2. 名字解释
 3. 应用场景
-4. 并发度
+4. 并发度、
 
->
-
-    行锁 : 锁一行        
-    表锁 : 锁整张表     
-    间隙锁(gap锁) 
+基本锁 ：
+   共享锁 Shared     
+   排他锁 Exclusive
+1. 行锁 : 锁一行         
+   单条索引记录上加锁，record lock锁住的永远是索引，而非记录本身，  
+   即使该表上没有任何索引，那么innodb会在后台创建一个隐藏的聚集主键索引，  
+   那么锁住的就是这个隐藏的聚集主键索引。  
+2. 表锁 : 锁整张表     
+3. 间隙锁(gap锁) 
         锁连续多行（不过这里的行时开区间，锁 1-5行：锁的行是 2，3，4 不包括1和5行）            
-    基本锁 ：
-        共享锁     
-        排他锁     
-    意向锁(Intention Locks)     
+4. 意向锁(Intention Locks)     
         InnoDB为了支持多粒度(表锁与行锁)的锁并存，引入意向锁。     
         意向锁是表级锁，可分为意向共享锁(IS锁)和意向排他锁(IX锁)。       
         Intention shared (IS)
         Intention exclusive (IX)
-        意向锁的意思是说你需要先获取到意向锁才能获取到对应的行锁
-        但是意向锁的到底是不是行锁还是值得考量的
-    记录锁
-        单条索引记录上加锁，record lock锁住的永远是索引，而非记录本身，
-        即使该表上没有任何索引，那么innodb会在后台创建一个隐藏的聚集主键索引，
-        那么锁住的就是这个隐藏的聚集主键索引。
-    插入意向锁
+        意向锁的作用，就是标识当前表存在锁，如果想对当前表格实现.
+5. 插入意向锁
         一种特殊的间隙锁
         官方示例，大致意思就是，两个事务的间隙锁都是4-7但是他们的锁并不冲突，可以并发执行。
         Suppose that there are index records with values of 4 and 7. Separate transactions that attempt to insert values of 5 and 6, respectively, each lock the gap between 4 and 7 with insert intention locks prior to obtaining the exclusive lock on the inserted row, but do not block each other because the rows are nonconflicting.
-    next-key锁(Next-Key Locks)
+    插入意向锁怎么复现
+    ```sql
+    create table with_pk_1
+    (
+        id int auto_increment
+            primary key,
+        b  int null
+    );
+    
+    insert into with_pk_1(id, b)
+    values (1, 1),
+           (5, 5);
+    -- session1  
+    
+    begin;
+    
+    select * from with_pk_1 where id > 1 for update;
+    
+    commit;
+    -- session2
+    begin;
+    
+    insert into with_pk_1(id, b) value (3, 3);  -- 这个时候就会出现如下如的一天所记录
+    
+    commit;
+    ```
+     ![img.png](insert_intent_lock.png)
+6. next-key锁(Next-Key Locks)
         record lock + gap lock, 左开右闭区间。    
-    自增锁(AUTO-INC Locks)
+7. 自增锁(AUTO-INC Locks)
         An AUTO-INC lock is a special table-level lock taken by transactions inserting into tables with AUTO_INCREMENT columns.
         插入自增行的时候发生的锁
+        这个锁有一些特殊，只有在插入的那一行 才会上锁，insert执行完了就会释放，不是在整个事务释放锁的时候释放
+                设计InnoDB的大叔提供了一个称之为innodb_autoinc_lock_mode的系统变量来控制到底使用上
+                述两种方式中的哪种来为AUTO_INCREMENT修饰的列进行赋值，当innodb_autoinc_lock_mode值
+                为0时，一律采用AUTO-INC锁；当innodb_autoinc_lock_mode值为2时，一律采用轻量级锁；当
+                innodb_autoinc_lock_mode值为1时，两种方式混着来（也就是在插入记录数量确定时采用轻
+                量级锁，不确定时使用AUTO-INC锁）。不过当innodb_autoinc_lock_mode值为2时，可能会造
+                成不同事务中的插入语句为AUTO_INCREMENT修饰的列生成的值是交叉的，在有主从复制的场景
+                中是不安全的。
+8. 隐式锁：
+        这个就是记录数据的 trx_id，事务在上锁之前回去检测这个字段对应的事务状态，如果判断出来对应的事务ID是是活跃的（判断过程比较负责），那么就会阻塞自己等待trx_id完成
 
 # 日志
 
@@ -75,7 +108,6 @@ innodb_undo_tablespaces
    update：  
    非主键修改，反向修改  
    主键修改，delete insert
-
 3. redo 日志
     - 在系统崩溃之后更具checkpoint 进行redo操作
     - redo日志类型有
