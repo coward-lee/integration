@@ -1,0 +1,139 @@
+class GreetingPlugin implements Plugin<Project> {
+    @Override
+    void apply(Project target) {
+        target.task('hello') {
+            doLast {
+                println "hello from custom plugin"
+            }
+        }
+    }
+}
+
+
+plugins {
+    id 'java'
+    id 'application'
+    id 'java-library'
+}
+apply plugin: GreetingPlugin
+
+// 添加发布插件
+// 发布jar包
+apply plugin:  'maven-publish'
+// 发布war包
+apply plugin: 'war'
+java{
+    withJavadocJar()
+    withSourcesJar()
+}
+
+mainClassName = 'org.lee.Main'
+
+group 'org.lee'
+version '1.1.0.SNAPSHOT'
+
+repositories {
+    maven{
+        allowInsecureProtocol = true
+        url 'http://maven.aliyun.com/nexus/content/groups/public/'
+    }
+    mavenCentral()
+}
+
+dependencies {
+    // 直接依赖： 依赖类型 组名 名称 版本号
+    // 本地依赖 本地的某个jar包 具体可以通过 文件集合、文件树的方式指定
+    // 项目依赖： 当前项目的模块
+
+    // 直接依赖
+    implementation 'mysql:mysql-connector-java:8.0.30'
+
+    // 本地依赖: 文件集合和文件树
+//    implementation files('lib/demo.jar','lib/demo2.jar')
+//    implementation fileTree('dir':'lib', includes: ['*.jar'], excludes: [''])
+
+    // 项目依赖：
+    implementation project(':basic:ddd')
+
+    implementation(libs.arrowFlight)
+}
+
+test {
+    useJUnitPlatform()
+}
+//
+//task task1 {
+//    println "这是一个简单任务 来自 task1"
+//    doFirst {
+//        println "task 1 do first"
+//    }
+//    doLast {
+//        println "task 1 do last"
+//    }
+//}
+//
+//task1.doFirst {
+//    println " task1 doFirst outer"
+//}
+//task1.doLast {
+//    println " task1 doLast outer"
+//}
+//
+//task A {
+//    doLast {
+//        println "taskA"
+//    }
+//}
+//task B {
+//    group "abc"
+//    doLast {
+//        println "taskB"
+//    }
+//}
+
+// 对当前工程和子工程一起设置
+allprojects {
+
+}
+// 不包括当前工程
+subprojects {
+
+}
+
+
+
+
+
+// 发布 信息配置
+publishing {
+    publications {
+        myLibrary(MavenPublication) {
+            groupId = 'org.lee.study'
+            artifactId = 'library'
+            version = '1.1'
+            from components.java // 发布jar包
+//             from components.web // 引入 war 插件，发布war包
+        }
+    }
+    repositories {
+        // 本地
+        // 本地位置为 USER_HOME/.m2/repository
+        mavenLocal()
+        // maven 私服
+        maven {
+            name = 'myRepoxxxxx'  //name 可选属性， 表示仓库的名称， url 时必填项
+//            url = layout.buildDirectory.dir('repo')
+            // change URLs to your repos,
+            def releaseRepoUrl = layout.buildDirectory.dir("repos/releases")
+            def snapshotRepoUrl = layout.buildDirectory.dir("repos/snapshots")
+            url = version.endsWith('SNAPSHOT') ? snapshotRepoUrl : releaseRepoUrl
+            //
+//            credentials{
+//                username = 'xxx'
+//                password = 'xxx'
+//            }
+        }
+    }
+}
+
+
