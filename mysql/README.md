@@ -23,26 +23,50 @@ tips:
 4. 并发度、
 
 基本锁 ：
-   共享锁 Shared     
-   排他锁 Exclusive
+共享锁 Shared     
+排他锁 Exclusive
+
 1. 行锁 : 锁一行         
    单条索引记录上加锁，record lock锁住的永远是索引，而非记录本身，  
    即使该表上没有任何索引，那么innodb会在后台创建一个隐藏的聚集主键索引，  
-   那么锁住的就是这个隐藏的聚集主键索引。  
-2. 表锁 : 锁整张表     
-3. 间隙锁(gap锁) 
-        锁连续多行（不过这里的行时开区间，锁 1-5行：锁的行是 2，3，4 不包括1和5行）            
-4. 意向锁(Intention Locks)     
-        InnoDB为了支持多粒度(表锁与行锁)的锁并存，引入意向锁。     
-        意向锁是表级锁，可分为意向共享锁(IS锁)和意向排他锁(IX锁)。       
-        Intention shared (IS)
-        Intention exclusive (IX)
-        意向锁的作用，就是标识当前表存在锁，如果想对当前表格实现.
+   那么锁住的就是这个隐藏的聚集主键索引。
+2. 表锁 : 锁整张表   
+   再执行DDL的时候会触发，在修改行数据或者插入的时候不会
+3. 间隙锁(gap锁)
+   锁连续多行（不过这里的行时开区间，锁 1-5行：锁的行是 2，3，4 不包括1和5行）     
+   间隙锁的触发
+   ![img.png](gap_lock.png)
+   ```sql
+
+   create table with_pk_1
+   (
+       id int auto_increment
+           primary key,
+       b  int null
+   );
+
+   insert into with_pk_1(id, b)
+   values (1, 1),
+          (5, 5);
+   begin;
+
+   select * from with_pk_1 where 1<id and id <5 for update ;  -- 这个时候会触发间隙锁的发生，这个时候不能在 1-5中间插入数据
+   ```
+4. 意向锁(Intention Locks)
+    - 描述：InnoDB为了支持多粒度(表锁与行锁)的锁并存，引入意向锁。     
+      意向锁是表级锁，可分为意向共享锁(IS锁)和意向排他锁(IX锁)。       
+      Intention shared (IS)
+      Intention exclusive (IX)
+      意向锁的作用，就是**标识**当前表存在锁，如果需要对这个表格进行表级别的锁需要根据意向锁来判断是时候能获得锁。
+    - 触发：在执行 行级别的 S或者X锁的时候会自定触发
+
 5. 插入意向锁
-        一种特殊的间隙锁
-        官方示例，大致意思就是，两个事务的间隙锁都是4-7但是他们的锁并不冲突，可以并发执行。
-        Suppose that there are index records with values of 4 and 7. Separate transactions that attempt to insert values of 5 and 6, respectively, each lock the gap between 4 and 7 with insert intention locks prior to obtaining the exclusive lock on the inserted row, but do not block each other because the rows are nonconflicting.
-    插入意向锁怎么复现
+   一种特殊的间隙锁
+   官方示例，大致意思就是，两个事务的间隙锁都是4-7但是他们的锁并不冲突，可以并发执行。
+   Suppose that there are index records with values of 4 and 7. Separate transactions that attempt to insert values of 5
+   and 6, respectively, each lock the gap between 4 and 7 with insert intention locks prior to obtaining the exclusive
+   lock on the inserted row, but do not block each other because the rows are nonconflicting.
+   插入意向锁怎么复现
     ```sql
     create table with_pk_1
     (
@@ -68,22 +92,23 @@ tips:
     
     commit;
     ```
-     ![img.png](insert_intent_lock.png)
+   ![img.png](insert_intent_lock.png)
 6. next-key锁(Next-Key Locks)
-        record lock + gap lock, 左开右闭区间。    
+   record lock + gap lock, 左开右闭区间。
 7. 自增锁(AUTO-INC Locks)
-        An AUTO-INC lock is a special table-level lock taken by transactions inserting into tables with AUTO_INCREMENT columns.
-        插入自增行的时候发生的锁
-        这个锁有一些特殊，只有在插入的那一行 才会上锁，insert执行完了就会释放，不是在整个事务释放锁的时候释放
-                设计InnoDB的大叔提供了一个称之为innodb_autoinc_lock_mode的系统变量来控制到底使用上
-                述两种方式中的哪种来为AUTO_INCREMENT修饰的列进行赋值，当innodb_autoinc_lock_mode值
-                为0时，一律采用AUTO-INC锁；当innodb_autoinc_lock_mode值为2时，一律采用轻量级锁；当
-                innodb_autoinc_lock_mode值为1时，两种方式混着来（也就是在插入记录数量确定时采用轻
-                量级锁，不确定时使用AUTO-INC锁）。不过当innodb_autoinc_lock_mode值为2时，可能会造
-                成不同事务中的插入语句为AUTO_INCREMENT修饰的列生成的值是交叉的，在有主从复制的场景
-                中是不安全的。
+   An AUTO-INC lock is a special table-level lock taken by transactions inserting into tables with AUTO_INCREMENT
+   columns.
+   插入自增行的时候发生的锁
+   这个锁有一些特殊，只有在插入的那一行 才会上锁，insert执行完了就会释放，不是在整个事务释放锁的时候释放
+   设计InnoDB的大叔提供了一个称之为innodb_autoinc_lock_mode的系统变量来控制到底使用上
+   述两种方式中的哪种来为AUTO_INCREMENT修饰的列进行赋值，当innodb_autoinc_lock_mode值
+   为0时，一律采用AUTO-INC锁；当innodb_autoinc_lock_mode值为2时，一律采用轻量级锁；当
+   innodb_autoinc_lock_mode值为1时，两种方式混着来（也就是在插入记录数量确定时采用轻
+   量级锁，不确定时使用AUTO-INC锁）。不过当innodb_autoinc_lock_mode值为2时，可能会造
+   成不同事务中的插入语句为AUTO_INCREMENT修饰的列生成的值是交叉的，在有主从复制的场景
+   中是不安全的。
 8. 隐式锁：
-        这个就是记录数据的 trx_id，事务在上锁之前回去检测这个字段对应的事务状态，如果判断出来对应的事务ID是是活跃的（判断过程比较负责），那么就会阻塞自己等待trx_id完成
+   这个就是记录数据的 trx_id，事务在上锁之前回去检测这个字段对应的事务状态，如果判断出来对应的事务ID是是活跃的（判断过程比较负责），那么就会阻塞自己等待trx_id完成
 
 # 日志
 
@@ -296,18 +321,19 @@ server-id=4
 4. 再次查询 select * from test between min and table_max limit start/n,num(
    table_max为第2步每一个数据库获取的数据column的最大值)，
 5. 这样可以根据放回结果计算 min的全局offset   
-   计算方法： offset = start - (second_result_len() - num)+ ..+(second_result_len() - start/n); second_result_len:   第二次，第4步查询返回的数据长度
+   计算方法： offset = start - (second_result_len() - num)+ ..+(second_result_len() - start/n); second_result_len:
+   第二次，第4步查询返回的数据长度
    列如 start = 100 , num = 10, n = 3 ，second_result_len 分别为 3，7，8
    那么mid 的offset = 100 - (3-3)-(7-3)-(8-3) = 100 -4-5 = 91 也就是 mid的全局offset 为91
    同时 start/n = 33
 6. 但是这个存在一个问题，如果
-    存在这样一个情况： 数据分布为
-   0 - 999 
+   存在这样一个情况： 数据分布为
+   0 - 999
    222, 1001 - 1999
    2000 - 2999
-    我执行：select * from test order by column limit 1000,10
-   那么时候算出来 
-    min = 333 的 全局offset=334 此时怎么从内存里面直接将1000,10 之后的数据取出来，或者有一种快速的方法从MySQL取出来
+   我执行：select * from test order by column limit 1000,10
+   那么时候算出来
+   min = 333 的 全局offset=334 此时怎么从内存里面直接将1000,10 之后的数据取出来，或者有一种快速的方法从MySQL取出来
 
 - 测试分页结果
 - 并行查询和排序
