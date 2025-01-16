@@ -7,7 +7,9 @@ import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.WritableByteChannel;
+import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
+import java.util.Set;
 
 public class ZeroCopyDemo {
     int count = 1 << 10 << 10 << 10;
@@ -41,7 +43,7 @@ public class ZeroCopyDemo {
         System.out.println(s);
     }
 
-    public void zeroCopy()  {
+    public void zeroCopy() {
         ByteBuffer src = ByteBuffer.allocateDirect(count);
         src.put(bytes);
 
@@ -64,5 +66,15 @@ public class ZeroCopyDemo {
         started.stop();
         String s = started.toString();
         System.out.println(s);
+    }
+
+    public void mmapAndSendFile() throws Exception {
+        File file = new File("zero.bin");
+        FileChannel open = FileChannel.open(file.toPath(), Set.of(StandardOpenOption.WRITE, StandardOpenOption.CREATE_NEW));
+
+
+        File f1 = new File("zero.bin1");
+        FileChannel o1 = FileChannel.open(f1.toPath(), Set.of(StandardOpenOption.READ));
+        open.transferTo(0, open.size(), o1);
     }
 }

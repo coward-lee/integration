@@ -5,9 +5,10 @@ import akka.stream.alpakka.slick.javadsl.Slick;
 import akka.stream.alpakka.slick.javadsl.SlickRow;
 import akka.stream.alpakka.slick.javadsl.SlickSession;
 import akka.stream.javadsl.Source;
+import org.lee.Main;
 
 public class MysqlSource {
-    private static final SlickSession session = SlickSession.forConfig("slick-mysql");
+    private static final SlickSession session = Main.a();
     public static Source<StreamMysql.DemoPojo, NotUsed> toSource() {
         return Slick.source(session, "select * from shading_table",
                 (SlickRow slickRow) ->
