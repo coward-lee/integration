@@ -105,3 +105,8 @@ include 'im:im-netty:im-netty'
 
 
 include 'linux'
+include 'framework:web3'
+findProject(':framework:web3')?.name = 'web3'
+include 'framework:rpc'
+findProject(':framework:rpc')?.name = 'rpc'
+

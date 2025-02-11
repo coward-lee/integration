@@ -224,6 +224,7 @@ arrowMemoryCore = { module = 'org.apache.arrow:arrow-memory-core', version.ref =
 arrowMemoryNetty = { module = 'org.apache.arrow:arrow-memory-netty', version.ref = 'arrowVersion' }
 arrowFlight = { module = 'org.apache.arrow:arrow-flight', version.ref = 'arrowVersion' }
 arrowPlasma = { module = 'org.apache.arrow:arrow-plasma', version.ref = 'arrowVersion' }
+netty = { module = "io.netty:netty-all", version = "4.1.117.Final" }
 
 [bundles]
 #groovy = ["groovy-core", "groovy-json", "groovy-nio"]
